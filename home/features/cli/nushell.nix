@@ -1,6 +1,10 @@
 { pkgs, config, ... }: {
   
-  programs.nushell.enable = true;
+  programs.nushell = {
+    enable = true;
+    configFile.source = ./nushell/config.nu;
+    envFile.source = ./nushell/env.nu;
+  };
   # https://github.com/rsteube/carapace-bin
   home.packages = with pkgs; [ carapace nu_scripts ];
 
@@ -13,13 +17,6 @@
   };
 
   home.file = {
-    # ".config/nushell" = {
-    #   # FIXME find a way to not hardcode the path:
-    #   # https://github.com/nix-community/home-manager/issues/676#issuecomment-1595795685
-    #   source = config.lib.file.mkOutOfStoreSymlink
-    #     "${config.home.homeDirectory}/.config/45rar/home/features/cli/nushell/";
-    # };
-
     ".nu_scripts.nu" = {
       text = ''
       # maybe useful functions

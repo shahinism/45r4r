@@ -564,9 +564,6 @@ let-env config = {
 # Tools
 # TODO make these scripts safe, to source only their executable exists.
 source ~/.nu_scripts.nu
-source ~/.zoxide.nu
-source ~/.cache/starship/init.nu
-source ~/.local/share/atuin/init.nu
 
 # Aliases
 alias l = ls
