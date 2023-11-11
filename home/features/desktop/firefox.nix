@@ -5,32 +5,7 @@
     profiles.default = {
       isDefault = true;
 
-      userChrome = ''
-        #TabsToolbar { visibility: collapse;  }
-      '';
-
-      containers = {
-        dc = {
-          id = 7;
-          name = "dc";
-          color = "purple";
-          icon = "fingerprint";
-        };
-
-        facebook = {
-          id = 8;
-          name = "facebook";
-          color = "blue";
-          icon = "fence";
-        };
-
-        btg = {
-          id = 9;
-          name = "btg";
-          color = "blue";
-          icon = "fingerprint";
-        };
-      };
+      userChrome = "${builtins.readFile ./firefox/userChrome.css}";
 
       search = {
         default = "kagi";
@@ -38,9 +13,7 @@
         engines = {
           "Bing".metaData.hidden = true;
           "Google".metaData.hidden = true;
-          "Amazon.nl".metaData.hidden = true;
-          "Wikipedia (en)".metaData.hidden = true;
-
+          "eBay".metaData.hidden = true;
           "kagi" = {
             urls = [{
               template = "https://kagi.com/search?q={searchTerms}";
@@ -407,12 +380,20 @@
         # https://github.com/mozilla/policy-templates/blob/master/README.md#extensionsettings
         # about:support
         ExtensionSettings = {
+          # Ublock-Origin
+          "uBlock0@raymondhill.net" = {
+            installation_mode = "normal_installed";
+            install_url =
+              "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+          };
+          # Tridactyl
           "tridactyl.vim.betas.nonewtab@cmcaine.co.uk" = {
             installation_mode = "normal_installed";
             install_url =
               "https://tridactyl.cmcaine.co.uk/betas/nonewtab/tridactyl_no_new_tab_beta-latest.xpi";
             install_sources = [ "https://tridactyl.cmcaine.co.uk/betas/*" ];
           };
+          # Query AMO Addon ID
           "queryamoid@kaply.com" = {
             installation_mode = "normal_installed";
             install_url =
@@ -420,96 +401,85 @@
             install_sources =
               [ "https://github.com/mkaply/queryamoid/releases/download/*" ];
           };
+          # Bitwarden
           "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
             installation_mode = "normal_installed";
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
           };
+          # 1password
           "{d634138d-c276-4fc8-924b-40a0ea21d284}" = {
             installation_mode = "normal_installed";
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/1password-x-password-manager/latest.xpi";
           };
+          # Awesome RSS
           "{97d566da-42c5-4ef4-a03b-5a2e5f7cbcb2}" = {
             installation_mode = "normal_installed";
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/awesome-rss/latest.xpi";
           };
-          "clearcache@michel.de.almeida" = {
-            installation_mode = "normal_installed";
-            install_url =
-              "https://addons.mozilla.org/firefox/downloads/latest/clearcache/latest.xpi";
-          };
-          "addon@darkreader.org" = {
-            installation_mode = "normal_installed";
-            install_url =
-              "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
-          };
+          # Enahancer for Youtube
           "enhancerforyoutube@maximerf.addons.mozilla.org" = {
             installation_mode = "normal_installed";
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/enhancer-for-youtube/latest.xpi";
           };
+          # Facebook Container
           "@contain-facebook" = {
             installation_mode = "normal_installed";
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/facebook-container/latest.xpi";
           };
+          # Multi Account Containers
           "@testpilot-containers" = {
             installation_mode = "normal_installed";
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/multi-account-containers/latest.xpi";
           };
-          "FirefoxColor@mozilla.com" = {
-            installation_mode = "normal_installed";
-            install_url =
-              "https://addons.mozilla.org/firefox/downloads/latest/firefox-color/latest.xpi";
-          };
+          # Grammarly
           "87677a2c52b84ad3a151a4a72f5bd3c4@jetpack" = {
             installation_mode = "normal_installed";
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/grammarly-1/latest.xpi";
           };
-          "linkgopher@oooninja.com" = {
-            installation_mode = "normal_installed";
-            install_url =
-              "https://addons.mozilla.org/firefox/downloads/latest/link-gopher/latest.xpi";
-          };
+          # Omnivore
           "save-extension@omnivore.app" = {
             installation_mode = "normal_installed";
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/omnivore/latest.xpi";
           };
+          # OneTab
           "extension@one-tab.com" = {
             installation_mode = "normal_installed";
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/onetab/latest.xpi";
           };
+          # Raindrop
           "jid0-adyhmvsP91nUO8pRv0Mn2VKeB84@jetpack" = {
             installation_mode = "normal_installed";
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/raindropio/latest.xpi";
           };
+          # Sidebery
           "{3c078156-979c-498b-8990-85f7987dd929}" = {
             installation_mode = "normal_installed";
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/sidebery/latest.xpi";
           };
+          # Translate Web Pages
           "{036a55b4-5e72-4d05-a06c-cba2dfcc134a}" = {
             installation_mode = "normal_installed";
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/traduzir-paginas-web/latest.xpi";
           };
-          "sourcegraph-for-firefox@sourcegraph.com" = {
-            installation_mode = "normal_installed";
-            install_url =
-              "https://addons.mozilla.org/firefox/downloads/latest/sourcegraph-for-firefox/latest.xpi";
-          };
+          # LibRedirect
           "7esoorv3@alefvanoon.anonaddy.me" = {
             installation_mode = "normal_installed";
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/libredirect/latest.xpi";
           };
+          # Memex
           "info@worldbrain.io" = {
             installation_mode = "normal_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/worldbrain/latest.xpi";
@@ -524,6 +494,15 @@
       source =
         "${pkgs.tridactyl-native}/lib/mozilla/native-messaging-hosts/tridactyl.json";
     };
+
+    # NOTE it might cause a collision, just delete the file for now!
+    # the containers option on home-manager, requires everytime to
+    # delete containers file from profile to let the home manager
+    # switch work
+    ".mozilla/firefox/default/containers.json" = {
+      source = ./. + "/firefox/containers.json";
+    };
+
   };
 
   xdg.configFile.tridactyl_config = {

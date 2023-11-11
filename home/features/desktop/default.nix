@@ -52,6 +52,7 @@
   services.kbfs.enable = true;
   services.keybase.enable = true;
 
+  # Set mimeapps for default applications
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
