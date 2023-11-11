@@ -7,6 +7,40 @@
     ./atuin.nix
   ];
 
+  home.packages = with pkgs;
+    [
+      killall
+      fzf
+      gnupg
+      ripgrep
+      yazi
+
+      yubikey-personalization
+      yubikey-manager
+      pcscliteWithPolkit
+      bash-completion
+
+      # A cross-platform graphical process/system monitor with a
+      # customizable interface: https://github.com/ClementTsang/bottom
+      bottom
+      # A very fast implementation of tldr in Rust:
+      # https://github.com/dbrgn/tealdeer
+      tealdeer
+
+      procs
+      bandwhich
+
+      fd
+      rm-improved
+      jc
+      jq
+      asciinema
+      mosh
+      magic-wormhole
+      sshuttle
+
+    ];
+
   programs = {
     zoxide = {
       enable = true;

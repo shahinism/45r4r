@@ -30,7 +30,25 @@ let
     startupWMClass = "Emacs";
   };
 in {
-  home.packages = [ emacsClientGuiDesktop ];
+  home.packages = with pkgs; [
+    cmake         # rquired by emacs to build vterm
+    zstd          # Used by emacs to optimize undo history
+    rustfmt       # Used by Emacs to format Rust code
+    rust-analyzer # Used by Emacs to provide Rust code completion
+    nodejs        # required by copilot
+    aspell        # Used with Emacs as spell checker
+    aspellDicts.en
+    aspellDicts.en-science
+    aspellDicts.en-computers
+    emacs-all-the-icons-fonts
+
+    # Required for Emacs vterm
+    libvterm
+    libtool
+
+  ] ++ [
+    emacsClientGuiDesktop
+  ];
 
   programs.emacs = {
     enable = true;
