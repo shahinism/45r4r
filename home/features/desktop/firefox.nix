@@ -2,11 +2,35 @@
   programs.firefox = {
     enable = true;
 
-    profiles.dev-edition-default = {
-      path = "p8klfsds.dev-edition-default";
+    profiles.default = {
+      isDefault = true;
+
       userChrome = ''
         #TabsToolbar { visibility: collapse;  }
       '';
+
+      containers = {
+        dc = {
+          id = 7;
+          name = "dc";
+          color = "purple";
+          icon = "fingerprint";
+        };
+
+        facebook = {
+          id = 8;
+          name = "facebook";
+          color = "blue";
+          icon = "fence";
+        };
+
+        btg = {
+          id = 9;
+          name = "btg";
+          color = "blue";
+          icon = "fingerprint";
+        };
+      };
 
       search = {
         default = "kagi";
@@ -360,7 +384,7 @@
       };
     };
 
-    package = pkgs.wrapFirefox pkgs.firefox-devedition-bin-unwrapped {
+    package = pkgs.wrapFirefox pkgs.firefox-bin-unwrapped {
       nativeMessagingHosts = [ pkgs.tridactyl-native ];
       extraPolicies = {
         DisableAppUpdate = true;
@@ -383,11 +407,6 @@
         # https://github.com/mozilla/policy-templates/blob/master/README.md#extensionsettings
         # about:support
         ExtensionSettings = {
-          "uBlock0@raymondhill.net" = {
-            installation_mode = "normal_installed";
-            install_url =
-              "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-          };
           "tridactyl.vim.betas.nonewtab@cmcaine.co.uk" = {
             installation_mode = "normal_installed";
             install_url =
@@ -505,13 +524,6 @@
       source =
         "${pkgs.tridactyl-native}/lib/mozilla/native-messaging-hosts/tridactyl.json";
     };
-    # NOTE This will cause collision if you edit containers using
-    # Firefox. In that case, just delete the files and restart nix
-    # build.
-    ".mozilla/firefox/p8klfsds.dev-edition-default/containers.json" = {
-      source = ./firefox/containers.json;
-    };
-
   };
 
   xdg.configFile.tridactyl_config = {
