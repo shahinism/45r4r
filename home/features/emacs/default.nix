@@ -29,6 +29,15 @@ let
     categories = [ "Development" "TextEditor" "Utility" ];
     startupWMClass = "Emacs";
   };
+  python-packages = p:
+  with p; [
+    grip # FIXME markdown preview, currently failing due to nix
+         # package collision.
+  ];
+  nodejs-packages = with pkgs.nodePackages_latest;
+  [
+    js-beautify # Used by Emacs to format JavaScript code
+  ];
 in {
   home.packages = with pkgs; [
     cmake         # rquired by emacs to build vterm
@@ -45,8 +54,8 @@ in {
     # Required for Emacs vterm
     libvterm
     libtool
-
-  ] ++ [
+    # (python311.withPackages python-packages)
+  ] ++ nodejs-packages ++ [
     emacsClientGuiDesktop
   ];
 
@@ -64,7 +73,7 @@ in {
   home.file = {
     ".emacs.d" = {
       source = config.lib.file.mkOutOfStoreSymlink
-        "${config.home.homeDirectory}/.config/45r4r/home/features/emacs/emacs.chemacs2/";
+      "${config.home.homeDirectory}/.config/45r4r/home/features/emacs/emacs.chemacs2/";
     };
   };
 

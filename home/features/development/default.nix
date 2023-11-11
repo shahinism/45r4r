@@ -1,4 +1,10 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: let
+  python-packages = p:
+    with p; [
+      ipython
+    ];
+  devpkgs = inputs.devenv.packages.x86_64-linux;
+in {
   imports = [
     ./git.nix
   ];
@@ -16,6 +22,8 @@
       exercism
       sbcl
       rlwrap
+      dbeaver
 
-    ];
+      (python3.withPackages python-packages)
+    ] ++ [ devpkgs.devenv ];
 }

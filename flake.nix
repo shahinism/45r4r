@@ -18,8 +18,9 @@
     emacs-src.url = "github:emacs-mirror/emacs/emacs-29";
     emacs-src.flake = false;
 
-    # TODO: Add any other flake you might need
+    # Add any other flake you might need
     hardware.url = "github:nixos/nixos-hardware";
+    devenv.url = "github:cachix/devenv/latest";
 
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
