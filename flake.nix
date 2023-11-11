@@ -13,6 +13,11 @@
     home-manager.url = "github:nix-community/home-manager/release-23.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Emacs
+    emacs-overlay.url = "github:nix-community/emacs-overlay/master";
+    emacs-src.url = "github:emacs-mirror/emacs/emacs-29";
+    emacs-src.flake = false;
+
     # TODO: Add any other flake you might need
     hardware.url = "github:nixos/nixos-hardware";
 
@@ -24,21 +29,23 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-unstable,
     home-manager,
     ...
   } @ inputs: let
     inherit (self) outputs;
+    lib = nixpkgs.lib // home-manager.lib;
     # Supported systems for your flake packages, shell, etc.
     systems = [
       "aarch64-linux"
-      "i686-linux"
       "x86_64-linux"
-      "aarch64-darwin"
-      "x86_64-darwin"
     ];
     # This is a function that generates an attribute by calling a function you
     # pass to it, with each system as an argument
     forAllSystems = nixpkgs.lib.genAttrs systems;
+    pkgsFor = lib.genAttrs systems (system: import nixpkgs {
+      inherit system;
+    });
   in {
     # Your custom packages
     # Acessible through 'nix build', 'nix shell', etc
@@ -59,11 +66,11 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      system76 = nixpkgs.lib.nixosSystem {
+      system76 = lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [./hosts/system76];
       };
-      framework = nixpkgs.lib.nixosSystem {
+      framework = lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [./hosts/framework];
       };
@@ -74,12 +81,12 @@
     homeConfigurations = {
       "shahin@system76" = home-manager.lib.homeManagerConfiguration {
         # Home-manager requires 'pkgs' instance
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [./home/system76.nix];
       };
       "shahin@framework" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [./home/framework.nix];
       };

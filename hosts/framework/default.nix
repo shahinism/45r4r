@@ -2,13 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, hardware, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [ # Include the results of the hardware scan.
-    ../common.nix
+    inputs.hardware.nixosModules.framework
     ./hardware-configuration.nix
-    hardware.nixosModules.framework-12th-gen-intel
+    ../common.nix
   ];
   hardware = {
     enableAllFirmware = true;

@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   imports = [
     ./aliases.nix
     ./nushell.nix
@@ -11,6 +11,7 @@
     zoxide = {
       enable = true;
       enableBashIntegration = true;
+      enableNushellIntegration = true;
     };
 
     direnv = {
@@ -29,7 +30,6 @@
 
     starship = {
       enable = true;
-      promptInit = "eval \"$(starship init bash)\"";
     };
 
     bat = {

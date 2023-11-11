@@ -4,7 +4,6 @@
     ./kitty.nix
     ./qtile.nix
     ./rofi.nix
-    ./zellij.nix
     ./dunst.nix
   ];
 
