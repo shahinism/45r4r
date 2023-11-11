@@ -379,7 +379,7 @@
           SkipOnboarding = true;
         };
 
-        # FIXME this is currently broken
+        # FIXME currently this method is not working
         # https://github.com/mozilla/policy-templates/blob/master/README.md#extensionsettings
         # about:support
         ExtensionSettings = {
@@ -499,22 +499,23 @@
       };
     };
   };
-
   # https://github.com/NixOS/nixpkgs/issues/47340#issuecomment-440645870
   home.file = {
     ".mozilla/native-messaging-hosts/tridactyl.json" = {
       source =
         "${pkgs.tridactyl-native}/lib/mozilla/native-messaging-hosts/tridactyl.json";
     };
-    # NOTE it might cause a collision, just delete the file for now!
+    # NOTE This will cause collision if you edit containers using
+    # Firefox. In that case, just delete the files and restart nix
+    # build.
     ".mozilla/firefox/p8klfsds.dev-edition-default/containers.json" = {
-      source = ./. + "containers.json";
+      source = ./firefox/containers.json;
     };
 
   };
 
   xdg.configFile.tridactyl_config = {
-    source = ./tridactylrc;
+    source = ./firefox/tridactylrc;
     target = "tridactyl/tridactylrc";
   };
 }

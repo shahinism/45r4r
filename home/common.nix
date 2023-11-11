@@ -18,6 +18,9 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
+    ./features/cli
+    ./features/desktop
+    ./features/emacs
   ];
 
   nixpkgs = {
@@ -28,16 +31,21 @@
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
 
+      # TODO am I using both of these?
       # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
+      emacs-overlay.overlays.default
       # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
+      (final: prev: {
+        emacs29 = (prev.emacsGit.override {
+
+        }).overrideAttrs (old: {
+          name = "emacs29";
+          version = "29.0-90";
+          src = emacs-src;
+        });
+      })
     ];
+
     # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages
@@ -47,19 +55,17 @@
     };
   };
 
-  # TODO: Set your username
   home = {
-    username = "your-username";
-    homeDirectory = "/home/your-username";
+    username = "shahin";
+    homeDirectory = "/home/shahin";
   };
 
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   # home.packages = with pkgs; [ steam ];
 
-  # Enable home-manager and git
+  # Enable home-manager
   programs.home-manager.enable = true;
-  programs.git.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

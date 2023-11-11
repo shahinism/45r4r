@@ -2,11 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, hardware, ... }:
 
 {
   imports = [ # Include the results of the hardware scan.
+    ../common.nix
     ./hardware-configuration.nix
+    hardware.nixosModules.system76
   ];
 
   # System76
