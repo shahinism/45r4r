@@ -361,7 +361,7 @@
     };
 
     package = pkgs.wrapFirefox pkgs.firefox-devedition-bin-unwrapped {
-      cfg.enableTridactylNative = true;
+      nativeMessagingHosts = [ pkgs.tridactyl-native ];
       extraPolicies = {
         DisableAppUpdate = true;
         DisableFirefoxStudies = true;

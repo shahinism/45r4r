@@ -10,7 +10,7 @@
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/release-23.05";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Emacs
@@ -35,6 +35,7 @@
   } @ inputs: let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
+    libUnstable = nixpkgs-unstable.lib // home-manager.lib;
     # Supported systems for your flake packages, shell, etc.
     systems = [
       "aarch64-linux"
@@ -44,6 +45,9 @@
     # pass to it, with each system as an argument
     forAllSystems = nixpkgs.lib.genAttrs systems;
     pkgsFor = lib.genAttrs systems (system: import nixpkgs {
+      inherit system;
+    });
+    pkgsForUnstable = libUnstable.genAttrs systems (system: import nixpkgs-unstable {
       inherit system;
     });
   in {
@@ -66,11 +70,11 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      system76 = lib.nixosSystem {
+      system76 = libUnstable.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [./hosts/system76];
       };
-      framework = lib.nixosSystem {
+      framework = libUnstable.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [./hosts/framework];
       };
@@ -81,12 +85,12 @@
     homeConfigurations = {
       "shahin@system76" = home-manager.lib.homeManagerConfiguration {
         # Home-manager requires 'pkgs' instance
-        pkgs = pkgsFor.x86_64-linux;
+        pkgs = pkgsForUnstable.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [./home/system76.nix];
       };
       "shahin@framework" = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgsFor.x86_64-linux;
+        pkgs = pkgsForUnstable.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [./home/framework.nix];
       };

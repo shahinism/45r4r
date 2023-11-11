@@ -73,37 +73,39 @@ in {
     overrideDevices = true;
     overrideFolders = true;
 
-    inherit devices;
+    settings = {
+      inherit devices;
 
-    folders = {
-      "projects" = {
-        enable = true;
-        path = "/home/shahin/projects";
-        devices = allDevices;
-      };
+      folders = {
+        "projects" = {
+          enable = true;
+          path = "/home/shahin/projects";
+          devices = allDevices;
+        };
 
-      "org" = {
-        enable = true;
-        path = "/home/shahin/org";
-        devices = allDevices;
-      };
+        "org" = {
+          enable = true;
+          path = "/home/shahin/org";
+          devices = allDevices;
+        };
 
-      "ssh" = {
-        enable = true;
-        path = "/home/shahin/.ssh";
-        devices = allDevices;
-      };
+        "ssh" = {
+          enable = true;
+          path = "/home/shahin/.ssh";
+          devices = allDevices;
+        };
 
-      "gnupg" = {
-        enable = true;
-        path = "/home/shahin/.gnupg";
-        devices = allDevices;
-      };
+        "gnupg" = {
+          enable = true;
+          path = "/home/shahin/.gnupg";
+          devices = allDevices;
+        };
 
-      "aws" = {
-        enable = true;
-        path = "/home/shahin/.aws";
-        devices = allDevices;
+        "aws" = {
+          enable = true;
+          path = "/home/shahin/.aws";
+          devices = allDevices;
+        };
       };
     };
   };
@@ -126,7 +128,7 @@ in {
     LC_TIME = "en_US.UTF-8";
   };
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     emacs-all-the-icons-fonts
     (nerdfonts.override { fonts = [ "Inconsolata" "FiraCode" "Hack" "RobotoMono" ]; })
   ];
