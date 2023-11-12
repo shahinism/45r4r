@@ -15,22 +15,20 @@
           "Google".metaData.hidden = true;
           "eBay".metaData.hidden = true;
           "kagi" = {
-            urls = [{
-              template = "https://kagi.com/search?q={searchTerms}";
-            }];
+            urls = [{ template = "https://kagi.com/search?q={searchTerms}"; }];
             iconUpdateUrl = "https://assets.kagi.com/v2/apple-touch-icon.png";
           };
 
           "fastgpt" = {
-            urls = [{
-              template = "https://kagi.com/fastgpt?query={searchTerms}";
-            }];
+            urls =
+              [{ template = "https://kagi.com/fastgpt?query={searchTerms}"; }];
             iconUpdateUrl = "https://assets.kagi.com/v2/apple-touch-icon.png";
           };
 
           "summearizer" = {
             urls = [{
-              template = "https://kagi.com/summarizer/index.html?url={searchTerms}";
+              template =
+                "https://kagi.com/summarizer/index.html?url={searchTerms}";
             }];
             iconUpdateUrl = "https://assets.kagi.com/v2/apple-touch-icon.png";
           };
@@ -443,11 +441,11 @@
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/grammarly-1/latest.xpi";
           };
-          # Omnivore
-          "save-extension@omnivore.app" = {
+          # Readwise
+          "team@readwise.io" = {
             installation_mode = "normal_installed";
             install_url =
-              "https://addons.mozilla.org/firefox/downloads/latest/omnivore/latest.xpi";
+              "https://addons.mozilla.org/firefox/downloads/latest/readwise-highlighter/latest.xpi";
           };
           # OneTab
           "extension@one-tab.com" = {
@@ -482,7 +480,8 @@
           # Memex
           "info@worldbrain.io" = {
             installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/worldbrain/latest.xpi";
+            install_url =
+              "https://addons.mozilla.org/firefox/downloads/latest/worldbrain/latest.xpi";
           };
         };
       };
