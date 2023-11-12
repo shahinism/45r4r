@@ -25,76 +25,76 @@
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
     # nix-colors.url = "github:misterio77/nix-colors";
+
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    nixpkgs-unstable,
-    home-manager,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    lib = nixpkgs.lib // home-manager.lib;
-    libUnstable = nixpkgs-unstable.lib // home-manager.lib;
-    # Supported systems for your flake packages, shell, etc.
-    systems = [
-      "aarch64-linux"
-      "x86_64-linux"
-    ];
-    # This is a function that generates an attribute by calling a function you
-    # pass to it, with each system as an argument
-    forAllSystems = nixpkgs.lib.genAttrs systems;
-    pkgsFor = lib.genAttrs systems (system: import nixpkgs {
-      inherit system;
-    });
-    pkgsForUnstable = libUnstable.genAttrs systems (system: import nixpkgs-unstable {
-      inherit system;
-    });
-  in {
-    # Your custom packages
-    # Acessible through 'nix build', 'nix shell', etc
-    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-    # Formatter for your nix files, available through 'nix fmt'
-    # Other options beside 'alejandra' include 'nixpkgs-fmt'
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+  outputs =
+    { self, nixpkgs, nixpkgs-unstable, home-manager, devenv, ... }@inputs:
+    let
+      inherit (self) outputs;
+      lib = nixpkgs.lib // home-manager.lib;
+      libUnstable = nixpkgs-unstable.lib // home-manager.lib;
+      # Supported systems for your flake packages, shell, etc.
+      systems = [ "aarch64-linux" "x86_64-linux" ];
+      # This is a function that generates an attribute by calling a function you
+      # pass to it, with each system as an argument
+      forAllSystems = nixpkgs.lib.genAttrs systems;
+      pkgsFor =
+        lib.genAttrs systems (system: import nixpkgs { inherit system; });
+      pkgsForUnstable = libUnstable.genAttrs systems
+        (system: import nixpkgs-unstable { inherit system; });
+      x86_64-linux = pkgsForUnstable.x86_64-linux;
+    in {
+      # Your custom packages
+      # Acessible through 'nix build', 'nix shell', etc
+      packages =
+        forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+      # Formatter for your nix files, available through 'nix fmt'
+      # Other options beside 'alejandra' include 'nixpkgs-fmt'
+      formatter =
+        forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
-    # Your custom packages and modifications, exported as overlays
-    overlays = import ./overlays {inherit inputs;};
-    # Reusable nixos modules you might want to export
-    # These are usually stuff you would upstream into nixpkgs
-    nixosModules = import ./modules/nixos;
-    # Reusable home-manager modules you might want to export
-    # These are usually stuff you would upstream into home-manager
-    homeManagerModules = import ./modules/home-manager;
+      # Your custom packages and modifications, exported as overlays
+      overlays = import ./overlays { inherit inputs; };
+      # Reusable nixos modules you might want to export
+      # These are usually stuff you would upstream into nixpkgs
+      nixosModules = import ./modules/nixos;
+      # Reusable home-manager modules you might want to export
+      # These are usually stuff you would upstream into home-manager
+      homeManagerModules = import ./modules/home-manager;
 
-    # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#your-hostname'
-    nixosConfigurations = {
-      system76 = libUnstable.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [./hosts/system76];
+      # NixOS configuration entrypoint
+      # Available through 'nixos-rebuild --flake .#your-hostname'
+      nixosConfigurations = {
+        system76 = libUnstable.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/system76 ];
+        };
+        framework = libUnstable.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/framework ];
+        };
       };
-      framework = libUnstable.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [./hosts/framework];
+
+      # Standalone home-manager configuration entrypoint
+      # Available through 'home-manager --flake .#your-username@your-hostname'
+      homeConfigurations = {
+        "shahin@system76" = home-manager.lib.homeManagerConfiguration {
+          # Home-manager requires 'pkgs' instance
+          pkgs = pkgsForUnstable.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/system76.nix ];
+        };
+        "shahin@framework" = home-manager.lib.homeManagerConfiguration {
+          pkgs = pkgsForUnstable.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/framework.nix ];
+        };
+      };
+
+      devShell.x86_64-linux = devenv.lib.mkShell {
+        inherit x86_64-linux;
+        modules = [ ./devenv.nix ];
       };
     };
-
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
-    homeConfigurations = {
-      "shahin@system76" = home-manager.lib.homeManagerConfiguration {
-        # Home-manager requires 'pkgs' instance
-        pkgs = pkgsForUnstable.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/system76.nix];
-      };
-      "shahin@framework" = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgsForUnstable.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/framework.nix];
-      };
-    };
-  };
 }
