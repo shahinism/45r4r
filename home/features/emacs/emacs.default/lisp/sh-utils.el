@@ -182,4 +182,11 @@ When REGION is non-nil, unfill each paragraph in the region,"
      ("u" restclient-unmark "unmark")
      ("U" restclient-unmark-all "unmark all"))
     )))
+
+(leaf editorconfig
+  :doc "EditorConfig Emacs Plugin"
+  :url "https://github.com/editorconfig/editorconfig-emacs"
+  :ensure t
+  :config
+  (editorconfig-mode 1))
 ;;; sh-utils.el ends here
