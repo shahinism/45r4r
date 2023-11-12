@@ -15,22 +15,17 @@
 ;; Highlight the current line.
 (global-hl-line-mode 1)
 
-(defun sh/set-local-devdocs (doc)
-  "Set the local DEVDOCS to DOC."
-  (interactive "sLocal DEVDOCS: ")
-  (setq-local devdocs-current-docs doc))
-
 (leaf devdocs
   :doc "Search the local devdocs."
   :url "https://github.com/astoff/devdocs.el"
   :ensure t
-  :hook
-  (python-mode-hook . (lambda () (sh/set-local-devdocs "python-3.12")))
-  (emacs-lisp-mode-hook . (lambda () (sh/set-local-devdocs "elisp")))
-  (sh-mode-hook . (lambda () (sh/set-local-devdocs "bash")))
-  (nix-mode-hook . (lambda () (sh/set-local-devdocs "nix")))
-  (rust-mode-hook . (lambda () (sh/set-local-devdocs "rust")))
-  (go-mode-hook . (lambda () (sh/set-local-devdocs "go")))
+  ;; TODO extract a function instead of this lambda
+  :hook ((python-mode . (lambda () (setq-local devdocs-current-docs '("python-3.11"))))
+         (emacs-lisp-mode . (lambda () (setq-local devdocs-current-docs '("elisp"))))
+         (sh-mode . (lambda () (setq-local devdocs-current-docs '("bash"))))
+         (nix-mode . (lambda () (setq-local devdocs-current-docs '("nix"))))
+         (rust-mode . (lambda () (setq-local devdocs-current-docs '("rust"))))
+         (go-mode . (lambda () (setq-local devdocs-current-docs '("go")))))
   :bind
   ("C-c d" . devdocs-lookup))
 
