@@ -189,4 +189,9 @@ When REGION is non-nil, unfill each paragraph in the region,"
   :ensure t
   :config
   (editorconfig-mode 1))
+
+(leaf crux
+  :doc "A Collection of Ridiculously Useful eXtensions for Emacs"
+  :url "https://github.com/bbatsov/crux"
+  ensure t)
 ;;; sh-utils.el ends here

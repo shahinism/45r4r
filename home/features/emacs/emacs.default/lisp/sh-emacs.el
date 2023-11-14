@@ -26,7 +26,8 @@
   (expand-file-name name sh/cache-dir))
 
 ;; When an error happens, show me the stack trace
-(setq debug-on-error t)
+;; FIXME this is too distracting
+;; (setq debug-on-error t)
 
 ;; Set default coding system
 (prefer-coding-system       'utf-8)

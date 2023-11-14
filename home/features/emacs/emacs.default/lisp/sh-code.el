@@ -39,7 +39,7 @@
   (python-mode-hook . eglot-ensure)
   (go-mode-hook . eglot-ensure)
   (rust-mode-hook . eglot-ensure)
-  (js-mode . eglot-ensure)
+  (js-mode-hook . eglot-ensure)
   :custom
   (eglot-sync-connect . 1)
   (eglot-connect-timeout . 10)
@@ -370,19 +370,4 @@
     ))
   )
 
-(leaf flycheck-posframe
-  :doc "Flycheck errors display in posframe"
-  :url "https://github.com/alexmurray/flycheck-posframe"
-  :ensure t
-  :hook
-  (flycheck-mode-hook . flycheck-posframe-mode)
-  :config
-  (flycheck-posframe-configure-pretty-defaults))
-
-(leaf flycheck-rust
-  :doc "Flycheck: Rust additions and Cargo support"
-  :url "https://github.com/flycheck/flycheck-rust"
-  :ensure t
-  :hook
-  (rust-mode-hook . flycheck-rust-setup))
 ;;; sh-code.el ends here
