@@ -106,6 +106,12 @@ in {
           path = "/home/shahin/.aws";
           devices = allDevices;
         };
+
+        "firefox" = {
+          enable = true;
+          path = "/home/shahin/.mozilla/firefox/default";
+          devices = allDevices;
+        };
       };
     };
   };
@@ -130,7 +136,9 @@ in {
 
   fonts.packages = with pkgs; [
     emacs-all-the-icons-fonts
-    (nerdfonts.override { fonts = [ "Inconsolata" "FiraCode" "Hack" "RobotoMono" ]; })
+    (nerdfonts.override {
+      fonts = [ "Inconsolata" "FiraCode" "Hack" "RobotoMono" ];
+    })
   ];
 
   # Disable CUPS to print documents.
