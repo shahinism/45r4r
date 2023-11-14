@@ -1,45 +1,39 @@
 { pkgs, ... }: {
-  imports = [
-    ./aliases.nix
-    ./nushell.nix
-    ./bash.nix
-    ./zellij.nix
-    ./atuin.nix
+  imports = [ ./aliases.nix ./nushell.nix ./bash.nix ./zellij.nix ./atuin.nix ];
+
+  home.packages = with pkgs; [
+    killall
+    fzf
+    gnupg
+    ripgrep
+    ranger # muscle memory
+    yazi # doesn't seem stable
+
+    yubikey-personalization
+    yubikey-manager
+    pcscliteWithPolkit
+    bash-completion
+
+    # A cross-platform graphical process/system monitor with a
+    # customizable interface: https://github.com/ClementTsang/bottom
+    bottom
+    # A very fast implementation of tldr in Rust:
+    # https://github.com/dbrgn/tealdeer
+    tealdeer
+
+    procs
+    bandwhich
+
+    fd
+    rm-improved
+    jc
+    jq
+    asciinema
+    mosh
+    magic-wormhole
+    sshuttle
+
   ];
-
-  home.packages = with pkgs;
-    [
-      killall
-      fzf
-      gnupg
-      ripgrep
-      yazi
-
-      yubikey-personalization
-      yubikey-manager
-      pcscliteWithPolkit
-      bash-completion
-
-      # A cross-platform graphical process/system monitor with a
-      # customizable interface: https://github.com/ClementTsang/bottom
-      bottom
-      # A very fast implementation of tldr in Rust:
-      # https://github.com/dbrgn/tealdeer
-      tealdeer
-
-      procs
-      bandwhich
-
-      fd
-      rm-improved
-      jc
-      jq
-      asciinema
-      mosh
-      magic-wormhole
-      sshuttle
-
-    ];
 
   programs = {
     zoxide = {
