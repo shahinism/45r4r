@@ -378,6 +378,12 @@
         # https://github.com/mozilla/policy-templates/blob/master/README.md#extensionsettings
         # about:support
         ExtensionSettings = {
+          # Firefox Colors
+          "FirefoxColor@mozilla.com" = {
+            installation_mode = "normal_installed";
+            install_url =
+              "https://addons.mozilla.org/firefox/downloads/latest/firefox-color/latest.xpi";
+          };
           # Ublock-Origin
           "uBlock0@raymondhill.net" = {
             installation_mode = "normal_installed";
