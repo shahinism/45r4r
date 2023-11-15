@@ -106,12 +106,6 @@ in {
           path = "/home/shahin/.aws";
           devices = allDevices;
         };
-
-        "firefox" = {
-          enable = true;
-          path = "/home/shahin/.mozilla/firefox/default";
-          devices = allDevices;
-        };
       };
     };
   };
