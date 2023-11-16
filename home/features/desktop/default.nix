@@ -5,42 +5,42 @@
     ./qtile.nix
     ./rofi.nix
     ./dunst.nix
+    ./espanso.nix
   ];
 
-  home.packages = with pkgs;
-    [
-      okular
-      pavucontrol
-      audacity
-      xorg.xkill
-      gimp
-      inkscape
-      brave
-      slack
-      xclip
-      pinentry-gtk2
-      flameshot
-      keybase-gui
-      networkmanagerapplet
-      blueman
-      xss-lock
-      udiskie
-      betterlockscreen
-      brightnessctl
-      rpi-imager
-      pulseaudioFull
-      obs-studio
-      vlc
-      gnome.gnome-tweaks
-      autorandr
-      libreoffice
-      anki-bin
-      appimage-run
-      protonvpn-cli
-      mullvad-vpn
-      wireguard-tools
-      deluge-gtk
-    ];
+  home.packages = with pkgs; [
+    okular
+    pavucontrol
+    audacity
+    xorg.xkill
+    gimp
+    inkscape
+    brave
+    slack
+    xclip
+    pinentry-gtk2
+    flameshot
+    keybase-gui
+    networkmanagerapplet
+    blueman
+    xss-lock
+    udiskie
+    betterlockscreen
+    brightnessctl
+    rpi-imager
+    pulseaudioFull
+    obs-studio
+    vlc
+    gnome.gnome-tweaks
+    autorandr
+    libreoffice
+    anki-bin
+    appimage-run
+    protonvpn-cli
+    mullvad-vpn
+    wireguard-tools
+    deluge-gtk
+  ];
 
   services.gpg-agent = {
     enable = true;
