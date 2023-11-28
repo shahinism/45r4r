@@ -32,7 +32,6 @@
     mosh
     magic-wormhole
     sshuttle
-
   ];
 
   programs = {
