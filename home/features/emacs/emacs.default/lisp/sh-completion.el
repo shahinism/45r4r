@@ -92,9 +92,10 @@
                                     corfu-quit-no-match t
                                     corfu-auto :if-nil)
                         (corfu-mode 1)))
-  :custom
-  (completion-at-point-functions . #'cape-file)
-  (completion-at-point-functions . #'cape-dabbrev)
+  :init
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-elisp-block)
   :config
   ;; Silence the pcomplete capf, no errors or messages!
   ;; Important for corfu
@@ -130,12 +131,6 @@
   (xref-show-xrefs-function . #'consult-xref)
   (xref-show-definitions-function . #'consult-xref)
   )
-
-(leaf consult-eglot
-  :doc "Consult integration for eglot"
-  :url "https://github.com/mohkale/consult-eglot"
-  :ensure t
-  :after (consult eglot))
 
 (leaf consult-ag
   :doc "Consult integration for ag"

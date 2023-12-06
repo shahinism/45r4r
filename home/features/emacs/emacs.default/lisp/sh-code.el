@@ -15,6 +15,23 @@
 ;; Highlight the current line.
 (global-hl-line-mode 1)
 
+(leaf lsp-mode
+  :doc "LSP mode"
+  :url "https://emacs-lsp.github.io/lsp-mode/"
+  :ensure t
+  :commands (lsp-mode lsp-deferred)
+  :hook
+  (lsp-mode-hook . lsp-enable-which-key-integration)
+  (python-mode-hook . lsp-deferred))
+
+(leaf lsp-ui
+  :doc "UI modules for lsp-mode"
+  :url "https://emacs-lsp.github.io/lsp-ui/"
+  :ensure t
+  :commands lsp-ui-mode
+  :hook
+  (lsp-mode-hook . lsp-ui-mode))
+
 (leaf devdocs
   :doc "Search the local devdocs."
   :url "https://github.com/astoff/devdocs.el"
@@ -28,26 +45,6 @@
          (go-mode . (lambda () (setq-local devdocs-current-docs '("go")))))
   :bind
   ("C-c d" . devdocs-lookup))
-
-(leaf eglot
-  :doc "Client for Language Server Protocol servers"
-  :url "https://github.com/joaotavora/eglot/"
-  :req "emacs-29"
-  :tag "builtin"
-  :commands eglot eglot-ensure
-  :hook
-  (python-mode-hook . eglot-ensure)
-  (go-mode-hook . eglot-ensure)
-  (rust-mode-hook . eglot-ensure)
-  (js-mode-hook . eglot-ensure)
-  :custom
-  (eglot-sync-connect . 1)
-  (eglot-connect-timeout . 10)
-  (eglot-autoshutdown . t)
-  (eglot-send-changes-idle-time . 0.5)
-  ;; NOTE disable eglot-auto-display-help-buffer because :select t in
-  ;;      its popup rule causes eglot to steal focus too often.
-  (eglot-auto-display-help-buffer . nil))
 
 (leaf major-mode-hydra
   :doc "Spacemacs-inspired major mode leader key powered by Hydra"
@@ -221,12 +218,6 @@
   :custom
   (typescript-indent-level . 2)
   :config
-  ;; we choose this instead of tsx-mode so that eglot can
-  ;; automatically figure out language for server see
-  ;; https://github.com/joaotavora/eglot/issues/624 and
-  ;; https://github.com/joaotavora/eglot#handling-quirky-servers
-  (define-derived-mode typescriptreact-mode typescript-mode
-    "TypeScript TSX")
 
   ;; use our derived mode for tsx files
   (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescriptreact-mode))
@@ -256,7 +247,6 @@
   :ensure t
   )
 
-;; TODO checkout eat shell
 (leaf rust-mode                ;; NOTE this requires rustfmt to be installed.
   :doc "A major emacs mode for editing Rust source code"
   :url "https://github.com/rust-lang/rust-mode"
@@ -265,9 +255,25 @@
   :custom
   (rust-format-on-save . t)
   :hook
-  (rust-mode-hook . eglot-ensure)
   (rust-mode-hook . prettify-symbols-mode))
 
+(leaf rustic
+  :doc "Rust development environment"
+  :url "https://github.com/brotzeit/rustic"
+  :ensure t
+  :config
+  ;; (bind-rust-snippets rustic-mode-map)
+  (advice-add 'rustic-recompile :before #'save-current-buffer-if-modified)
+  (advice-add 'rustic-cargo-current-test :before #'save-current-buffer-if-modified)
+  (advice-add 'rustic-cargo-test :before #'save-current-buffer-if-modified))
+
+(leaf flycheck-rust
+  :doc "Flycheck: Rust additions and Cargo support"
+  :url "https://github.com/flycheck/flycheck-rust"
+  :after (flycheck rust-mode)
+  :ensure t
+  :hook
+  (flycheck-mode-hook . flycheck-rust-setup))
 ;; TODO setup keybindings
 (leaf cargo-mode
   :doc "Minor mode for Cargo, Rust's package manager."

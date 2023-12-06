@@ -5,6 +5,9 @@
 ;; Increase the GC threshold for faster startups.  Measured in bytes.
 (setq gc-cons-threshold (* 50 1000 1000))
 
+;; Suggested by lsp-mode: https://emacs-lsp.github.io/lsp-mode/page/performance/
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+
 ;; Prefer loading newest compiled .el file
 (customize-set-variable 'load-prefer-newer noninteractive)
 

@@ -23,5 +23,6 @@ in {
       (python3.withPackages python-packages)
 
       cargo
+      clippy
     ] ++ [ devpkgs.devenv ];
 }
