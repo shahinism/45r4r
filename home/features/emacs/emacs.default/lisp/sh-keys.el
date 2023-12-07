@@ -136,8 +136,8 @@
   ;; (org-capture-mode . meow-insert-mode)   ;; FIXME it kills lambda line
   )
 
-(global-set-key (kbd "M-,") 'previous-buffer)
-(global-set-key (kbd "M-.") 'next-buffer)
+;; (global-set-key (kbd "M-,") 'previous-buffer)
+;; (global-set-key (kbd "M-.") 'next-buffer)
 (global-set-key (kbd "M-!") 'async-shell-command)
 (global-set-key (kbd "M-@") 'shell-command)
 

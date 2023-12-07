@@ -20,17 +20,60 @@
   :url "https://emacs-lsp.github.io/lsp-mode/"
   :ensure t
   :commands (lsp-mode lsp-deferred)
+  :custom
+  ;; Disable features that have great potential to be slow.
+  (lsp-enable-folding . nil)
+  (lsp-enable-text-document-color . nil)
+  ;; Reduce unexpected modifications to code.
+  (lsp-enable-type-formatting . nil)
   :hook
   (lsp-mode-hook . lsp-enable-which-key-integration)
-  (python-mode-hook . lsp-deferred))
+  (python-mode-hook . lsp-deferred)
+  :bind
+  ("C-c l" . lsp-mode/body)
+  :pretty-hydra
+  ((:color teal :quit-key "q")
+   ("Buffer"
+    (("f" lsp-format-buffer "format buffer")
+     ("m" lsp-ui-imenu "imenu")
+     ("x" lsp-execute-code-action "execute code action")
+     ("r" lsp-rename "rename"))
+    "Server"
+    (("s" lsp-describe-session "describe session")
+     ("S" lsp-shutdown-workspace "shutdown workspace")
+     ("r" lsp-restart-workspace "restart workspace"))
+    "Symbol"
+    (("d" lsp-find-definition "find definition")
+     ("D" lsp-ui-peek-find-definitions "peek definition")
+     ("i" lsp-find-implementation "find implementation")
+     ("I" lsp-ui-peek-find-implementation "peek implementation")
+     ("r" lsp-find-references "find references")
+     ("R" lsp-ui-peek-find-references "peek references"))))
+  )
 
 (leaf lsp-ui
   :doc "UI modules for lsp-mode"
   :url "https://emacs-lsp.github.io/lsp-ui/"
   :ensure t
-  :commands lsp-ui-mode
+  :commands (lsp-ui-mode lsp-ui-imenu)
+  :custom
+  (lsp-ui-peak-enable . t)
+  (lsp-ui-doc-max-height . 8)
+  (lsp-ui-doc-max-width . 72)          ; 150 (default) is too wide
+  (lsp-ui-doc-delay . 0.75)              ; 0.2 (default) is too naggy
+  (lsp-ui-doc-show-with-cursor . nil)  ; don't dissappear on mouseover
+  (lsp-ui-doc-position . 'at-point)
+  (lsp-ui-sideline-ignore-duplicate . t)
+  ;; Don't show symbol definitions in the sideline. They are pretty noisy,
+  ;; and there is a bug preventing Flycheck errors from being shown (the
+  ;; errors flash briefly and then disappear).
+  (lsp-ui-sideline-show-hover . nil)
   :hook
-  (lsp-mode-hook . lsp-ui-mode))
+  (lsp-mode-hook . lsp-ui-mode)
+  :bind lsp-ui-mode-map
+  ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+  ([remap xref-find-references] . lsp-ui-peek-find-references)
+  )
 
 (leaf devdocs
   :doc "Search the local devdocs."
