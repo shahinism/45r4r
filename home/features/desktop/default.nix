@@ -6,6 +6,7 @@
     ./rofi.nix
     ./dunst.nix
     ./espanso.nix
+    ./mullvad.nix
   ];
 
   home.packages = with pkgs; [
@@ -37,7 +38,6 @@
     anki-bin
     appimage-run
     protonvpn-cli
-    mullvad-vpn
     wireguard-tools
     deluge-gtk
   ];
