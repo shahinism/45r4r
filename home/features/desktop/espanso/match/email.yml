@@ -29,3 +29,6 @@ matches:
       values:
         - Shahin
         - Reza Khanipour
+
+- trigger: ":available"
+  replace: "https://savvycal.com/shahin/chat"
