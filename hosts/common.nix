@@ -274,6 +274,23 @@ in {
   # TODO make me conditional
   services.mullvad-vpn.enable = true;
 
+  # TODO make me conditional
+  users.groups.uinput = { members = [ "shahin" ]; };
+
+  services.udev.extraRules = ''
+    KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+  '';
+
+  # Firewall
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      # waylus
+      1701 # server
+      9001 # websocket
+    ];
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

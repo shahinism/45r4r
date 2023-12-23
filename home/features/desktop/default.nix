@@ -42,6 +42,10 @@
     deluge-gtk
 
     libsForQt5.ktouch
+
+    # Use tablet as touch screen
+    weylus
+    xournalpp
   ];
 
   services.gpg-agent = {
