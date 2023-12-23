@@ -40,6 +40,8 @@
     mullvad-vpn
     wireguard-tools
     deluge-gtk
+
+    libsForQt5.ktouch
   ];
 
   services.gpg-agent = {
