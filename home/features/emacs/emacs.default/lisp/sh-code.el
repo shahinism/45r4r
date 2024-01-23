@@ -29,6 +29,8 @@
   :hook
   (lsp-mode-hook . lsp-enable-which-key-integration)
   (python-mode-hook . lsp-deferred)
+  (go-mode-hook . lsp-deferred)
+  (rust-mode-hook . lsp-deferred)
   :bind
   ("C-c l" . lsp-mode/body)
   :pretty-hydra
@@ -112,7 +114,8 @@
     (("s" project-shell "shell")
      ("e" project-eshell "eshell")
      ("c" project-compile "compile")
-     ("x" project-execute-extended-command "execute extended command")
+     ;; ("x" project-execute-extended-command "execute extended command")
+     ("x" compile "compile in current directory")
      ("a" consult-ag "ag")
      ("v" project-vc-dir "vc dir"))
     ))
