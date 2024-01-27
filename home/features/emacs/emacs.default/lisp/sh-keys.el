@@ -32,7 +32,6 @@
    ;; SPC j/k will run the original command in MOTION state.
    ;; '("j" . "H-j")
    ;; '("k" . "H-k")
-   '("j" . hydra-goto/body)
    '("f" . hydra-file/body)
 
    '("z" . hydra-chat/body)
@@ -85,7 +84,8 @@
    '("D" . meow-backward-delete)
    '("e" . meow-next-word)
    '("E" . meow-next-symbol)
-   '("f" . meow-find)
+   '("F" . meow-find)
+   '("f" . avy-goto-char-timer)
    '("g" . meow-cancel-selection)
    '("G" . meow-grab)
    '("h" . meow-left)
