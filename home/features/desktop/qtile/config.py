@@ -100,7 +100,7 @@ keys = [
         desc="Launch kitty terminal",
     ),
     Key([mod], "d", lazy.spawn(launcher), desc="Run Launcher"),
-    Key([mod], "q", lazy.window.kill(), desc="Kill active window"),
+    Key([mod], "w", lazy.window.kill(), desc="Kill active window"),
     Key([mod], "c", lazy.reload_config(), desc="Reload Qtile config"),
     Key([mod, "shift"], "c", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "shift"], "e", lazy.shutdown(), desc="Shutdown Qtile"),
