@@ -11,6 +11,7 @@
 (require 'sh-keys)
 (require 'sh-completion)
 (require 'sh-code)
+(require 'sh-note)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
