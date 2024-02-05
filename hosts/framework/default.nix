@@ -6,7 +6,7 @@
 
 {
   imports = [ # Include the results of the hardware scan.
-    inputs.hardware.nixosModules.framework
+    inputs.hardware.nixosModules.framework-13th-gen-intel
     ./hardware-configuration.nix
     ../common.nix
   ];
