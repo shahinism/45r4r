@@ -91,6 +91,7 @@
 (leaf org-roam
   :url "https://www.orgroam.com/"
   :ensure t
+  :disabled t
   :custom
   (org-roam-directory . "~/org/roam")
   (org-roam-completion-everywhere . t)
@@ -136,6 +137,46 @@
         org-download-screenshot-method "flameshot gui --raw > %s")
 
   (customize-set-variable 'org-download-image-dir "images"))
+
+(leaf denote
+  :url "https://github.com/protesilaos/denote"
+  :doc "A simple note taking system for Emacs"
+  :ensure t
+  :bind ("C-c n" . denote/body)
+  :pretty-hydra
+  ((:color teal :quit-key "q")
+   ("Notes"
+    (("n" denote-new-note "new note")
+     ("l" denote-list-notes "list notes")
+     ("s" denote-search-notes "search notes")
+     ("r" denote-recent-notes "recent notes")
+     ("d" denote-delete-note "delete note")
+     ("e" denote-edit-note "edit note")
+     )
+    "Publish"
+    (("p" denote-publish "publish")
+     ("P" denote-publish-all "publish all"))
+    "Tasks"
+    (("t" denote-todo "todo"))
+    "Files"
+    (("f" denote-find-file "find file")
+     ("x" denote-export "export")
+     ("X" denote-export-all "export all")
+     ("o" denote-open "open")
+     ("O" denote-open-all "open all"))
+    "Actions"
+    (("c" denote-calendar "calendar")
+     ("i" denote-insert "insert")
+     ("I" denote-insert-file "insert file")
+     ("a" denote-archive "archive")
+     ("A" denote-archive-all "archive all")
+     ("u" denote-update "update")
+     ("U" denote-update-all "update all")
+     ("v" denote-view "view")
+     ("V" denote-view-all "view all")
+     ("h" denote-help "help")
+     ("H" denote-help-all "help all")
+     ))))
 
 (leaf org-modern
   :url "https://github.com/minad/org-modern"
