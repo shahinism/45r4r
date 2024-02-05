@@ -14,7 +14,8 @@ let
     ports = "sudo netstat -tunapl";
     poweroff = "shutdow -h now";
     ps = "procs";
-    reboot = "shutdown -r now";
+    # FIXME
+    # reboot = "shutdown -r now";
     # rm = "rm -i --preserve-root";
     serve = "python -m http.server";
     sleep = "systemctl suspend";
