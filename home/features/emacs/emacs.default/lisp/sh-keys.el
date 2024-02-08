@@ -32,17 +32,11 @@
    ;; SPC j/k will run the original command in MOTION state.
    ;; '("j" . "H-j")
    ;; '("k" . "H-k")
-   '("f" . hydra-file/body)
-
-   '("z" . hydra-chat/body)
    '("." . point-to-register)
    '(">" . jump-to-register)
    '("p" . project/body)
    '("w" . ace-window/body)
    '("v" . magit-status)
-   '("l" . hydra-lsp-bridge/body)
-   '("t" . hydra-toggle/body)
-   '("o" . hydra-org/body)
    '("b" . consult-buffer)
    ;; Use SPC (0-9) for digit arguments.
    '("1" . meow-digit-argument)

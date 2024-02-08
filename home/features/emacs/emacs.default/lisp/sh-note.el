@@ -199,6 +199,7 @@
   :doc "A simple note taking system for Emacs"
   :ensure t
   :bind ("C-c n" . denote/body)
+  :disabled t
   :pretty-hydra
   ((:color teal :quit-key "q")
    ("New Note"
