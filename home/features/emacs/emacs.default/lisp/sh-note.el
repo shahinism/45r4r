@@ -29,6 +29,50 @@
     )
   :hook
   (org-mode-hook . sh/org-electric-pair-mode)
+  :bind
+  (:org-mode-map
+   ("C-c o" . org/body))
+  :pretty-hydra
+  ((:color teal :quit-key "q")
+   ("Org"
+    (
+     ("c" org-capture "capture")
+     ("l" org-store-link "store link")
+     ("b" org-switchb "switch buffer")
+     ("r" org-refile "refile")
+     ("i" org-id-get-create "id")
+     ("m" org-tags-view "tags")
+     ("f" org-footnote-action "footnote")
+     ("e" org-export-dispatch "export")
+     ("o" org-open-at-point "open")
+     ("u" org-update-all-dblocks "update dblocks"))
+    "Task"
+    (("a" org-agenda "agenda")
+     ("t" org-todo-list "todo list")
+     ("s" org-schedule "schedule")
+     ("d" org-deadline "deadline")
+     ("p" org-priority "priority"))
+    "Babel"
+    (("v" org-babel-tangle "tangle")
+     ("x" org-babel-execute-buffer "execute")
+     ("X" org-babel-execute-subtree "execute subtree")
+     ("y" org-babel-execute-src-block "execute block")
+     ("z" org-babel-switch-to-session "switch session")
+     ("w" org-babel-previous-src-block "previous block")
+     ("W" org-babel-next-src-block "next block")
+     ("q" org-babel-demarcate-block "demarcate block")
+     ("j" org-babel-insert-header-arg "insert header arg")
+     ("k" org-babel-remove-header-arg "remove header arg")
+     ("l" org-babel-load-in-session "load in session")
+     ("n" org-babel-goto-named-src-block "goto named block")
+     ("N" org-babel-goto-named-result "goto named result")
+     ("h" org-babel-describe-session "describe session")
+     ("H" org-babel-describe-session-in-popup "describe session in popup")
+     ("M" org-babel-view-src-block-info "view block info")
+     ("P" org-babel-view-src-block-result "view block result")
+     ("R" org-babel-view-src-block-result-in-popup "view block result in popup")
+     ("S" org-babel-view-src-block-result-other-window "view block result other window")
+     ("T" org-babel-tangle-jump-to-org "tangle jump to org"))))
   :config
   (require 'org-tempo) ;; enable org templates; by default it's disabled
   ;; on Org > 9.2, more info:
@@ -53,6 +97,15 @@
            "* [ ] %?
 :PROPERTIES:
 :Added:     %U
+:END:" :empty-lines 0)
+          ("p" "People"           entry
+           (file+headline "~/org/meetings.org" "People")
+           "* %^{Name}
+:PROPERTIES:
+:BIRTHDAY: %^{Birthday}
+:EMAIL: %^{Email}
+:PHONE: %^{Phone}
+:LINKEDIN: %^{Linkedin}
 :END:" :empty-lines 0)
           ))
 
@@ -171,3 +224,27 @@
   :after org
   :hook
   (org-mode-hook . org-modern-mode))
+
+(leaf org-super-links
+  :url "https://github.com/toshism/org-super-links"
+  :doc "Supercharge your org-mode links"
+  :straight (org-super-links :host github :repo "toshism/org-super-links" :branch "develop")
+  :bind (("C-c s" . org-super-links/body))
+  :pretty-hydra
+  ((:color teal :quit-key "q")
+   ("Link"
+    (("c" org-super-links-link "create")
+     ("s" org-super-links-store-link "store")
+     ("l" org-super-links-insert-link "insert")
+     ("r" org-super-links-delete-link "delete"))
+    "Quick"
+    (("d" org-super-links-quick-insert-drawer-link "drawer")
+     ("i" org-super-links-quick-insert-inline-link "inline"))
+    ))
+  :init
+  (require 'org-id)
+  :custom
+  (org-super-links-related-into-drawer . t)
+  (org-super-links-link-prefix . 'org-super-links-link-prefix-timestamp)
+  (org-id-link-to-org-use-id . 'create-if-interactive-and-no-custom-id)
+  )
