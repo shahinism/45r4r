@@ -32,6 +32,7 @@
    ;; SPC j/k will run the original command in MOTION state.
    ;; '("j" . "H-j")
    ;; '("k" . "H-k")
+   '("o" . org/body)
    '("." . point-to-register)
    '(">" . jump-to-register)
    '("p" . project/body)

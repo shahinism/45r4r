@@ -29,9 +29,6 @@
     )
   :hook
   (org-mode-hook . sh/org-electric-pair-mode)
-  :bind
-  (:org-mode-map
-   ("C-c o" . org/body))
   :pretty-hydra
   ((:color teal :quit-key "q")
    ("Org"
@@ -230,7 +227,7 @@
   :url "https://github.com/toshism/org-super-links"
   :doc "Supercharge your org-mode links"
   :straight (org-super-links :host github :repo "toshism/org-super-links" :branch "develop")
-  :bind (("C-c s" . org-super-links/body))
+  :bind (("C-c s" . org-super-links/body))
   :pretty-hydra
   ((:color teal :quit-key "q")
    ("Link"
