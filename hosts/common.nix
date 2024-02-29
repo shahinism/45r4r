@@ -5,6 +5,12 @@ in {
   # Kernel
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
+  # Automatic Disc Optimisation
+  ## This can be done manually by running `# nix-store --optimise`
+  ## It also might potentially slow down builds. However, given my
+  ## experience with NixOS, I think it's worth it.
+  nix.settings.auto-optimise-store = true;
+
   # TODO switch to Caddy if it can enable SSL for localhost
   services.nginx = {
     enable = true;
@@ -122,8 +128,10 @@ in {
     # Enable the X11 windowing system.
     enable = true;
     # Configure keymap in X11
-    layout = "us";
-    xkbVariant = "";
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
 
     displayManager.lightdm = {
       enable = true;
@@ -220,17 +228,17 @@ in {
     };
   };
 
-  # Enable flatpak
-  services.flatpak.enable = true;
+  # Flatpak
+  services.flatpak.enable = false;
 
   # https://nixos.wiki/wiki/NTFS
   boot.supportedFilesystems = [ "ntfs" ];
 
-  # Enable memtest
-  boot.loader.grub.memtest86.enable = true;
+  # Memtest
+  boot.loader.grub.memtest86.enable = false;
 
-  # TODO make me conditional
-  services.mullvad-vpn.enable = true;
+  # Mullvad VPN
+  services.mullvad-vpn.enable = false;
 
   # TODO make me conditional
   users.groups.uinput = { members = [ "shahin" ]; };
@@ -239,6 +247,8 @@ in {
     KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
   '';
 
+  # NetworkManager
+  networking.networkmanager.enable = true;
   # Firewall
   networking.firewall = {
     enable = true;
