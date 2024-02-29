@@ -32,7 +32,6 @@
     pulseaudioFull
     obs-studio
     vlc
-    gnome.gnome-tweaks
     autorandr
     libreoffice
     anki-bin

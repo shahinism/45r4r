@@ -134,8 +134,6 @@ in {
     displayManager.autoLogin.user = "shahin";
     displayManager.defaultSession = "none+qtile";
 
-    # Enable the GNOME Desktop Environment.
-    desktopManager.gnome.enable = true;
     # qtile
     windowManager.qtile.enable = true;
 
