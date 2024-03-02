@@ -4,16 +4,32 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = [ ];
+  imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
+  boot.loader.grub = {
+    efiSupport = true;
+    efiInstallAsRemovable = true;
+    device = "nodev";
+  };
 
-  boot.initrd.availableKernelModules =
-    [ "ahci" "xhci_pci" "virtio_pci" "sr_mod" "virtio_blk" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.availableKernelModules = [
+    "ahci"
+    "ata_piix"
+    "sr_mod"
+    "uhci_hcd"
+    "virtio_blk"
+    "virtio_pci"
+    "vmw_pvscsi"
+    "xen_blkfront"
+    "xhci_pci"
+  ];
+  boot.initrd.kernelModules = [ "nvme" ];
+
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/00f0ec87-743a-44b8-907a-418bbde80cab";
+    device = "/dev/vda2";
+
     fsType = "ext4";
   };
 

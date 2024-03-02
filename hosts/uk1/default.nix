@@ -1,7 +1,7 @@
 { config, pkgs, inputs, ... }: {
   imports = [ ./hardware-configuration.nix ];
 
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
   networking.hostName = "uk1";
   networking.domain = "";
