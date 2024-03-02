@@ -36,6 +36,7 @@
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud28;
+    hostName = "localhost";
   };
 
   system.stateVersion = "23.11";
