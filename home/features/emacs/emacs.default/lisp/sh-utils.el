@@ -195,15 +195,4 @@ When REGION is non-nil, unfill each paragraph in the region,"
   :url "https://github.com/bbatsov/crux"
   ensure t)
 
-(leaf eat
-  :doc "Emulate A Terminal, in a region, in a buffer and in Eshell."
-  :url "https://codeberg.org/akib/emacs-eat"
-  :straight (eat :type git
-       :host codeberg
-       :repo "akib/emacs-eat"
-       :files ("*.el" ("term" "term/*.el") "*.texi"
-               "*.ti" ("terminfo/e" "terminfo/e/*")
-               ("terminfo/65" "terminfo/65/*")
-               ("integration" "integration/*")
-               (:exclude ".dir-locals.el" "*-tests.el"))))
 ;;; sh-utils.el ends here

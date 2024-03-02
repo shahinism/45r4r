@@ -111,6 +111,7 @@
   :straight (copilot :host github :repo "zerolfx/copilot.el" :files ("*.el" "dist"))
   :custom
   (copilot-max-char . 1000000)   ;; https://github.com/zerolfx/copilot.el/issues/175
+  (copilot-indent-offset-warning-disable . t) ;; https://github.com/copilot-emacs/copilot.el/issues/249#issuecomment-1921157985
   :hook
   (prog-mode-hook . copilot-mode)
   :bind (:copilot-mode-map

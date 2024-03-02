@@ -10,7 +10,9 @@
 
 ;; Line numbers (relative of course).
 (setq display-line-numbers-type 'relative)
-(global-display-line-numbers-mode 1)
+;; (global-display-line-numbers-mode 1)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(add-hook 'text-mode-hook 'display-line-numbers-mode)
 
 ;; Highlight the current line.
 (global-hl-line-mode 1)
@@ -185,8 +187,9 @@
   :doc "Highlight TODO keywords"
   :url "https://github.com/tarsius/hl-todo"
   :ensure t
-  :init
-  (global-hl-todo-mode))
+  :config
+  (require 'hl-todo)
+  (global-hl-todo-mode 1))
 
 ;; TODO dumb-jump
 (leaf terraform-mode
