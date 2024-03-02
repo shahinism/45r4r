@@ -28,7 +28,7 @@
     allowedUDPPorts = [ config.services.tailscale.port ];
 
     # allow you to SSH in over the public internet
-    allowedTCPPorts = [ 22 ];
+    allowedTCPPorts = [ ];
   };
 
   system.stateVersion = "23.11";
