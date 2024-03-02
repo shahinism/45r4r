@@ -42,6 +42,7 @@
 
     libsForQt5.ktouch
 
+    tailscale-systray
     # Use tablet as touch screen
     weylus
     xournalpp

@@ -136,8 +136,7 @@
 (leaf consult-ag
   :doc "Consult integration for ag"
   :url "https://github.com/yadex205/consult-ag"
-  :ensure t
-  :after consult)
+  :ensure t)
 
 ;; TODO learn me
 (leaf embark

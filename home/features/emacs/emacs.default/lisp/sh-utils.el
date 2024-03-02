@@ -195,4 +195,14 @@ When REGION is non-nil, unfill each paragraph in the region,"
   :url "https://github.com/bbatsov/crux"
   ensure t)
 
+(leaf eshell-toggle
+  :custom
+  (eshell-toggle-size-fraction . 3)
+  (eshell-toggle-use-projectile-root . nil)
+  (eshell-toggle-run-command . nil)
+  (eshell-toggle-init-function . #'eshell-toggle-init-eshell)
+  :straight
+  (eshell-toggle :repo "4DA/eshell-toggle" :fetcher github :version original)
+  :bind
+  ("<f12>" . eshell-toggle))
 ;;; sh-utils.el ends here
