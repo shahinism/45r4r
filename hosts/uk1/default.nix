@@ -44,8 +44,8 @@
       adminpassFile = "/etc/nextcloud-admin-pass";
     };
     settings = {
-      trusted_domains = [ "localhost" ];
-      trusted_proxies = [ "100.98.96.54" ];
+      trusted_domains = [ "100.98.96.54" "localhost" ];
+      trusted_proxies = [ ];
     };
   };
 
