@@ -74,6 +74,11 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ ./hosts/framework ];
         };
+
+        uk1 = libUnstable.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/uk1 ];
+        };
       };
 
       # Standalone home-manager configuration entrypoint
