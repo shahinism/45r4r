@@ -36,6 +36,7 @@
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud28;
+    datadir = "/data/nextcloud";
     hostName = "localhost";
     database.createLocally = true;
     config = {
