@@ -35,18 +35,27 @@
   # Nextcloud
   services.nextcloud = {
     enable = true;
+    https = true;
     package = pkgs.nextcloud28;
     datadir = "/data/nextcloud";
-    hostName = "localhost";
+    hostName = "uk1.starling-goldeye.ts.net";
     database.createLocally = true;
     config = {
       dbtype = "pgsql";
       adminpassFile = "/etc/nextcloud-admin-pass";
     };
-    settings = {
-      trusted_domains = [ "uk1.starling-goldeye.ts.net" "localhost" ];
-      trusted_proxies = [ ];
-    };
+    # settings = {
+    #   trusted_domains = [ "uk1.starling-goldeye.ts.net" ];
+    #   trusted_proxies = [ ];
+    # };
+  };
+
+  services.nginx.virtualHosts.${config.services.nextcloud.hostName} = {
+    forceSSL = true;
+    sslCertificate =
+      "/etc/ssl/certs/private/${config.services.nextcloud.hostName}.crt";
+    sslCertificateKey =
+      "/etc/ssl/certs/private/${config.services.nextcloud.hostName}.key";
   };
 
   system.stateVersion = "23.11";
