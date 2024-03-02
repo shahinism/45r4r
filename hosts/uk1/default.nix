@@ -44,7 +44,7 @@
       adminpassFile = "/etc/nextcloud-admin-pass";
     };
     settings = {
-      trusted_domains = [ "uk1.tail4b8cb.ts.net" "localhost" ];
+      trusted_domains = [ "uk1.starling-goldeye.ts.net" "localhost" ];
       trusted_proxies = [ ];
     };
   };
