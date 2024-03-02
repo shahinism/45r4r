@@ -16,7 +16,12 @@
   # Enable Tailscale
   environment.systemPackages = with pkgs; [ tailscale ];
 
-  services = { tailscale = { enable = true; }; };
+  services.tailscale = { enable = true; };
+
+  systemd.services.tailscaled.environment = {
+    # configure the Caddy user to have access to Tailscale’s socket
+    TS_PERMIT_CERT_UID = "caddy";
+  };
 
   networking.firewall = {
     # enable the firewall
@@ -59,6 +64,11 @@
   # };
 
   services.nginx.enable = false;
+
+  services.phpfpm.pools.nextcloud.settings = {
+    "listen.owner" = config.services.caddy.user;
+    "listen.group" = config.services.caddy.group;
+  };
   services.caddy = {
     enable = true;
     virtualHosts = {
