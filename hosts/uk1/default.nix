@@ -43,6 +43,10 @@
       dbtype = "pgsql";
       adminpassFile = "/etc/nextcloud-admin-pass";
     };
+    settings = {
+      trusted_domains = [ "localhost" ];
+      trusted_proxies = [ "100.98.96.54" ];
+    };
   };
 
   system.stateVersion = "23.11";
