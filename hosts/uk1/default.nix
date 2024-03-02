@@ -35,9 +35,12 @@
   # Nextcloud
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud28;
     hostName = "localhost";
-    config.adminpassFile = "/etc/nextcloud-admin-pass";
+    database.createLocally = true;
+    config = {
+      dbtype = "pgsql";
+      adminpassFile = "/etc/nextcloud-admin-pass";
+    };
   };
 
   system.stateVersion = "23.11";
