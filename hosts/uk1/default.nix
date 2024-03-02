@@ -1,5 +1,6 @@
 { config, pkgs, inputs, ... }: {
   imports = [ ./hardware-configuration.nix ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
@@ -29,6 +30,12 @@
 
     # allow you to SSH in over the public internet
     allowedTCPPorts = [ ];
+  };
+
+  # Nextcloud
+  services.nextcloud = {
+    enable = true;
+    package = pkgs.nextcloud28;
   };
 
   system.stateVersion = "23.11";
