@@ -50,12 +50,44 @@
     # };
   };
 
-  services.nginx.virtualHosts.${config.services.nextcloud.hostName} = {
-    forceSSL = true;
-    sslCertificate =
-      "/etc/ssl/certs/private/${config.services.nextcloud.hostName}.crt";
-    sslCertificateKey =
-      "/etc/ssl/certs/private/${config.services.nextcloud.hostName}.key";
+  # services.nginx.virtualHosts.${config.services.nextcloud.hostName} = {
+  #   forceSSL = true;
+  #   sslCertificate =
+  #     "/etc/ssl/certs/private/${config.services.nextcloud.hostName}.crt";
+  #   sslCertificateKey =
+  #     "/etc/ssl/certs/private/${config.services.nextcloud.hostName}.key";
+  # };
+
+  services.nginx.enable = false;
+  services.caddy = {
+    enable = true;
+    virtualHosts = {
+      "${config.services.nextcloud.hostName}" = {
+        extraConfig = ''
+          redir /.well-known/carddav /remote.php/dav 301
+          redir /.well-known/caldav /remote.php/dav 301
+
+          @forbidden {
+              path /.htaccess
+              path /data/*
+              path /config/*
+              path /db_structure
+              path /.xml
+              path /README
+              path /3rdparty/*
+              path /lib/*
+              path /templates/*
+              path /occ
+              path /console.php
+          }
+          respond @forbidden 404
+
+          root * ${config.services.nextcloud.package}
+          file_server
+          php_fastcgi unix//run/phpfpm/nextcloud.sock
+        '';
+      };
+    };
   };
 
   system.stateVersion = "23.11";
