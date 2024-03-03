@@ -1,6 +1,11 @@
 { config, pkgs, inputs, ... }: {
-  imports =
-    [ ./hardware-configuration.nix ./firewall.nix ./caddy.nix ./tailscale.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ./firewall.nix
+    ./caddy.nix
+    ./tailscale.nix
+    ./nextcloud-container.nix
+  ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   boot.tmp.cleanOnBoot = true;
