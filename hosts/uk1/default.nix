@@ -4,6 +4,7 @@
     ./firewall.nix
     ./caddy.nix
     ./tailscale.nix
+    ./docker.nix
     ./nextcloud-container.nix
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
