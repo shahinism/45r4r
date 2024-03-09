@@ -5,8 +5,14 @@
   boot.tmp.cleanOnBoot = true;
   networking.hostName = "pi3-1";
 
-  services.openssh.enable = true;
-  services.openssh.passwordAuthentication = false;
+  # TODO extract and make it reusable
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+    };
+  };
 
   users = {
     mutableUsers = false;

@@ -101,6 +101,8 @@
 (leaf project
   :doc "Manage and navigate projects in Emacs easily"
   :tag "builtin"
+  :bind
+  ("C-x p" . project/body)
   :pretty-hydra
   ((:color teal :quit-key "q")
    ("Project"

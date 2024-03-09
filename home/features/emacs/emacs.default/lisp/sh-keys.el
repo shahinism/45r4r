@@ -138,4 +138,6 @@
 (global-set-key (kbd "M-@") 'shell-command)
 (global-set-key (kbd "C-x w") 'ace-window/body)
 (global-set-key (kbd "C-x v") 'magit-status)
+;; Unbind the annoying behavior of temporarily suspending emacs
+(unbind-key "C-z")
 ;;; sh-keys.el ends here
