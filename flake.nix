@@ -79,6 +79,10 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ ./hosts/uk1 ];
         };
+        pi3-1 = libUnstable.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/pi3-1 ];
+        };
       };
 
       # Standalone home-manager configuration entrypoint
