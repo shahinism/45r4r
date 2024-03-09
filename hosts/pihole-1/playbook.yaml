@@ -1,0 +1,118 @@
+- name: Setup PIHole
+  hosts: pi3-1
+  become: true
+
+  pre_tasks:
+    - name: load configuration
+      ansible.builtin.include_vars: "{{ item }}"
+      loop:
+        - config.yml
+
+    - name: Upgrade Packages
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: yes
+
+  tasks:
+    - name: Configure options in /etc/default/tailscaled.
+      lineinfile:
+        dest: /etc/default/tailscaled
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        insertafter: EOF
+        state: present
+      with_items: "{{ tailscale_default_options_settings }}"
+      notify:
+        - restart tailscaled
+
+    - name: Install System Requirements
+      ansible.builtin.apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-setuptools
+          - python3-pip
+        state: latest
+        update_cache: true
+
+    - name: Add Docker GPG apt Key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      ansible.builtin.apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      ansible.builtin.apt:
+        name: docker-ce
+        state: latest
+        update_cache: true
+
+    - name: Install Docker Module for Python
+      ansible.builtin.pip:
+        name: docker
+
+    # FIXME when testing it gets permission denied
+    # - name: ensure docker is started
+    #   ansible.builtin.service:
+    #     name: docker
+    #     state: started
+    #     enabled: true
+
+    - name: ensure {{ ansible_user }} is added to the docker group
+      ansible.builtin.user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: true
+
+    - name: Create Pi-hole folder on Pi.
+      ansible.builtin.file:
+        path: "{{ config_dir }}/pi-hole"
+        state: directory
+        mode: 0755
+      become: false
+      register: pi_hole_dir
+
+    - name: Copy Pi-hole docker-compose template to Pi.
+      ansible.builtin.template:
+        src: templates/pi-hole-docker-compose.yml.j2
+        dest: "{{ pi_hole_dir.path }}/docker-compose.yml"
+        mode: '0640'
+      become: false
+      notify: Restart pi-hole
+    - name: Ensure Pi-hole is running.
+      community.docker.docker_compose_v2:
+        project_src: "{{ pi_hole_dir.path }}/"
+        build: never
+      become: false
+
+  roles:
+    - role: artis3n.tailscale
+      vars:
+        talescale_args: "--ssh"
+        tailscale_up_skip: true
+
+    - role: caddy_ansible.caddy_ansible
+      caddy_systemd_capabilities_enabled: true
+      caddy_systemd_network_dependency: false
+      caddy_config: |
+        {{ pihole_domain }} {
+            log
+
+            reverse_proxy http://{{ pihole_local_ip }}:{{ pihole_local_port }} {
+                header_up Host {http.request.host}
+                header_up X-Real-IP {http.request.remote.host}
+                header_up X-Forwarded-For {http.request.remote.host}
+                header_up X-Forwarded-Port {http.request.port}
+                header_up X-Forwarded-Proto {http.request.scheme}
+            }
+        }
+
+  handlers:
+    - name: Include handlers.
+      ansible.builtin.import_tasks: tasks/handlers.yml
