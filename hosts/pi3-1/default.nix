@@ -2,7 +2,7 @@
   imports = [ ./hardware-configuration.nix ];
   nix.settings.experimental-features = [ "nix-command flakes" ];
 
-  boot.tmp.cleanupTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
   networking.hostName = "pi3-1";
 
   services.openssh.enable = true;
