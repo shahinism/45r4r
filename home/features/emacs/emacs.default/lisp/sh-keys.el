@@ -121,6 +121,7 @@
 (leaf meow
   :url "https://github.com/meow-edit/meow"
   :ensure t
+  :disabled t
   :custom
   (meow-use-clipboard . t)
   :init
@@ -135,6 +136,6 @@
 ;; (global-set-key (kbd "M-.") 'next-buffer)
 (global-set-key (kbd "M-!") 'async-shell-command)
 (global-set-key (kbd "M-@") 'shell-command)
-
-
+(global-set-key (kbd "C-x w") 'ace-window/body)
+(global-set-key (kbd "C-x v") 'magit-status)
 ;;; sh-keys.el ends here
