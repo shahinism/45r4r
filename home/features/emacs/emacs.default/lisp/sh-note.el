@@ -29,6 +29,8 @@
     )
   :hook
   (org-mode-hook . sh/org-electric-pair-mode)
+  :bind
+  (("C-c o" . org/body))
   :pretty-hydra
   ((:color teal :quit-key "q")
    ("Org"
@@ -104,7 +106,9 @@
 :PHONE: %^{Phone}
 :LINKEDIN: %^{Linkedin}
 :END:" :empty-lines 0)
-          ))
+          ("l" "Engineering Log"  entry
+           (file+datetree "~/org/engineering.org")
+           "- %T %? %^g" :empty-lines 0)))
 
   ;; Return or left-click with mouse should follow links
   (customize-set-variable 'org-return-follows-link t)
