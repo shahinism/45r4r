@@ -108,7 +108,7 @@
 :END:" :empty-lines 0)
           ("l" "Engineering Log"  entry
            (file+datetree "~/org/engineering.org")
-           "- %T %? %^g" :empty-lines 0)))
+           "**** %<%H:%M:%S> %^{Title} %^g\n- %?" :empty-lines 0)))
 
   ;; Return or left-click with mouse should follow links
   (customize-set-variable 'org-return-follows-link t)
