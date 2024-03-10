@@ -6,7 +6,6 @@
     ./rofi.nix
     ./dunst.nix
     ./espanso.nix
-    ./mullvad.nix
   ];
 
   home.packages = with pkgs; [

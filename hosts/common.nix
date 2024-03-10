@@ -237,9 +237,6 @@ in {
   # Memtest
   boot.loader.grub.memtest86.enable = false;
 
-  # Mullvad VPN
-  services.mullvad-vpn.enable = false;
-
   # TODO make me conditional
   users.groups.uinput = { members = [ "shahin" ]; };
 
@@ -257,6 +254,10 @@ in {
       1701 # server
       9001 # websocket
     ];
+
+    # This is in order to help with Tailscale using exit node
+    # https://github.com/tailscale/tailscale/issues/10319#issuecomment-1886730614
+    checkReversePath = "loose";
   };
 
   # Tailscale
