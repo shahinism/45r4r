@@ -115,7 +115,7 @@
   :hook
   (prog-mode-hook . copilot-mode)
   :bind (:copilot-mode-map
-         ("C-e" . copilot-accept-completion)
+         ("C-<return>" . copilot-accept-completion)
          ("C-;" . copilot-accept-completion-by-word)))
 
 (leaf consult
