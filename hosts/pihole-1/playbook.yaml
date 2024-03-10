@@ -94,7 +94,6 @@
   roles:
     - role: artis3n.tailscale
       vars:
-        talescale_args: "--ssh"
         tailscale_up_skip: true
 
     - role: caddy_ansible.caddy_ansible
@@ -112,6 +111,14 @@
                 header_up X-Forwarded-Proto {http.request.scheme}
             }
         }
+
+    - role: devsec.hardening.os_hardening
+
+  vars:
+    sysctl_overwrite:
+      # Enable IPv4 traffic forwarding.
+      net.ipv4.ip_forward: 1
+      vm.mmap_rnd_bits: 18
 
   handlers:
     - name: Include handlers.
