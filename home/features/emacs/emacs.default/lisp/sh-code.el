@@ -131,6 +131,13 @@
   :ensure t
   :commands magit-status)
 
+(leaf git-timemachine
+    :doc "Walk through git revisions of a file"
+    :url "https://github.com/emacsmirror/git-timemachine"
+    :ensure t
+    :bind
+    ("s-g" . git-timemachine))
+
 (leaf git-gutter
   :doc "Port of Sublime Text plugin GitGutter"
   :url "https://github.com/emacsorphanage/git-gutter"
