@@ -184,7 +184,31 @@ When REGION is non-nil, unfill each paragraph in the region,"
 (leaf crux
   :doc "A Collection of Ridiculously Useful eXtensions for Emacs"
   :url "https://github.com/bbatsov/crux"
-  ensure t)
+  :ensure t
+  :bind
+  ("C-c o" . crux-open-with)
+  ("M-j" . crux-smart-open-line)
+  ("C-c n" . crux-cleanup-buffer-or-region)
+  ("C-c f" . crux-recentf-find-file)
+  ("C-M-z" . crux-indent-defun)
+  ("C-c u" . crux-view-url)
+  ("C-c e" . crux-eval-and-replace)
+  ("C-c w" . crux-swap-windows)
+  ("C-c D" . crux-delete-file-and-buffer)
+  ("C-c r" . crux-rename-buffer-and-file)
+  ("C-c t" . crux-visit-term-buffer)
+  ("C-c k" . crux-kill-other-buffers)
+  ("s-r" . crux-recentf-find-file)
+  ("s-j" . crux-top-join-line)
+  ("C-^" . crux-top-join-line)
+  ("C-<backspace>" . crux-kill-line-backwards)
+  ("s-o" . crux-smart-open-line-above)
+  ([remap move-beginning-of-line] . crux-move-beginning-of-line)
+  ([(shift return)] . crux-smart-open-line)
+  ([(control shift return)] . crux-smart-open-line-above)
+  ([remap kill-whole-line] . crux-kill-whole-line)
+  ("C-c s" . crux-ispell-word-then-abbrev)
+  )
 
 (leaf eshell-toggle
   :custom
@@ -196,4 +220,13 @@ When REGION is non-nil, unfill each paragraph in the region,"
   (eshell-toggle :repo "4DA/eshell-toggle" :fetcher github :version original)
   :bind
   ("<f12>" . eshell-toggle))
+
+(leaf ace-window
+  :doc "Quickly switch windows"
+  :url "https://github.com/abo-abo/ace-window"
+  :ensure t
+  :config
+  (global-set-key (kbd "M-o") 'ace-window)
+  (global-set-key [remap other-window] 'ace-window))
+
 ;;; sh-utils.el ends here
