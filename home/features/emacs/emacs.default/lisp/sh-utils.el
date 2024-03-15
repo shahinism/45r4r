@@ -137,6 +137,14 @@ When REGION is non-nil, unfill each paragraph in the region,"
   ("M-g f" . avy-goto-line)
   )
 
+(leaf expand-region
+  :doc "Increase selected region by semantic units."
+  :url "https://github.com/magnars/expand-region.el"
+  :ensure t
+  :bind
+  ("C-=" . er/expand-region)
+  )
+
 (leaf restclient
   :doc "HTTP REST client tool for Emacs"
   :url "https://github.com/pashky/restclient.el"
