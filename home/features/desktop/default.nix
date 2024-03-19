@@ -39,6 +39,7 @@
     wireguard-tools
     deluge-gtk
 
+    localsend
     libsForQt5.ktouch
 
     tailscale-systray
