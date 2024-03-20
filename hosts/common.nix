@@ -180,7 +180,11 @@ in {
 
   # Bluetooth
   services.blueman.enable = true;
-
+  # TODO make sure to enable me only on desktops
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
   # It's needed to explicitly disable this, as this is enabled by
   # default on Gnome, and prevents using tlp:
   # https://discourse.nixos.org/t/cant-enable-tlp-when-upgrading-to-21-05/13435
