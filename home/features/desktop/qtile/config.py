@@ -96,7 +96,7 @@ keys = [
     Key(
         [mod],
         "Return",
-        lazy.spawn("kitty zellij -l compact"),
+        lazy.spawn("kitty"),
         desc="Launch kitty terminal",
     ),
     Key([mod], "d", lazy.spawn(launcher), desc="Run Launcher"),
