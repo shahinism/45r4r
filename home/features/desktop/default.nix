@@ -43,6 +43,7 @@
     libsForQt5.ktouch
 
     tailscale-systray
+    tor-browser
     # Use tablet as touch screen
     weylus
     xournalpp
