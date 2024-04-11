@@ -1,13 +1,6 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{
-  inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
+{ inputs, outputs, lib, config, pkgs, ... }: {
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
@@ -17,7 +10,6 @@
     # inputs.nix-colors.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
     ./features/cli
     ./features/desktop
     ./features/emacs
@@ -31,20 +23,7 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
-
-      # TODO am I using both of these?
-      # You can also add overlays exported from other flakes:
       inputs.emacs-overlay.overlays.default
-      # Or define it inline, for example:
-      (final: prev: {
-        emacs29 = (prev.emacsGit.override {
-
-        }).overrideAttrs (old: {
-          name = "emacs29";
-          version = "29.0-90";
-          src = inputs.emacs-src;
-        });
-      })
     ];
 
     # Configure your nixpkgs instance
@@ -64,13 +43,12 @@
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   # home.packages = with pkgs; [ steam ];
-  home.packages = with pkgs;
-    [
-      # Nix tools
-      comma        # Run binaries without installing them!
-      cachix       # Service for Nix binary cache hosting
-      nixos-option # Inspect NixOS configuration
-    ];
+  home.packages = with pkgs; [
+    # Nix tools
+    comma # Run binaries without installing them!
+    cachix # Service for Nix binary cache hosting
+    nixos-option # Inspect NixOS configuration
+  ];
 
   # Enable home-manager
   programs.home-manager.enable = true;

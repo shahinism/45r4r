@@ -96,11 +96,11 @@ keys = [
     Key(
         [mod],
         "Return",
-        lazy.spawn("kitty zellij -l compact"),
+        lazy.spawn("kitty"),
         desc="Launch kitty terminal",
     ),
     Key([mod], "d", lazy.spawn(launcher), desc="Run Launcher"),
-    Key([mod], "q", lazy.window.kill(), desc="Kill active window"),
+    Key([mod], "w", lazy.window.kill(), desc="Kill active window"),
     Key([mod], "c", lazy.reload_config(), desc="Reload Qtile config"),
     Key([mod, "shift"], "c", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "shift"], "e", lazy.shutdown(), desc="Shutdown Qtile"),
@@ -443,7 +443,6 @@ floating_layout = layout.Floating(
         Match(title="Confirmation"),  # tastyworks exit box
         Match(title="Qalculate!"),  # qalculate-gtk
         Match(wm_class="kdenlive"),  # kdenlive
-        Match(wm_class="pinentry-gtk-2"),  # GPG key password entry
     ]
 )
 auto_fullscreen = True

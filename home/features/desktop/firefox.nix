@@ -483,6 +483,12 @@
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/worldbrain/latest.xpi";
           };
+          # Auto Tab Discard
+          "{c2c003ee-bd69-42a2-b0e9-6f34222cb046}" = {
+            installation_mode = "normal_installed";
+            install_url =
+              "https://addons.mozilla.org/firefox/downloads/latest/auto-tab-discard/latest.xpi";
+          };
         };
       };
     };

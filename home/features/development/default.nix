@@ -1,13 +1,9 @@
-{ pkgs, inputs, ... }: let
-  python-packages = p:
-    with p; [
-      ipython
-    ];
+{ pkgs, inputs, ... }:
+let
+  python-packages = p: with p; [ ipython ];
   devpkgs = inputs.devenv.packages.x86_64-linux;
 in {
-  imports = [
-    ./git.nix
-  ];
+  imports = [ ./git.nix ];
 
   home.packages = with pkgs;
     [
@@ -25,5 +21,8 @@ in {
       dbeaver
 
       (python3.withPackages python-packages)
+
+      cargo
+      clippy
     ] ++ [ devpkgs.devenv ];
 }

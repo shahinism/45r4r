@@ -18,7 +18,6 @@
     brave
     slack
     xclip
-    pinentry-gtk2
     flameshot
     keybase-gui
     networkmanagerapplet
@@ -31,21 +30,33 @@
     pulseaudioFull
     obs-studio
     vlc
-    gnome.gnome-tweaks
     autorandr
     libreoffice
     anki-bin
     appimage-run
     protonvpn-cli
-    mullvad-vpn
     wireguard-tools
     deluge-gtk
+
+    localsend
+    libsForQt5.ktouch
+
+    tailscale-systray
+    # Use tablet as touch screen
+    weylus
+    xournalpp
   ];
 
+  # TODO move it to CLI feature.
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
-    pinentryFlavor = "gtk2";
+    pinentryPackage = pkgs.pinentry-tty;
+    enableZshIntegration = true;
+    extraConfig = ''
+      allow-emacs-pinentry
+      allow-loopback-pinentry
+    '';
   };
 
   # Enable keybase requirements

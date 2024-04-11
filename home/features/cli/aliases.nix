@@ -10,12 +10,12 @@ let
     flightoff = "sudo rfkill unblock all";
     flighton = "sudo rfkill block all";
     man = "batman";
-    # mkdir = "mkdir -pv";
+    mkdir = "mkdir -pv";
     ports = "sudo netstat -tunapl";
     poweroff = "shutdow -h now";
     ps = "procs";
     reboot = "shutdown -r now";
-    # rm = "rm -i --preserve-root";
+    rm = "rip";
     serve = "python -m http.server";
     sleep = "systemctl suspend";
     snr = "sudo systemctl restart NetworkManager";
@@ -23,8 +23,7 @@ let
     top = "btm";
     watch = "batwatch";
     wget = "wget -c"; # Resume by default
+    dir = "yazi";
+    ls = "eza";
   };
-in {
-  home.shellAliases = aliases;
-  programs.nushell.shellAliases = aliases;
-}
+in { home.shellAliases = aliases; }

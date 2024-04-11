@@ -10,10 +10,74 @@
 
 ;; Line numbers (relative of course).
 (setq display-line-numbers-type 'relative)
-(global-display-line-numbers-mode 1)
+;; (global-display-line-numbers-mode 1)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(add-hook 'text-mode-hook 'display-line-numbers-mode)
 
 ;; Highlight the current line.
 (global-hl-line-mode 1)
+
+(leaf lsp-mode
+  :doc "LSP mode"
+  :url "https://emacs-lsp.github.io/lsp-mode/"
+  :ensure t
+  :commands (lsp-mode lsp-deferred)
+  :custom
+  ;; Disable features that have great potential to be slow.
+  (lsp-enable-folding . nil)
+  (lsp-enable-text-document-color . nil)
+  ;; Reduce unexpected modifications to code.
+  (lsp-enable-type-formatting . nil)
+  :hook
+  (lsp-mode-hook . lsp-enable-which-key-integration)
+  (python-mode-hook . lsp-deferred)
+  (go-mode-hook . lsp-deferred)
+  (rust-mode-hook . lsp-deferred)
+  :bind
+  ("C-c l" . lsp-mode/body)
+  :pretty-hydra
+  ((:color teal :quit-key "q")
+   ("Buffer"
+    (("f" lsp-format-buffer "format buffer")
+     ("m" lsp-ui-imenu "imenu")
+     ("x" lsp-execute-code-action "execute code action")
+     ("r" lsp-rename "rename"))
+    "Server"
+    (("s" lsp-describe-session "describe session")
+     ("S" lsp-shutdown-workspace "shutdown workspace")
+     ("r" lsp-restart-workspace "restart workspace"))
+    "Symbol"
+    (("d" lsp-find-definition "find definition")
+     ("D" lsp-ui-peek-find-definitions "peek definition")
+     ("i" lsp-find-implementation "find implementation")
+     ("I" lsp-ui-peek-find-implementation "peek implementation")
+     ("r" lsp-find-references "find references")
+     ("R" lsp-ui-peek-find-references "peek references"))))
+  )
+
+(leaf lsp-ui
+  :doc "UI modules for lsp-mode"
+  :url "https://emacs-lsp.github.io/lsp-ui/"
+  :ensure t
+  :commands (lsp-ui-mode lsp-ui-imenu)
+  :custom
+  (lsp-ui-peak-enable . t)
+  (lsp-ui-doc-max-height . 8)
+  (lsp-ui-doc-max-width . 72)          ; 150 (default) is too wide
+  (lsp-ui-doc-delay . 0.75)              ; 0.2 (default) is too naggy
+  (lsp-ui-doc-show-with-cursor . nil)  ; don't dissappear on mouseover
+  (lsp-ui-doc-position . 'at-point)
+  (lsp-ui-sideline-ignore-duplicate . t)
+  ;; Don't show symbol definitions in the sideline. They are pretty noisy,
+  ;; and there is a bug preventing Flycheck errors from being shown (the
+  ;; errors flash briefly and then disappear).
+  (lsp-ui-sideline-show-hover . nil)
+  :hook
+  (lsp-mode-hook . lsp-ui-mode)
+  :bind lsp-ui-mode-map
+  ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+  ([remap xref-find-references] . lsp-ui-peek-find-references)
+  )
 
 (leaf devdocs
   :doc "Search the local devdocs."
@@ -29,26 +93,6 @@
   :bind
   ("C-c d" . devdocs-lookup))
 
-(leaf eglot
-  :doc "Client for Language Server Protocol servers"
-  :url "https://github.com/joaotavora/eglot/"
-  :req "emacs-29"
-  :tag "builtin"
-  :commands eglot eglot-ensure
-  :hook
-  (python-mode-hook . eglot-ensure)
-  (go-mode-hook . eglot-ensure)
-  (rust-mode-hook . eglot-ensure)
-  (js-mode-hook . eglot-ensure)
-  :custom
-  (eglot-sync-connect . 1)
-  (eglot-connect-timeout . 10)
-  (eglot-autoshutdown . t)
-  (eglot-send-changes-idle-time . 0.5)
-  ;; NOTE disable eglot-auto-display-help-buffer because :select t in
-  ;;      its popup rule causes eglot to steal focus too often.
-  (eglot-auto-display-help-buffer . nil))
-
 (leaf major-mode-hydra
   :doc "Spacemacs-inspired major mode leader key powered by Hydra"
   :url "https://github.com/jerrypnz/major-mode-hydra.el"
@@ -57,6 +101,8 @@
 (leaf project
   :doc "Manage and navigate projects in Emacs easily"
   :tag "builtin"
+  :bind
+  ("C-x p" . project/body)
   :pretty-hydra
   ((:color teal :quit-key "q")
    ("Project"
@@ -72,7 +118,8 @@
     (("s" project-shell "shell")
      ("e" project-eshell "eshell")
      ("c" project-compile "compile")
-     ("x" project-execute-extended-command "execute extended command")
+     ;; ("x" project-execute-extended-command "execute extended command")
+     ("x" compile "compile in current directory")
      ("a" consult-ag "ag")
      ("v" project-vc-dir "vc dir"))
     ))
@@ -83,6 +130,13 @@
   :url "https://github.com/magit/magit"
   :ensure t
   :commands magit-status)
+
+(leaf git-timemachine
+    :doc "Walk through git revisions of a file"
+    :url "https://github.com/emacsmirror/git-timemachine"
+    :ensure t
+    :bind
+    ("s-g" . git-timemachine))
 
 (leaf git-gutter
   :doc "Port of Sublime Text plugin GitGutter"
@@ -142,8 +196,9 @@
   :doc "Highlight TODO keywords"
   :url "https://github.com/tarsius/hl-todo"
   :ensure t
-  :init
-  (global-hl-todo-mode))
+  :config
+  (require 'hl-todo)
+  (global-hl-todo-mode 1))
 
 ;; TODO dumb-jump
 (leaf terraform-mode
@@ -221,12 +276,6 @@
   :custom
   (typescript-indent-level . 2)
   :config
-  ;; we choose this instead of tsx-mode so that eglot can
-  ;; automatically figure out language for server see
-  ;; https://github.com/joaotavora/eglot/issues/624 and
-  ;; https://github.com/joaotavora/eglot#handling-quirky-servers
-  (define-derived-mode typescriptreact-mode typescript-mode
-    "TypeScript TSX")
 
   ;; use our derived mode for tsx files
   (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescriptreact-mode))
@@ -244,19 +293,12 @@
 
 ;; TODO check tree-sitter
 
-(leaf nushell-mode
-  :doc "Major mode for editing Nushell scripts"
-  :url "https://github.com/mrkkrp/nushell-mode"
-  :ensure t
-  )
-
 (leaf plantuml-mode
   :doc "Major mode for PlantUML"
   :url "https://github.com/skuro/plantuml-mode"
   :ensure t
   )
 
-;; TODO checkout eat shell
 (leaf rust-mode                ;; NOTE this requires rustfmt to be installed.
   :doc "A major emacs mode for editing Rust source code"
   :url "https://github.com/rust-lang/rust-mode"
@@ -265,9 +307,25 @@
   :custom
   (rust-format-on-save . t)
   :hook
-  (rust-mode-hook . eglot-ensure)
   (rust-mode-hook . prettify-symbols-mode))
 
+(leaf rustic
+  :doc "Rust development environment"
+  :url "https://github.com/brotzeit/rustic"
+  :ensure t
+  :config
+  ;; (bind-rust-snippets rustic-mode-map)
+  (advice-add 'rustic-recompile :before #'save-current-buffer-if-modified)
+  (advice-add 'rustic-cargo-current-test :before #'save-current-buffer-if-modified)
+  (advice-add 'rustic-cargo-test :before #'save-current-buffer-if-modified))
+
+(leaf flycheck-rust
+  :doc "Flycheck: Rust additions and Cargo support"
+  :url "https://github.com/flycheck/flycheck-rust"
+  :after (flycheck rust-mode)
+  :ensure t
+  :hook
+  (flycheck-mode-hook . flycheck-rust-setup))
 ;; TODO setup keybindings
 (leaf cargo-mode
   :doc "Minor mode for Cargo, Rust's package manager."

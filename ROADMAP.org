@@ -1,0 +1,42 @@
+
+
+* Ideas
+** TODO Setup a local binary cache
+
+This is specially important, where in the new releases on NixOS, it
+usually takes time for all binaries to be available. In the recent
+upgrade, my less powerful machine, couldn't catch up with all the
+builds, and the failures happening every few hours proved to be
+frustrating.
+
+On the framework machine, it took a few hours to complete though. So
+I'm thinking, of having a [[https://nixos.wiki/wiki/Binary_Cache][binary cache]] on any of my machines, and
+exposing them on the network to use as substitutions of the builds,
+will help with:
+
+1. Reducing the download time.
+2. Reducing the build time.
+
+** TODO Implement home row mods on Linux setup
+
+Currently I'm using a [[https://my.glove80.com/#/layout/user/70648c2c-b1e3-49fd-b359-71f070308654][modified version]] of [[https://github.com/sunaku/glove80-keymaps][Sunaku's]] awesome keyboard
+layout on my [[https://www.moergo.com/][Glove80]]. The main improvement for me, apart from having
+the ergonomy, is the home row mods. Yesterday, while reading [[https://usesthis.com/interviews/j3s/][Uses
+This]], I learned about [[https://github.com/rvaiya/keyd][Keyd]], and man, how did I miss this?
+
+It seems like, it enables the same functionality of framewares like
+ZMK, on the normal Linux setup, and it's agnostic from the GUI. This
+sounds promissing.
+
+This is specially important/interesting for me, given the fact I
+literally dropped my Evil like bindings from the Emacs setup, having
+the comfort of the Glove80 setup. However, for <10% of the times, I'm
+on my laptop, on the move, and having this, I don't need to crack my
+muscle memory to do Ctrl/Alt/Shift with the normal positions.
+
+** TODO Add a README
+
+After about two years crafting this setup, breaking it many times, and
+recovering with no problem, it seems it's becoming stable enough for
+me to rely on it for long term. So it just make sense to also put a
+proper README on it, for any other interested soul out there.

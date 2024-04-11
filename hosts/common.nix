@@ -2,48 +2,10 @@
 
 let syncting = { };
 in {
+
+  imports = [ ./nix.nix ];
   # Kernel
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-
-  # Networking
-  networking = {
-    # dns servers
-    nameservers = [ "127.0.0.1" "::1" ];
-    dhcpcd.extraConfig = "nohook resolv.conf";
-    networkmanager = {
-      enable = true;
-      # dns = "none";
-    };
-  };
-  services.resolved.enable = false;
-  services.dnscrypt-proxy2 = {
-    enable = true;
-    settings = {
-      ipv6_servers = true;
-      require_dnssec = true;
-
-      sources.public-resolvers = {
-        urls = [
-          "https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md"
-          "https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md"
-        ];
-        cache_file = "/var/lib/dnscrypt-proxy2/public-resolvers.md";
-        minisign_key =
-          "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
-      };
-
-      server_names = [ "NextDNS-627fa7" ];
-      # server_names = [ "cloudflare" ];
-      static = {
-        NextDNS-627fa7.stamp =
-          "sdns://AgEAAAAAAAAAAAAOZG5zLm5leHRkbnMuaW8HLzYyN2ZhNw";
-      };
-    };
-  };
-
-  systemd.services.dnscrypt-proxy2.serviceConfig = {
-    StateDirectory = "dnscrypt-proxy";
-  };
 
   # TODO switch to Caddy if it can enable SSL for localhost
   services.nginx = {
@@ -162,8 +124,10 @@ in {
     # Enable the X11 windowing system.
     enable = true;
     # Configure keymap in X11
-    layout = "us";
-    xkbVariant = "";
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
 
     displayManager.lightdm = {
       enable = true;
@@ -174,8 +138,6 @@ in {
     displayManager.autoLogin.user = "shahin";
     displayManager.defaultSession = "none+qtile";
 
-    # Enable the GNOME Desktop Environment.
-    desktopManager.gnome.enable = true;
     # qtile
     windowManager.qtile.enable = true;
 
@@ -199,13 +161,10 @@ in {
   # Automatic Nix garbage collection
   nix.gc.automatic = true;
 
-  # Enable experimental features
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  programs.zsh.enable = true;
   users.users.shahin = {
-    shell =
-      pkgs.nushell.override { additionalFeatures = p: p ++ [ "dataframe" ]; };
+    shell = pkgs.zsh;
     isNormalUser = true;
     description = "Shahin Azad";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
@@ -214,7 +173,11 @@ in {
 
   # Bluetooth
   services.blueman.enable = true;
-
+  # TODO make sure to enable me only on desktops
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
   # It's needed to explicitly disable this, as this is enabled by
   # default on Gnome, and prevents using tlp:
   # https://discourse.nixos.org/t/cant-enable-tlp-when-upgrading-to-21-05/13435
@@ -262,14 +225,41 @@ in {
     };
   };
 
-  # Enable flatpak
-  services.flatpak.enable = true;
+  # Flatpak
+  services.flatpak.enable = false;
 
   # https://nixos.wiki/wiki/NTFS
   boot.supportedFilesystems = [ "ntfs" ];
 
-  # Enable memtest
-  boot.loader.grub.memtest86.enable = true;
+  # Memtest
+  boot.loader.grub.memtest86.enable = false;
+
+  # TODO make me conditional
+  users.groups.uinput = { members = [ "shahin" ]; };
+
+  services.udev.extraRules = ''
+    KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+  '';
+
+  # NetworkManager
+  networking.networkmanager.enable = true;
+  # Firewall
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      # waylus
+      1701 # server
+      9001 # websocket
+    ];
+
+    # This is in order to help with Tailscale using exit node
+    # https://github.com/tailscale/tailscale/issues/10319#issuecomment-1886730614
+    checkReversePath = "loose";
+  };
+
+  # Tailscale
+  environment.systemPackages = with pkgs; [ tailscale ];
+  services.tailscale = { enable = true; };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

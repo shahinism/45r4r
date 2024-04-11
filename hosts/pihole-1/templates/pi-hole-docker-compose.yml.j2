@@ -1,0 +1,24 @@
+version: "3"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    restart: unless-stopped
+    # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "{{ pihole_local_ip }}:{{ pihole_local_port }}:80/tcp"
+    environment:
+      TZ: 'Europe/Amsterdam'
+      # WEBPASSWORD: 'set a secure password here or it will be random'
+      # NOTE I'm not setting it here to generate randomly. After
+      # deploying, you can find the password in the log.
+      ServerIP: {{ pihole_local_ip }}
+      VIRTUAL_HOST: {{ pihole_domain }}
+    # Volumes store your data between container upgrades
+    volumes:
+      - './etc-pihole:/etc/pihole'
+      - './etc-dnsmasq.d:/etc/dnsmasq.d'

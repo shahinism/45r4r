@@ -1,18 +1,18 @@
 { pkgs, ... }: {
-  imports = [ ./aliases.nix ./nushell.nix ./bash.nix ./zellij.nix ./atuin.nix ];
+  imports = [ ./aliases.nix ./zsh.nix ./atuin.nix ];
 
   home.packages = with pkgs; [
     killall
     fzf
-    gnupg
     ripgrep
-    ranger # muscle memory
     yazi # doesn't seem stable
+    rm-improved # https://github.com/nivekuil/rip
 
     yubikey-personalization
     yubikey-manager
     pcscliteWithPolkit
-    bash-completion
+    zsh-completions
+    nix-zsh-completions
 
     # A cross-platform graphical process/system monitor with a
     # customizable interface: https://github.com/ClementTsang/bottom
@@ -24,29 +24,31 @@
     procs
     bandwhich
 
+    eza
     fd
-    rm-improved
     jc
     jq
     asciinema
     mosh
     magic-wormhole
     sshuttle
-
   ];
+
+  programs.gpg = {
+    enable = true;
+    settings = { pinentry-mode = "loopback"; };
+  };
 
   programs = {
     zoxide = {
       enable = true;
-      enableBashIntegration = true;
-      enableNushellIntegration = true;
+      enableZshIntegration = true;
     };
 
     direnv = {
       enable = true;
       nix-direnv.enable = true;
-      enableBashIntegration = true;
-      enableNushellIntegration = true;
+      enableZshIntegration = true;
     };
 
     readline = {
@@ -59,8 +61,7 @@
 
     starship = {
       enable = true;
-      enableBashIntegration = true;
-      enableNushellIntegration = true;
+      enableZshIntegration = true;
     };
 
     bat = {

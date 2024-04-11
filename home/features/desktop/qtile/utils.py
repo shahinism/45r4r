@@ -20,6 +20,8 @@ AUTOSTART_APPS = [
     # 'espanso service start --unmanaged',
     # Apply screen definition
     "autorandr --change",
+    # Tailscale
+    "tailscale-systray",
 ]
 
 GET_SPEAKERS_VOLUME_SHELL_CMD = """

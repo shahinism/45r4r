@@ -1,0 +1,13 @@
+---
+# Location where configuration files will be stored
+config_dir: '~'
+
+pihole_domain: 'pihole.starling-goldeye.ts.net'
+pihole_local_ip: 127.0.0.1
+pihole_local_port: 8080
+
+tailscale_default_options_settings:
+  # Allow caddy user to fetch cert.
+  # See https://tailscale.com/kb/1190/caddy-certificates/#provide-non-root-users-with-access-to-fetch-certificate.
+  - regexp: "^#?TS_PERMIT_CERT_UID"
+    line: "TS_PERMIT_CERT_UID=\"www-data\""

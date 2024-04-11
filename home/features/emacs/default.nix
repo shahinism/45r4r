@@ -30,34 +30,35 @@ let
     startupWMClass = "Emacs";
   };
   python-packages = p:
-  with p; [
-    grip # FIXME markdown preview, currently failing due to nix
-         # package collision.
-  ];
+    with p;
+    [
+      grip # FIXME markdown preview, currently failing due to nix
+      # package collision.
+    ];
   nodejs-packages = with pkgs.nodePackages_latest;
-  [
-    js-beautify # Used by Emacs to format JavaScript code
-  ];
+    [
+      js-beautify # Used by Emacs to format JavaScript code
+    ];
 in {
-  home.packages = with pkgs; [
-    cmake         # rquired by emacs to build vterm
-    zstd          # Used by emacs to optimize undo history
-    rustfmt       # Used by Emacs to format Rust code
-    rust-analyzer # Used by Emacs to provide Rust code completion
-    nodejs        # required by copilot
-    aspell        # Used with Emacs as spell checker
-    aspellDicts.en
-    aspellDicts.en-science
-    aspellDicts.en-computers
-    emacs-all-the-icons-fonts
+  home.packages = with pkgs;
+    [
+      cmake # rquired by emacs to build vterm
+      zstd # Used by emacs to optimize undo history
+      rustfmt # Used by Emacs to format Rust code
+      rust-analyzer # Used by Emacs to provide Rust code completion
+      nodejs # required by copilot
+      aspell # Used with Emacs as spell checker
+      aspellDicts.en
+      aspellDicts.en-science
+      aspellDicts.en-computers
+      emacs-all-the-icons-fonts
 
-    # Required for Emacs vterm
-    libvterm
-    libtool
-    # (python311.withPackages python-packages)
-  ] ++ nodejs-packages ++ [
-    emacsClientGuiDesktop
-  ];
+      # Required for Emacs vterm
+      libvterm
+      libtool
+      # (python311.withPackages python-packages)
+      zip # used by org-mode to publish to ODT
+    ] ++ nodejs-packages ++ [ emacsClientGuiDesktop ];
 
   programs.emacs = {
     enable = true;
@@ -73,13 +74,9 @@ in {
   home.file = {
     ".emacs.d" = {
       source = config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/.config/45r4r/home/features/emacs/emacs.chemacs2/";
+        "${config.home.homeDirectory}/.config/45r4r/home/features/emacs/emacs.chemacs2/";
     };
   };
 
-  home.file = {
-    ".emacs-profiles.el" = {
-      source = ./emacs-profile.el;
-    };
-  };
+  home.file = { ".emacs-profiles.el" = { source = ./emacs-profile.el; }; };
 }

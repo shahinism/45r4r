@@ -32,18 +32,12 @@
    ;; SPC j/k will run the original command in MOTION state.
    ;; '("j" . "H-j")
    ;; '("k" . "H-k")
-   '("j" . hydra-goto/body)
-   '("f" . hydra-file/body)
-
-   '("z" . hydra-chat/body)
+   '("o" . org/body)
    '("." . point-to-register)
    '(">" . jump-to-register)
    '("p" . project/body)
    '("w" . ace-window/body)
    '("v" . magit-status)
-   '("l" . hydra-lsp-bridge/body)
-   '("t" . hydra-toggle/body)
-   '("o" . hydra-org/body)
    '("b" . consult-buffer)
    ;; Use SPC (0-9) for digit arguments.
    '("1" . meow-digit-argument)
@@ -85,7 +79,8 @@
    '("D" . meow-backward-delete)
    '("e" . meow-next-word)
    '("E" . meow-next-symbol)
-   '("f" . meow-find)
+   '("F" . meow-find)
+   '("f" . avy-goto-char-timer)
    '("g" . meow-cancel-selection)
    '("G" . meow-grab)
    '("h" . meow-left)
@@ -103,7 +98,7 @@
    '("o" . meow-block)
    '("O" . meow-to-block)
    '("p" . meow-yank)
-   '("q" . meow-quit)
+   ;; '("q" . meow-quit)
    '("Q" . meow-goto-line)
    '("r" . meow-replace)
    '("R" . meow-swap-grab)
@@ -126,6 +121,7 @@
 (leaf meow
   :url "https://github.com/meow-edit/meow"
   :ensure t
+  :disabled t
   :custom
   (meow-use-clipboard . t)
   :init
@@ -136,10 +132,12 @@
   ;; (org-capture-mode . meow-insert-mode)   ;; FIXME it kills lambda line
   )
 
-(global-set-key (kbd "M-,") 'previous-buffer)
-(global-set-key (kbd "M-.") 'next-buffer)
+;; (global-set-key (kbd "M-,") 'previous-buffer)
+;; (global-set-key (kbd "M-.") 'next-buffer)
 (global-set-key (kbd "M-!") 'async-shell-command)
 (global-set-key (kbd "M-@") 'shell-command)
-
-
+(global-set-key (kbd "C-x w") 'ace-window/body)
+(global-set-key (kbd "C-x v") 'magit-status)
+;; Unbind the annoying behavior of temporarily suspending emacs
+(unbind-key "C-z")
 ;;; sh-keys.el ends here

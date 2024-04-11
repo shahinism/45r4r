@@ -5,7 +5,7 @@ in {
   env.GREET = "🛠️ Let's hack 🧑🏻‍💻";
 
   # # https://devenv.sh/packages/
-  packages = with pkgs; [ (python3.withPackages python-packages) ];
+  packages = with pkgs; [ (python3.withPackages python-packages) ansible_2_14 ];
 
   # https://devenv.sh/scripts/
   scripts.hello.exec = "echo $GREET";
@@ -32,5 +32,4 @@ in {
     yamllint.enable = true;
   };
 
-  pre-commit.settings = { yamllint.relaxed = true; };
 }

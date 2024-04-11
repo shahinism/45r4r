@@ -92,9 +92,10 @@
                                     corfu-quit-no-match t
                                     corfu-auto :if-nil)
                         (corfu-mode 1)))
-  :custom
-  (completion-at-point-functions . #'cape-file)
-  (completion-at-point-functions . #'cape-dabbrev)
+  :init
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-elisp-block)
   :config
   ;; Silence the pcomplete capf, no errors or messages!
   ;; Important for corfu
@@ -110,10 +111,11 @@
   :straight (copilot :host github :repo "zerolfx/copilot.el" :files ("*.el" "dist"))
   :custom
   (copilot-max-char . 1000000)   ;; https://github.com/zerolfx/copilot.el/issues/175
+  (copilot-indent-offset-warning-disable . t) ;; https://github.com/copilot-emacs/copilot.el/issues/249#issuecomment-1921157985
   :hook
   (prog-mode-hook . copilot-mode)
   :bind (:copilot-mode-map
-         ("C-e" . copilot-accept-completion)
+         ("C-<return>" . copilot-accept-completion)
          ("C-;" . copilot-accept-completion-by-word)))
 
 (leaf consult
@@ -131,17 +133,10 @@
   (xref-show-definitions-function . #'consult-xref)
   )
 
-(leaf consult-eglot
-  :doc "Consult integration for eglot"
-  :url "https://github.com/mohkale/consult-eglot"
-  :ensure t
-  :after (consult eglot))
-
 (leaf consult-ag
   :doc "Consult integration for ag"
   :url "https://github.com/yadex205/consult-ag"
-  :ensure t
-  :after consult)
+  :ensure t)
 
 ;; TODO learn me
 (leaf embark

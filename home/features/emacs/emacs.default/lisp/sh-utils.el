@@ -29,7 +29,6 @@ When REGION is non-nil, unfill each paragraph in the region,"
   :req "emacs-24.1" "cl-lib-0.5"
   :url "https://github.com/purcell/exec-path-from-shell"
   :if (memq window-system '(mac ns x))
-  :disabled t    ;; FIXME doesn't support nushell
   :ensure t
   :init
   (exec-path-from-shell-initialize))
@@ -131,27 +130,18 @@ When REGION is non-nil, unfill each paragraph in the region,"
   :url "https://github.com/abo-abo/avy"
   :ensure t
   :bind
-  ("C-c j" . avy/body)
-  :pretty-hydra
-  ((:color teal :quit-key "q")
-   ("Char"
-    (("c" avy-goto-char-timer "Char Timer")
-     ("C" avy-goto-char "Char"))
-    "Word"
-    (("w" avy-goto-word-1 "Word")
-     ("W" avy-goto-word-0 "Word 0"))
-    "Line"
-    (("l" avy-goto-line "Line")
-     ("L" avy-goto-end-of-line "End of Line")
-     ("m" avy-move-line "Move Line")
-     ("y" avy-copy-line "Copy Line")
-     ("k" avy-kill-whole-line "Kill Line"))
-    "Region"
-    (("M" avy-move-region "Move Region")
-     ("R" avy-resume "Resume")
-     ("K" avy-kill-region "Kill Region")
-     ("Y" avy-copy-region "Copy Region"))
-    ))
+  ("s-." . avy-goto-word-or-subword-1)
+  ("s-," . avy-goto-char)
+  ("C-c ," . avy-go-to-char)
+  ("M-g f" . avy-goto-line)
+  )
+
+(leaf expand-region
+  :doc "Increase selected region by semantic units."
+  :url "https://github.com/magnars/expand-region.el"
+  :ensure t
+  :bind
+  ("C-=" . er/expand-region)
   )
 
 (leaf restclient
@@ -193,5 +183,49 @@ When REGION is non-nil, unfill each paragraph in the region,"
 (leaf crux
   :doc "A Collection of Ridiculously Useful eXtensions for Emacs"
   :url "https://github.com/bbatsov/crux"
-  ensure t)
+  :ensure t
+  :bind
+  ("C-c o" . crux-open-with)
+  ("M-j" . crux-smart-open-line)
+  ("C-c n" . crux-cleanup-buffer-or-region)
+  ("C-c f" . crux-recentf-find-file)
+  ("C-M-z" . crux-indent-defun)
+  ("C-c u" . crux-view-url)
+  ("C-c e" . crux-eval-and-replace)
+  ("C-c w" . crux-swap-windows)
+  ("C-c D" . crux-delete-file-and-buffer)
+  ("C-c r" . crux-rename-buffer-and-file)
+  ("C-c t" . crux-visit-term-buffer)
+  ("C-c k" . crux-kill-other-buffers)
+  ("s-r" . crux-recentf-find-file)
+  ("s-j" . crux-top-join-line)
+  ("C-^" . crux-top-join-line)
+  ("C-<backspace>" . crux-kill-line-backwards)
+  ("s-o" . crux-smart-open-line-above)
+  ([remap move-beginning-of-line] . crux-move-beginning-of-line)
+  ([(shift return)] . crux-smart-open-line)
+  ([(control shift return)] . crux-smart-open-line-above)
+  ([remap kill-whole-line] . crux-kill-whole-line)
+  ("C-c s" . crux-ispell-word-then-abbrev)
+  )
+
+(leaf eshell-toggle
+  :custom
+  (eshell-toggle-size-fraction . 3)
+  (eshell-toggle-use-projectile-root . nil)
+  (eshell-toggle-run-command . nil)
+  (eshell-toggle-init-function . #'eshell-toggle-init-eshell)
+  :straight
+  (eshell-toggle :repo "4DA/eshell-toggle" :fetcher github :version original)
+  :bind
+  ("<f12>" . eshell-toggle))
+
+(leaf ace-window
+  :doc "Quickly switch windows"
+  :url "https://github.com/abo-abo/ace-window"
+  :ensure t
+  :config
+  (global-set-key (kbd "M-o") 'ace-window)
+  (global-set-key [remap other-window] 'ace-window))
+
 ;;; sh-utils.el ends here
