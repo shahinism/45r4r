@@ -53,6 +53,7 @@
     enable = true;
     enableSshSupport = true;
     pinentryPackage = pkgs.pinentry-tty;
+    enableZshIntegration = true;
   };
 
   # Enable keybase requirements

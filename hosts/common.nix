@@ -162,9 +162,9 @@ in {
   nix.gc.automatic = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  programs.zsh.enable = true;
   users.users.shahin = {
-    shell =
-      pkgs.nushell.override { additionalFeatures = p: p ++ [ "dataframe" ]; };
+    shell = pkgs.zsh;
     isNormalUser = true;
     description = "Shahin Azad";
     extraGroups = [ "networkmanager" "wheel" "docker" ];

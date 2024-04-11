@@ -29,7 +29,6 @@ When REGION is non-nil, unfill each paragraph in the region,"
   :req "emacs-24.1" "cl-lib-0.5"
   :url "https://github.com/purcell/exec-path-from-shell"
   :if (memq window-system '(mac ns x))
-  :disabled t    ;; FIXME doesn't support nushell
   :ensure t
   :init
   (exec-path-from-shell-initialize))

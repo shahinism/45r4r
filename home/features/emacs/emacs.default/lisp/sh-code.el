@@ -293,12 +293,6 @@
 
 ;; TODO check tree-sitter
 
-(leaf nushell-mode
-  :doc "Major mode for editing Nushell scripts"
-  :url "https://github.com/mrkkrp/nushell-mode"
-  :ensure t
-  )
-
 (leaf plantuml-mode
   :doc "Major mode for PlantUML"
   :url "https://github.com/skuro/plantuml-mode"

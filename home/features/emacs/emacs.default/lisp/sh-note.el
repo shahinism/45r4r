@@ -187,9 +187,7 @@
   (setq org-download-method 'directory
         org-download-heading-lvl nil
         org-download-timestamp "_%Y%m%d-%H%M%S"
-        org-image-actual-width t
-        ;; TODO this only works with nushell
-        org-download-screenshot-method "flameshot gui --raw | save -f %s")
+        org-image-actual-width t)
 
   (customize-set-variable 'org-download-image-dir "images")
 
