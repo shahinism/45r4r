@@ -2,14 +2,10 @@
 
 let syncting = { };
 in {
+
+  imports = [ ./nix.nix ];
   # Kernel
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-
-  # Automatic Disc Optimisation
-  ## This can be done manually by running `# nix-store --optimise`
-  ## It also might potentially slow down builds. However, given my
-  ## experience with NixOS, I think it's worth it.
-  nix.settings.auto-optimise-store = true;
 
   # TODO switch to Caddy if it can enable SSL for localhost
   services.nginx = {
@@ -164,9 +160,6 @@ in {
   nixpkgs.config.allowUnfree = true;
   # Automatic Nix garbage collection
   nix.gc.automatic = true;
-
-  # Enable experimental features
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.shahin = {

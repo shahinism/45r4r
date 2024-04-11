@@ -32,5 +32,4 @@ in {
     yamllint.enable = true;
   };
 
-  pre-commit.settings = { yamllint.relaxed = true; };
 }

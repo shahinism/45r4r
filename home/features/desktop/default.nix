@@ -48,10 +48,11 @@
     xournalpp
   ];
 
+  # TODO move it to CLI feature.
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
-    pinentryFlavor = "gtk2";
+    pinentryPackage = pkgs.pinentry-tty;
   };
 
   # Enable keybase requirements
