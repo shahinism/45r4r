@@ -443,7 +443,6 @@ floating_layout = layout.Floating(
         Match(title="Confirmation"),  # tastyworks exit box
         Match(title="Qalculate!"),  # qalculate-gtk
         Match(wm_class="kdenlive"),  # kdenlive
-        Match(wm_class="pinentry-gtk-2"),  # GPG key password entry
     ]
 )
 auto_fullscreen = True

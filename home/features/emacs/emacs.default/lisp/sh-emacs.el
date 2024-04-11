@@ -166,4 +166,5 @@
       uniquify-after-kill-buffer-p t
       uniquify-ignore-buffers-re "^\\*")
 
+(setq epg-pinentry-mode 'loopback)
 ;;; sh-emacs.el ends here

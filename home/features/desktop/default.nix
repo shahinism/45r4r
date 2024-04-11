@@ -18,7 +18,6 @@
     brave
     slack
     xclip
-    pinentry-gtk2
     flameshot
     keybase-gui
     networkmanagerapplet
@@ -54,6 +53,10 @@
     enableSshSupport = true;
     pinentryPackage = pkgs.pinentry-tty;
     enableZshIntegration = true;
+    extraConfig = ''
+      allow-emacs-pinentry
+      allow-loopback-pinentry
+    '';
   };
 
   # Enable keybase requirements

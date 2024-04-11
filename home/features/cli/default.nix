@@ -4,7 +4,6 @@
   home.packages = with pkgs; [
     killall
     fzf
-    gnupg
     ripgrep
     yazi # doesn't seem stable
     rm-improved # https://github.com/nivekuil/rip
@@ -34,6 +33,11 @@
     magic-wormhole
     sshuttle
   ];
+
+  programs.gpg = {
+    enable = true;
+    settings = { pinentry-mode = "loopback"; };
+  };
 
   programs = {
     zoxide = {
