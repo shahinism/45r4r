@@ -17,7 +17,7 @@ will help with:
 1. Reducing the download time.
 2. Reducing the build time.
 
-** TODO Implement home row mods on Linux setup
+** DONE Implement home row mods on Linux setup
 
 Currently I'm using a [[https://my.glove80.com/#/layout/user/70648c2c-b1e3-49fd-b359-71f070308654][modified version]] of [[https://github.com/sunaku/glove80-keymaps][Sunaku's]] awesome keyboard
 layout on my [[https://www.moergo.com/][Glove80]]. The main improvement for me, apart from having
@@ -34,6 +34,14 @@ the comfort of the Glove80 setup. However, for <10% of the times, I'm
 on my laptop, on the move, and having this, I don't need to crack my
 muscle memory to do Ctrl/Alt/Shift with the normal positions.
 
+*** [2024-04-12 Fri 11:37]
+- Enabling the setup needs to be global and system level. Consequently
+  it not only covers the GUI desktop, but also works out of the box on
+  TTY.
+- The response time seems more effective than what I feel on Glove80.
+- While setting up, it's quite important to not make a mistake on
+  replace keys for ~overloadt2~'s second argument. Otherwise you can't
+  type the targetted characters. I ended up copy/pasting.
 ** TODO Add a README
 
 After about two years crafting this setup, breaking it many times, and
