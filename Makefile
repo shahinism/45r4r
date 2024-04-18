@@ -24,3 +24,5 @@ clean-system:
 	sudo nix-channel --update
 	sudo nix-env -u --always
 	sudo nix-collect-garbage -d
+	sudo nix-store --optimise
+	home-manager expire-generations "-30 days"
