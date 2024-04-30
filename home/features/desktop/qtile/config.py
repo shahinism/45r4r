@@ -111,6 +111,7 @@ keys = [
     Key([mod], "l", lazy.layout.right()),
     Key([mod], "v", lazy.layout.toggle_split()),
     Key([mod], "p", lazy.spawn("flameshot gui")),
+    key([mod], "e", lazy.spawn('emacsclient --eval "(emacs-everywhere)"')),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
     Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
@@ -440,9 +441,12 @@ floating_layout = layout.Floating(
         # default_float_rules include: utility, notification, toolbar, splash, dialog,
         # file_progress, confirm, download and error.
         *layout.Floating.default_float_rules,
-        Match(title="Confirmation"),  # tastyworks exit box
         Match(title="Qalculate!"),  # qalculate-gtk
+        Match(title="pinentry"),  # GPG key password entry
         Match(wm_class="kdenlive"),  # kdenlive
+        Match(wm_class="pavucontrol"),  # pavucontrol
+        Match(wm_class="ssh-askpass"),  # ssh-askpass
+        Match(title="Confirmation"),  # tastyworks exit box
     ]
 )
 auto_fullscreen = True
