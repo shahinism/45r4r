@@ -45,6 +45,13 @@
     # Use tablet as touch screen
     weylus
     xournalpp
+
+    # Required by emacs-everywhere
+    # https://github.com/tecosaur/emacs-everywhere
+    xclip
+    xdotool
+    xorg.xprop
+    xorg.xwininfo
   ];
 
   # TODO move it to CLI feature.

@@ -228,4 +228,8 @@ When REGION is non-nil, unfill each paragraph in the region,"
   (global-set-key (kbd "M-o") 'ace-window)
   (global-set-key [remap other-window] 'ace-window))
 
+(leaf emacs-everywhere
+  :doc "Edit text everywhere with Emacs"
+  :url "https://github.com/tecosaur/emacs-everywhere"
+  :ensure t)
 ;;; sh-utils.el ends here
