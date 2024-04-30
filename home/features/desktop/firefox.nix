@@ -441,17 +441,17 @@
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/multi-account-containers/latest.xpi";
           };
-          # Grammarly
-          "87677a2c52b84ad3a151a4a72f5bd3c4@jetpack" = {
+          # LanguageTool
+          "languagetool-webextension@languagetool.org" = {
             installation_mode = "normal_installed";
             install_url =
-              "https://addons.mozilla.org/firefox/downloads/latest/grammarly-1/latest.xpi";
+              "https://addons.mozilla.org/firefox/downloads/latest/languagetool/latest.xpi";
           };
-          # Readwise
-          "team@readwise.io" = {
+          # Omnivore
+          "save-extension@omnivore.app" = {
             installation_mode = "normal_installed";
             install_url =
-              "https://addons.mozilla.org/firefox/downloads/latest/readwise-highlighter/latest.xpi";
+              "https://addons.mozilla.org/firefox/downloads/latest/omnivore/latest.xpi";
           };
           # OneTab
           "extension@one-tab.com" = {
