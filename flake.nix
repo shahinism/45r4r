@@ -30,11 +30,13 @@
 
   nixConfig = {
     extra-substituters = [
+      "http://framework.starling-goldeye.ts.net:5000"
       "https://shahinism.cachix.org"
       "https://nix-community.cachix.org"
       "https://cache.nixos.org/"
     ];
     extra-trusted-public-keys = [
+      "framework.starling-goldeye.ts.net:r79SpjobbITfeymQBw7GUNYBxGBGbFumJVdR9sdsOTM="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "shahinism.cachix.org-1:BzxJ+Ky6ASS/936XSAcq13841+hRW/FN++zOqoxtbGM="
     ];
