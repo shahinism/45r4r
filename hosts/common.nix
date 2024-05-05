@@ -135,16 +135,18 @@ in {
       # autoLogin.timeout = 0;
     };
     displayManager.autoLogin.enable = true;
-    displayManager.autoLogin.user = "shahin";
-    displayManager.defaultSession = "none+qtile";
 
     # qtile
     windowManager.qtile.enable = true;
 
-    # Enable touchpad support (enabled default in most desktopManager).
-    libinput.enable = true;
-
   };
+
+  # Define the default session manager
+  services.displayManager.defaultSession = "none+qtile";
+  services.displayManager.autoLogin.user = "shahin";
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  services.libinput.enable = true;
 
   environment.variables = {
     # fix for this curl issue with https requests: https://github.com/NixOS/nixpkgs/issues/148686
