@@ -6,6 +6,7 @@
     ./rofi.nix
     ./dunst.nix
     ./espanso.nix
+    ./activitywatch.nix
   ];
 
   home.packages = with pkgs; [

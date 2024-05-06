@@ -232,4 +232,11 @@ When REGION is non-nil, unfill each paragraph in the region,"
   :doc "Edit text everywhere with Emacs"
   :url "https://github.com/tecosaur/emacs-everywhere"
   :ensure t)
+
+(leaf activity-watch-mode
+  :doc "Automatic time tracking and metrics"
+  :url "https://github.com/pauldub/activity-watch-mode"
+  :ensure t
+  :config
+  (global-activity-watch-mode))
 ;;; sh-utils.el ends here

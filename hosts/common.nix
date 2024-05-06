@@ -13,6 +13,9 @@ in {
     virtualHosts."syncthing" = {
       locations."/".proxyPass = "http://127.0.0.1:8384";
     };
+    virtualHosts."activitywatch" = {
+      locations."/".proxyPass = "http://127.0.0.1:5600";
+    };
   };
 
   # Syncthing
@@ -134,7 +137,6 @@ in {
       greeter.enable = true;
       # autoLogin.timeout = 0;
     };
-    displayManager.autoLogin.enable = true;
 
     # qtile
     windowManager.qtile.enable = true;
@@ -143,6 +145,7 @@ in {
 
   # Define the default session manager
   services.displayManager.defaultSession = "none+qtile";
+  services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "shahin";
 
   # Enable touchpad support (enabled default in most desktopManager).
