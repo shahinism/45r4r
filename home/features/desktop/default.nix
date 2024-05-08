@@ -7,6 +7,7 @@
     ./dunst.nix
     ./espanso.nix
     ./activitywatch.nix
+    ./redshift.nix
   ];
 
   home.packages = with pkgs; [
