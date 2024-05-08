@@ -2,9 +2,8 @@
 
   services.redshift = {
     enable = true;
-    latitude = 52.213;
-    longitude = 5.2794;
-    provider = "manual";
+    # NOTE to verify if geoclue is working, you can run `redshift -l geoclue2`
+    provider = "geoclue2";
     tray = true;
   };
 }
