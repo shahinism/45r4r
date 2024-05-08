@@ -48,3 +48,6 @@ After about two years crafting this setup, breaking it many times, and
 recovering with no problem, it seems it's becoming stable enough for
 me to rely on it for long term. So it just make sense to also put a
 proper README on it, for any other interested soul out there.
+** TODO Setup AppArmor profiles
+
+[[https://pureooze.com/blog/posts/2016-07-28-the-comprehensive-guide-to-apparmor-p1/][Comprehensive AppArmor guide]]
