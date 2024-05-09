@@ -14,8 +14,11 @@
   security.lockKernelModules = true;
 
   # app armor
-  security.apparmor.enable = true;
-  security.apparmor.killUnconfinedConfinables = true;
+  security.apparmor = {
+    enable = true;
+    killUnconfinedConfinables = true;
+    packages = with pkgs; [ apparmor-utils apparmor-profiles ];
+  };
 
   # boot kernel parameters
   boot.kernelParams = [
@@ -109,6 +112,16 @@
   };
 
   # Enable Antivirus and keep signature DB update
-  services.clamav.daemon.enable = true;
-  services.clamav.updater.enable = true;
+  services.clamav = {
+    daemon.enable = true;
+    fangfrisch = {
+      enable = true;
+      interval = "daily";
+    };
+    updater = {
+      enable = true;
+      interval = "daily";
+      frequency = 12;
+    };
+  };
 }
