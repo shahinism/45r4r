@@ -81,6 +81,7 @@
   # NOTE you can list firejailed session using `firejail --list`
   programs.firejail = {
     enable = true;
+    # TODO only enable these on desktop setup
     wrappedBinaries = {
       # NOTE when managing firefox with home-manager, the name firefox
       # will be overwritten. So I use a unique name, to make the
@@ -93,6 +94,16 @@
       tor-browser = {
         executable = "${pkgs.tor-browser-bundle-bin}/bin/tor-browser";
         profile = "${pkgs.firejail}/etc/firejail/tor-browser.profile";
+      };
+
+      slack = {
+        executable = "${pkgs.lib.getBin pkgs.slack}/bin/slack";
+        profile = "${pkgs.firejail}/etc/firejail/slack.profile";
+      };
+
+      brave = {
+        executable = "${pkgs.lib.getBin pkgs.brave}/bin/brave";
+        profile = "${pkgs.firejail}/etc/firejail/brave.profile";
       };
     };
   };

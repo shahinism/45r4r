@@ -17,8 +17,6 @@
     xorg.xkill
     gimp
     inkscape
-    brave
-    slack
     xclip
     flameshot
     keybase-gui
