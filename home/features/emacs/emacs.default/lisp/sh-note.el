@@ -193,30 +193,6 @@
 
   (require 'org-download))
 
-(leaf denote
-  :url "https://github.com/protesilaos/denote"
-  :doc "A simple note taking system for Emacs"
-  :ensure t
-  :bind ("C-c n" . denote/body)
-  :disabled t
-  :pretty-hydra
-  ((:color teal :quit-key "q")
-   ("New Note"
-    (("n" denote "create")
-     ("N" denote-type "of type")
-     ("d" denote-date "for date")
-     ("s" denote-subdirectory "in subdirectory")
-     ("t" denote-template "from template")
-     )
-    "Link"
-    (("i" denote-link "create link to FILE")
-     ("I" denote-add-links "Insert link to all notes matching regex"))
-    "Files"
-    (("r" denote-rename-file "rename file")
-     ("R" denote-rename-file-using-front-matter "rename file using its front matter"))
-    ))
-  )
-
 (leaf org-modern
   :url "https://github.com/minad/org-modern"
   :doc "Modern theme for org-mode"

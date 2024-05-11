@@ -239,4 +239,17 @@ When REGION is non-nil, unfill each paragraph in the region,"
   :ensure t
   :config
   (global-activity-watch-mode))
+
+(leaf gptel
+  :doc "A simple LLM client for Email"
+  :url "https://github.com/karthink/gptel"
+  :ensure t
+  :bind
+  ("C-c g" . gptel-menu)
+  :config
+  (setq gptel-model "mistral:latest"
+        gptel-backend (gptel-make-ollama "Ollama"
+                                         :host "localhost:11434"
+                                         :stream t
+                                         :models '("mistral:latest"))))
 ;;; sh-utils.el ends here
