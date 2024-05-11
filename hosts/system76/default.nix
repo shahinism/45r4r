@@ -9,6 +9,7 @@
     inputs.hardware.nixosModules.system76
     ./hardware-configuration.nix
     ../common.nix
+    ./experimental.nix
   ];
 
   # System76

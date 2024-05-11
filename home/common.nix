@@ -14,6 +14,7 @@
     ./features/desktop
     ./features/emacs
     ./features/development
+    ./experimental.nix
   ];
 
   nixpkgs = {

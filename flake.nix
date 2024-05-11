@@ -33,12 +33,14 @@
       "http://framework.starling-goldeye.ts.net:5000"
       "https://shahinism.cachix.org"
       "https://nix-community.cachix.org"
+      "https://cuda-maintainers.cachix.org"
       "https://cache.nixos.org/"
     ];
     extra-trusted-public-keys = [
       "framework.starling-goldeye.ts.net:r79SpjobbITfeymQBw7GUNYBxGBGbFumJVdR9sdsOTM="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "shahinism.cachix.org-1:BzxJ+Ky6ASS/936XSAcq13841+hRW/FN++zOqoxtbGM="
+      "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
     ];
 
     extra-trusted-users = [ "root" "shahin" ];
@@ -89,15 +91,6 @@
         framework = libUnstable.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [ ./hosts/framework ];
-        };
-
-        uk1 = libUnstable.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/uk1 ];
-        };
-        pi3-1 = libUnstable.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/pi3-1 ];
         };
       };
 

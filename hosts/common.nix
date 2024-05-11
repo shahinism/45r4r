@@ -3,7 +3,8 @@
 let syncting = { };
 in {
 
-  imports = [ ./nix.nix ./keyd.nix ./desktop.nix ./security.nix ];
+  imports =
+    [ ./nix.nix ./keyd.nix ./desktop.nix ./security.nix ./experimental.nix ];
   # Kernel
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
