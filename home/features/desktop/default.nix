@@ -52,6 +52,8 @@
     xdotool
     xorg.xprop
     xorg.xwininfo
+
+    remmina
   ];
 
   # TODO move it to CLI feature.
