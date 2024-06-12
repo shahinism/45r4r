@@ -1,3 +1,4 @@
+---
 - name: Setup PIHole
   hosts: pi3-1
   become: true
@@ -10,8 +11,8 @@
 
     - name: Upgrade Packages
       ansible.builtin.apt:
-        update_cache: yes
-        upgrade: yes
+        update_cache: true
+        upgrade: true
 
   tasks:
     - name: Configure options in /etc/default/tailscaled.
@@ -53,9 +54,9 @@
         state: latest
         update_cache: true
 
-    - name: Install Docker Module for Python
-      ansible.builtin.pip:
-        name: docker
+    # - name: Install Docker Module for Python
+    #   ansible.builtin.pip:
+    #     name: docker
 
     # FIXME when testing it gets permission denied
     # - name: ensure docker is started
