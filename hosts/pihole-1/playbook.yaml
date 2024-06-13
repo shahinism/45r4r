@@ -35,6 +35,7 @@
           - software-properties-common
           - python3-setuptools
           - python3-pip
+          - dnsutils
         state: latest
         update_cache: true
 
