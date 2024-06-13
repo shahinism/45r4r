@@ -3,7 +3,7 @@ let
   python-packages = p: with p; [ ipython ];
   devpkgs = inputs.devenv.packages.x86_64-linux;
 in {
-  imports = [ ./git.nix ];
+  imports = [ ./git.nix ./pass.nix ./aws-vault.nix ];
 
   home.packages = with pkgs;
     [
@@ -11,7 +11,6 @@ in {
       gcc
       silver-searcher
       unzip
-      aws-vault
       awscli2
       ssm-session-manager-plugin
       docker-compose
