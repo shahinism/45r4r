@@ -30,7 +30,7 @@
 
   nixConfig = {
     extra-substituters = [
-      "http://framework.starling-goldeye.ts.net:5000"
+      #      "http://framework.starling-goldeye.ts.net:5000"
       "https://shahinism.cachix.org"
       "https://nix-community.cachix.org"
       "https://cuda-maintainers.cachix.org"
