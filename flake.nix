@@ -20,7 +20,7 @@
 
     # Add any other flake you might need
     hardware.url = "github:nixos/nixos-hardware";
-    devenv.url = "github:cachix/devenv/v1.0.4";
+    devenv.url = "github:cachix/devenv/latest";
 
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
