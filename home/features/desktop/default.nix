@@ -52,7 +52,9 @@
     xdotool
     xorg.xprop
     xorg.xwininfo
+
     zoom-us
+    remmina
   ];
 
   # TODO move it to CLI feature.

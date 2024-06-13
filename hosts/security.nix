@@ -10,8 +10,13 @@
   security.forcePageTableIsolation = true;
   # Allow building packages from source
   security.allowUserNamespaces = true;
+  # NOTE enabling this, will prevent Microsd cards to be loaded, when
+  # connecting using a card reader. Seems like it needs loading a
+  # module which is not loaded by default. For now I'm disabling it,
+  # until I learn further.
+  # -----------------------------------------------------------
   # Don't allow loading modules dynamically after boot
-  security.lockKernelModules = true;
+  # security.lockKernelModules = true;
 
   # app armor
   security.apparmor = {

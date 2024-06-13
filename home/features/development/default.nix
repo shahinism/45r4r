@@ -18,7 +18,7 @@ in {
       exercism
       sbcl
       rlwrap
-      dbeaver
+      dbeaver-bin
 
       (python3.withPackages python-packages)
 
