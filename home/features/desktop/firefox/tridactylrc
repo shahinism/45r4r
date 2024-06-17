@@ -60,7 +60,7 @@ autocmd DocStart feedly.com/* mode ignore
 
 " Search Engines
 set searchurls.sum https://kagi.com/summarizer/index.html?url=
-set searchurls.gpt https://kagi.com/fastgpt?query=
+set searchurls.s https://www.startpage.com/do/dsearch?query=
 set searchurls.caniuse https://caniuse.com/?search=
 set searchurls.gh https://github.com/search?q=
 set searchurls.mdn https://developer.mozilla.org/en-US/search?q=
