@@ -507,6 +507,12 @@
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/refined-github-/latest.xpi";
           };
+          # ClearURLs
+          "{74145f27-f039-47ce-a470-a662b129930a}" = {
+            installation_mode = "normal_installed";
+            install_url =
+              "https://addons.mozilla.org/firefox/downloads/latest/clearurls/latest.xpi";
+          };
         };
       };
     };
