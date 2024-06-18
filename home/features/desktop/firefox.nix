@@ -8,7 +8,7 @@
       userChrome = "${builtins.readFile ./firefox/userChrome.css}";
 
       search = {
-        default = "startpage";
+        default = "perplexity";
         force = true;
         engines = {
           "Bing".metaData.hidden = true;
@@ -31,6 +31,13 @@
                 "https://kagi.com/summarizer/index.html?url={searchTerms}";
             }];
             iconUpdateUrl = "https://assets.kagi.com/v2/apple-touch-icon.png";
+          };
+
+          "perplexity" = {
+            urls = [{
+              template =
+                "https://www.perplexity.ai/search?focus=internet&q={searchTerms}";
+            }];
           };
 
           "startpage" = {

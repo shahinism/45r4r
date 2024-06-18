@@ -55,6 +55,7 @@
 
     zoom-us
     remmina
+    feh
   ];
 
   # TODO move it to CLI feature.
