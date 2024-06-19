@@ -8,7 +8,7 @@
       userChrome = "${builtins.readFile ./firefox/userChrome.css}";
 
       search = {
-        default = "perplexity";
+        default = "startpage";
         force = true;
         engines = {
           "Bing".metaData.hidden = true;
