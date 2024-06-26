@@ -56,6 +56,8 @@
     zoom-us
     remmina
     feh
+
+    quickemu
   ];
 
   # TODO move it to CLI feature.
