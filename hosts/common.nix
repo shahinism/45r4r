@@ -145,7 +145,7 @@ in {
   };
 
   # Define the default session manager
-  services.displayManager.defaultSession = "none+qtile";
+  services.displayManager.defaultSession = "qtile";
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "shahin";
 
