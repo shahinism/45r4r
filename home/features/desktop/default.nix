@@ -57,7 +57,7 @@
     remmina
     feh
 
-    quickemu
+    pulumi
   ];
 
   # TODO move it to CLI feature.

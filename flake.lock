@@ -390,6 +390,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-shahinism": {
+      "locked": {
+        "lastModified": 1720444838,
+        "narHash": "sha256-wtubMXdqJFyz+OdWyY5nEfBn3bNTd/GXfekrecmjt0I=",
+        "owner": "shahinism",
+        "repo": "nixpkgs",
+        "rev": "378e75830561ffd4033f25e24be977b47c27ea7d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "shahinism",
+        "ref": "shahinism",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1710695816,
@@ -547,6 +563,7 @@
         "hardware": "hardware",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_4",
+        "nixpkgs-shahinism": "nixpkgs-shahinism",
         "nixpkgs-unstable": "nixpkgs-unstable"
       }
     },

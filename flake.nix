@@ -9,6 +9,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
+    nixpkgs-shahinism.url = "github:shahinism/nixpkgs/shahinism";
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -46,8 +47,8 @@
     extra-trusted-users = [ "root" "shahin" ];
   };
 
-  outputs =
-    { self, nixpkgs, nixpkgs-unstable, home-manager, devenv, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-shahinism, home-manager
+    , devenv, ... }@inputs:
     let
       inherit (self) outputs;
       lib = nixpkgs.lib // home-manager.lib;
