@@ -57,7 +57,7 @@
     remmina
     feh
 
-    pulumi
+    shahinism.pulumi
   ];
 
   # TODO move it to CLI feature.

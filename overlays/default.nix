@@ -1,9 +1,5 @@
 # This file defines overlays
-{ inputs, ... }:
-let
-  # Current system type
-  system = builtins.currentSystem;
-in {
+{ inputs, outputs, ... }: {
   # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs { pkgs = final; };
 
@@ -24,11 +20,10 @@ in {
       system = final.system;
       config.allowUnfree = true;
     };
-  };
 
-  nixpkgs.overlays = [
-    (final: prev: {
-      pulumi = inputs.nixpkgs-shahinism.legacyPackages.${system}.pulumi;
-    })
-  ];
+    shahinism = import inputs.nixpkgs-shahinism {
+      system = final.system;
+      config.allowUnfree = true;
+    };
+  };
 }
