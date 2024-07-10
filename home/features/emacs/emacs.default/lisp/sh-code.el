@@ -428,4 +428,11 @@
     ))
   )
 
+(leaf emmet-mode
+  :doc "The essential toolkit for web developer"
+  :url "https://github.com/smihica/emmet-mode"
+  :ensure t
+  :hook
+  (sgml-mode-hook . emmet-mode)
+  (css-mode-hook . emmet-mode))
 ;;; sh-code.el ends here
