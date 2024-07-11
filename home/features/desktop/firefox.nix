@@ -454,12 +454,6 @@
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/languagetool/latest.xpi";
           };
-          # Omnivore
-          "save-extension@omnivore.app" = {
-            installation_mode = "normal_installed";
-            install_url =
-              "https://addons.mozilla.org/firefox/downloads/latest/omnivore/latest.xpi";
-          };
           # OneTab
           "extension@one-tab.com" = {
             installation_mode = "normal_installed";
@@ -490,11 +484,11 @@
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/libredirect/latest.xpi";
           };
-          # Memex
-          "info@worldbrain.io" = {
+          # Readwise
+          "team@readwise.io" = {
             installation_mode = "normal_installed";
             install_url =
-              "https://addons.mozilla.org/firefox/downloads/latest/worldbrain/latest.xpi";
+              "https://addons.mozilla.org/firefox/downloads/latest/readwise-highlighter/latest.xpi";
           };
           # Auto Tab Discard
           "{c2c003ee-bd69-42a2-b0e9-6f34222cb046}" = {
