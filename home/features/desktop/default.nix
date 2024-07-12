@@ -57,6 +57,7 @@
     remmina
     feh
 
+    obsidian
     shahinism.pulumi
   ];
 
