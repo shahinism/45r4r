@@ -291,7 +291,13 @@
   :hook
   (before-save-hook . gofmt-before-save))
 
-;; TODO check tree-sitter
+(leaf treesit-auto
+  :doc "Automatic installation, usage, and fallback for tree-sitter major modes in Emacs 29"
+  :url "https://github.com/renzmann/treesit-auto"
+  :ensure t
+  :custom ((treesit-auto-install quote prompt)
+           (treesit-auto-add-to-auto-mode-alist quote all))
+  :global-minor-mode global-treesit-auto-mode)
 
 (leaf plantuml-mode
   :doc "Major mode for PlantUML"
