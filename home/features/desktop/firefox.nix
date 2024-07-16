@@ -514,6 +514,12 @@
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/clearurls/latest.xpi";
           };
+          # Social Focus
+          "{26b4f076-089c-4c69-8497-44b7e5c9faef}" = {
+            installation_mode = "normal_installed";
+            install_url =
+              "https://addons.mozilla.org/firefox/downloads/latest/socialfocus/latest.xpi";
+          };
         };
       };
     };
