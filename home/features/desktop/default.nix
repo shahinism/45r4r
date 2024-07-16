@@ -59,6 +59,7 @@
 
     obsidian
     shahinism.pulumi
+    pulumiPackages.pulumi-language-python
   ];
 
   # TODO move it to CLI feature.

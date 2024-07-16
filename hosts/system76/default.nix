@@ -27,8 +27,8 @@
       };
     };
 
-    opengl.driSupport32Bit = true;
-    opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
+    graphics.enable32Bit = true;
+    graphics.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
   };
 
   # Bootloader.

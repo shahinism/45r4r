@@ -116,17 +116,18 @@
     };
   };
 
+  # NOTE disabled due to bug on build!
   # Enable Antivirus and keep signature DB update
-  services.clamav = {
-    daemon.enable = true;
-    fangfrisch = {
-      enable = true;
-      interval = "daily";
-    };
-    updater = {
-      enable = true;
-      interval = "daily";
-      frequency = 12;
-    };
-  };
+  # services.clamav = {
+  #   daemon.enable = true;
+  #   fangfrisch = {
+  #     enable = true;
+  #     interval = "daily";
+  #   };
+  #   updater = {
+  #     enable = true;
+  #     interval = "daily";
+  #     frequency = 12;
+  #   };
+  # };
 }
