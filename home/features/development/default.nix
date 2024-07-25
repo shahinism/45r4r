@@ -23,5 +23,6 @@ in {
 
       cargo
       clippy
+      pipx
     ] ++ [ devpkgs.devenv ];
 }
