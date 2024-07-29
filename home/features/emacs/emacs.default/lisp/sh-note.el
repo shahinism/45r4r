@@ -145,7 +145,6 @@
 (leaf org-roam
   :url "https://www.orgroam.com/"
   :ensure t
-  :disabled t
   :custom
   (org-roam-directory . "~/org/roam")
   (org-roam-completion-everywhere . t)
@@ -174,6 +173,8 @@
      ("B" org-roam-backlinks-insert "insert backlinks"))
     ))
   :init
+  (if (not (file-directory-p org-roam-directory))
+      (make-directory org-roam-directory))
   (setq org-roam-v2-ack t)
   :config
   (org-roam-setup))
