@@ -155,28 +155,31 @@
   :pretty-hydra
   ((:color teal :quick-key "q")
    ("Roam"
-    (("f" org-roam-find-file "find file")
-     ("g" org-roam-graph "graph")
-     ("i" org-roam-insert "insert")
-     ("r" org-roam "roam")
-     ("u" org-roam-update "update"))
+    (("g" org-roam-graph "graph")
+     ("z" org-roam "roam"))
     "Node"
     (("n" org-roam-node-find "find node")
-     ("N" org-roam-node-insert "insert node")
+     ("i" org-roam-node-insert "insert node")
      ("l" org-roam-buffer-toggle "toggle buffer")
      ("c" org-roam-capture "capture")
      ("s" org-roam-node-random "random node"))
     "Daily"
-    (("t" org-roam-today "today"))
-    "Backlinks"
-    (("b" org-roam-backlinks "backlinks")
-     ("B" org-roam-backlinks-insert "insert backlinks"))
+    (("d" org-roam-dailies-goto-today "today"))
+    "Tags"
+    (("t" org-roam-tag-add "add tag")
+     ("T" org-roam-tag-remove "remove tag"))
+    "References"
+    (("r" org-roam-ref-add "Add reference")
+     ("R" org-roam-ref-remove "Remove reference"))
     ))
   :init
   (if (not (file-directory-p org-roam-directory))
-      (make-directory org-roam-directory))
+      (make-directory (expand-file-name "daily" org-roam-directory) t))
   (setq org-roam-v2-ack t)
   :config
+  (setq org-roam-node-display-template
+      (concat "${title:*} "
+              (propertize "${tags:10}" 'face 'org-tag)))
   (org-roam-setup))
 
 (leaf org-download
@@ -188,7 +191,8 @@
   (setq org-download-method 'directory
         org-download-heading-lvl nil
         org-download-timestamp "_%Y%m%d-%H%M%S"
-        org-image-actual-width t)
+        org-image-actual-width t
+        org-download-screenshot-method "flameshot gui --raw > %s")
 
   (customize-set-variable 'org-download-image-dir "images")
 
