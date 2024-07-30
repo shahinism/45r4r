@@ -182,6 +182,18 @@
               (propertize "${tags:10}" 'face 'org-tag)))
   (org-roam-setup))
 
+(leaf org-roam-ui
+  :url "https://github.com/org-roam/org-roam-ui"
+  :doc "A graphical frontend for exploring your org-roam"
+  :straight
+  (org-roam-ui :host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+  :after org-roam
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
+
 (leaf org-download
   :url "https://github.com/abo-abo/org-download"
   :doc "Drag and drop images to Emacs org-mode"
@@ -210,7 +222,7 @@
   :url "https://github.com/toshism/org-super-links"
   :doc "Supercharge your org-mode links"
   :straight (org-super-links :host github :repo "toshism/org-super-links" :branch "develop")
-  :bind (("C-c s" . org-super-links/body))
+  :bind (("C-c s" . org-super-links/body))
   :pretty-hydra
   ((:color teal :quit-key "q")
    ("Link"
