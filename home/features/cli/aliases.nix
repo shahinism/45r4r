@@ -23,7 +23,6 @@ let
     top = "btm";
     watch = "batwatch";
     wget = "wget -c"; # Resume by default
-    dir = "yazi";
     ls = "eza";
   };
 in { home.shellAliases = aliases; }

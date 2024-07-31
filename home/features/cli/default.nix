@@ -1,11 +1,10 @@
 { pkgs, ... }: {
-  imports = [ ./aliases.nix ./zsh.nix ./atuin.nix ];
+  imports = [ ./aliases.nix ./zsh.nix ./atuin.nix ./lf.nix ];
 
   home.packages = with pkgs; [
     killall
     fzf
     ripgrep
-    yazi # doesn't seem stable
     rm-improved # https://github.com/nivekuil/rip
 
     yubikey-personalization
