@@ -169,4 +169,42 @@
   (chatgpt-shell-streaming . t)
   (chatgpt-shell-model-version . "gpt-3.5-turbo")
   (chatgpt-shell-request-timeout . 300000))
+
+(leaf tempel
+  :doc "Simple templates for Emacs"
+  :url "https://github.com/minad/tempel"
+  :ensure t
+  :custom
+  (tempel-trigger-prefix . "<")
+  :bind
+  (("M-+" . tempel-complete)
+   ("M-*" . tempel-insert)
+   (:tempel-map
+    ("C-c C-c" . tempel-done)
+    ("<tab>" . tempel-next)
+    ("<backtab>" . tempel-previous)))
+  :init
+  ;; Setup completion at point
+  (defun tempel-setup-capf ()
+    ;; Add the Tempel Capf to `completion-at-point-functions'.
+    ;; `tempel-expand' only triggers on exact matches. Alternatively use
+    ;; `tempel-complete' if you want to see all matches, but then you
+    ;; should also configure `tempel-trigger-prefix', such that Tempel
+    ;; does not trigger too often when you don't expect it. NOTE: We add
+    ;; `tempel-expand' *before* the main programming mode Capf, such
+    ;; that it will be tried first.
+    (setq-local completion-at-point-functions
+                (cons #'tempel-complete
+                      completion-at-point-functions)))
+
+  (add-hook 'conf-mode-hook 'tempel-setup-capf)
+  (add-hook 'prog-mode-hook 'tempel-setup-capf)
+  (add-hook 'text-mode-hook 'tempel-setup-capf))
+
+(leaf tempel-collection
+  :doc "Collection tempel templates"
+  :url "https://github.com/Crandel/tempel-collection"
+  :ensure t
+  :after tempel)
+
 ;;; sh-completion.el ends here
