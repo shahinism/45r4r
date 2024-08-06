@@ -140,10 +140,10 @@ in {
 
     # qtile
     windowManager.qtile.enable = true;
-
   };
 
   # Define the default session manager
+  services.xserver.displayManager.sessionPackages = [ pkgs.qtile-unwrapped ];
   services.displayManager.defaultSession = "qtile";
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "shahin";
