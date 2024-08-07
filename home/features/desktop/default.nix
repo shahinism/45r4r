@@ -1,5 +1,7 @@
 { pkgs, ... }: {
   imports = [
+    ./hyprland.nix
+    ./waybar.nix
     ./firefox.nix
     ./kitty.nix
     ./qtile.nix

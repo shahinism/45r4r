@@ -1,7 +1,5 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [
-    git-extras
-  ];
+  home.packages = with pkgs; [ git-extras ];
 
   programs.git = {
     enable = true;
