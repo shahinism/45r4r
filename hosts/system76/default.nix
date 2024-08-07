@@ -18,13 +18,23 @@
     cpu.intel.updateMicrocode = true;
     system76.enableAll = true;
 
+    opengl = { enable = true; };
+
     nvidia = {
+      # https://nixos.wiki/wiki/Nvidia
       modesetting.enable = true;
       prime = {
         sync.enable = true;
         nvidiaBusId = "PCI:1:0:0";
         intelBusId = "PCI:0:2:0";
       };
+
+      powerManagement.enable = true;
+      powerManagement.finegrained = false;
+      open = false;
+      nvidiaSettings = true;
+
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
 
     graphics.enable32Bit = true;

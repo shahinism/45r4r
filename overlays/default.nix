@@ -25,6 +25,21 @@
       '';
       passthru.providedSessions = [ "qtile" ];
     });
+
+    ulauncher = prev.ulauncher.overrideAttrs (old: {
+      nativeBuildInputs = old.nativeBuildInputs
+        ++ (with prev; [ gobject-introspection ]);
+
+      propagatedBuildInputs = with prev.python3Packages;
+        old.propagatedBuildInputs ++ [ fuzzywuzzy pint pytz simpleeval ];
+    });
+
+    flameshot = prev.flameshot.overrideAttrs {
+      cmakeFlags = [
+        (prev.lib.cmakeBool "USE_WAYLAND_GRIM" true)
+        (prev.lib.cmakeBool "USE_WAYLAND_CLIPBOARD" true)
+      ];
+    };
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will

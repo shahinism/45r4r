@@ -48,8 +48,6 @@
 
   networking.hostName = "framework"; # Define your hostname.
 
-  services.xserver.videoDrivers = [ "modesetting" ];
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # List packages installed in system profile. To search, run:

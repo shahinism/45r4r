@@ -117,6 +117,7 @@ in {
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
   };
 
   # Enable Docker
@@ -132,20 +133,17 @@ in {
       variant = "";
     };
 
-    displayManager.lightdm = {
-      enable = true;
-      greeter.enable = true;
-      # autoLogin.timeout = 0;
-    };
+    displayManager.sddm = { enable = true; };
 
     # qtile
     windowManager.qtile.enable = true;
   };
 
+  programs.hyprland = { enable = true; };
   # Define the default session manager
   services.xserver.displayManager.sessionPackages = [ pkgs.qtile-unwrapped ];
-  services.displayManager.defaultSession = "qtile";
-  services.displayManager.autoLogin.enable = true;
+  services.displayManager.defaultSession = "hyprland";
+  # services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "shahin";
 
   # Enable touchpad support (enabled default in most desktopManager).
