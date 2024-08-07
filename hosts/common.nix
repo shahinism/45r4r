@@ -133,15 +133,17 @@ in {
       variant = "";
     };
 
-    displayManager.sddm = { enable = true; };
-
     # qtile
     windowManager.qtile.enable = true;
   };
 
+  services.displayManager = {
+    sddm.enable = true;
+    sessionPackages = [ pkgs.qtile-unwrapped ];
+  };
+
   programs.hyprland = { enable = true; };
   # Define the default session manager
-  services.xserver.displayManager.sessionPackages = [ pkgs.qtile-unwrapped ];
   services.displayManager.defaultSession = "hyprland";
   # services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "shahin";

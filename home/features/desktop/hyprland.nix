@@ -35,6 +35,7 @@
         # Display,resolution,position,scale
         "DP-1,preferred,0x0,1"
         "eDP-1,preferred,1920x0,1"
+        "desc:BOE 0x095F,preferred,auto,1.175000" # Framework 13
         "DP-2,preferred,3849x0,1"
         ",preferred,auto,auto"
       ];
@@ -56,7 +57,15 @@
       # exec-once = $terminal
       # exec-once = nm-applet &
       # exec-once = waybar & hyprpaper & firefox
-      "exec-once" = [ "waybar" "nm-applet &" ];
+      "exec-once" = [
+        "waybar"
+        "nm-applet &"
+        "blueman-applet &"
+        "udiskie --no-automount --no-notify --tray"
+        "flameshot"
+        "tailscale-systray"
+        "KEYBASE_AUTOSTART=1 keybase-gui"
+      ];
 
       #############################
       ### ENVIRONMENT VARIABLES ###
