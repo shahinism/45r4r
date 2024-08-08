@@ -245,7 +245,8 @@
         "$mainMod, E, exec, $fileManager"
         "$mainMod, F, togglefloating,"
         "$mainMod, D, exec, $menu"
-        "$mainMod, P, pseudo," # dwindle
+        # FIXME "$mainMod, P, pseudo," # dwindle
+        "$mainMod, P, exec, flameshot gui"
         "$mainMod, V, togglesplit," # dwindle
         "$mainMod, H, movefocus, l"
         "$mainMod, L, movefocus, r"
