@@ -74,16 +74,17 @@
       # https://wiki.hyprland.org/Configuring/Variables/#general
       general = {
         gaps_in = 4;
-        gaps_out = 6;
+        gaps_out = 5;
+        gaps_workspaces = 50;
 
         border_size = 1;
 
         # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
-        "col.active_border" = "rgba(e6818388) rgba(363637ff) 45deg";
-        "col.inactive_border" = "rgba(161617ff)";
+        "col.active_border" = "rgba(471868FF)";
+        "col.inactive_border" = "rgba(4f4256CC)";
 
         # Set to true enable resizing windows by clicking and dragging on borders and gaps
-        resize_on_border = false;
+        resize_on_border = true;
 
         # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
         allow_tearing = false;
@@ -93,7 +94,7 @@
 
       # https://wiki.hyprland.org/Configuring/Variables/#decoration
       decoration = {
-        rounding = 6;
+        rounding = 20;
 
         dim_strength = 0.2;
         dim_inactive = true;
@@ -104,29 +105,58 @@
         active_opacity = "1.0";
         inactive_opacity = "1.0";
 
-        drop_shadow = true;
-        shadow_range = 10;
-        shadow_render_power = 3;
-        "col.shadow" = "rgba(1a1a1aee)";
+        # Shadow
+        drop_shadow = false;
+        shadow_ignore_window = true;
+        shadow_range = 20;
+        shadow_offset = "0 2";
+        shadow_render_power = 2;
+        "col.shadow" = "rgba(0000001A)";
 
         # https://wiki.hyprland.org/Configuring/Variables/#blur
         blur = {
           enabled = true;
-          size = 3;
-          passes = 1;
-
-          vibrancy = "0.1696";
+          xray = true;
+          special = false;
+          new_optimizations = true;
+          size = 5;
+          passes = 4;
+          brightness = 1;
+          noise = 1.0e-2;
+          contrast = 1;
         };
       };
 
       # https://wiki.hyprland.org/Configuring/Variables/#animations
-      animations = { enabled = false; };
+      animations = {
+        enabled = true;
+        bezier = [
+          "md3_decel, 0.05, 0.7, 0.1, 1"
+          "md3_accel, 0.3, 0, 0.8, 0.15"
+          "overshot, 0.05, 0.9, 0.1, 1.1"
+          "crazyshot, 0.1, 1.5, 0.76, 0.92"
+          "hyprnostretch, 0.05, 0.9, 0.1, 1.0"
+          "fluent_decel, 0.1, 1, 0, 1"
+          "easeInOutCirc, 0.85, 0, 0.15, 1"
+          "easeOutCirc, 0, 0.55, 0.45, 1"
+          "easeOutExpo, 0.16, 1, 0.3, 1"
+        ];
+        animation = [
+          "windows, 1, 3, md3_decel, popin 60%"
+          "border, 1, 10, default"
+          "fade, 1, 2.5, md3_decel"
+          # "workspaces, 1, 3.5, md3_decel, slide"
+          "workspaces, 1, 7, fluent_decel, slide"
+          # "workspaces, 1, 7, fluent_decel, slidefade 15%"
+          # "specialWorkspace, 1, 3, md3_decel, slidefadevert 15%"
+          "specialWorkspace, 1, 3, md3_decel, slidevert"
+        ];
+      };
 
       # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
       dwindle = {
-        pseudotile =
-          true; # Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-        preserve_split = true; # You probably want this
+        preserve_split = true;
+        smart_resizing = false;
       };
 
       # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
@@ -134,10 +164,19 @@
 
       # https://wiki.hyprland.org/Configuring/Variables/#misc
       misc = {
-        force_default_wallpaper =
-          -1; # Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo =
-          false; # If true disables the random hyprland logo / anime girl background. :(
+        # Set to 0 or 1 to disable the anime mascot wallpapers
+        force_default_wallpaper = -1;
+        # If true disables the random hyprland logo / anime girl
+        # background.
+        disable_hyprland_logo = false;
+        vfr = 1;
+        vrr = 1;
+        focus_on_activate = true;
+        animate_manual_resizes = false;
+        animate_mouse_windowdragging = false;
+        enable_swallow = false;
+        swallow_regex = "(foot|kitty|allacritty|Alacritty)";
+        new_window_takes_over_fullscreen = 2;
       };
 
       #############
@@ -160,7 +199,18 @@
       };
 
       # https://wiki.hyprland.org/Configuring/Variables/#gestures
-      gestures = { workspace_swipe = false; };
+      gestures = {
+        workspace_swipe = true;
+        workspace_swipe_distance = 700;
+        workspace_swipe_fingers = 4;
+        workspace_swipe_cancel_ratio = 0.2;
+        workspace_swipe_min_speed_to_force = 5;
+        workspace_swipe_direction_lock = true;
+        workspace_swipe_direction_lock_threshold = 10;
+        workspace_swipe_create_new = true;
+      };
+
+      binds = { scroll_event_delay = 0; };
 
       # Example per-device config
       # See https://wiki.hyprland.org/Configuring/Keywords/#per-device-input-configs for more
@@ -231,14 +281,21 @@
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
       # See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
 
-      # Example windowrule v1
-      # windowrule = float, ^(kitty)$
+      windowrule = [
+        "noblur,.*" # Disables blur for windows. Substantially improves performance.
+        "float, ^(steam)$"
+        "pin, ^(showmethekey-gtk)$"
+        "float,title:^(Open File)(.*)$"
+        "float,title:^(Select a File)(.*)$"
+        "float,title:^(Choose wallpaper)(.*)$"
+        "float,title:^(Open Folder)(.*)$"
+        "float,title:^(Save As)(.*)$"
+        "float,title:^(Library)(.*)$ "
+      ];
 
       # Example windowrule v2
       # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
-
-      windowrulev2 =
-        "suppressevent maximize, class:.*"; # You'll probably like this.
+      windowrulev2 = [ "tile,class:(wpsoffice)" ];
 
       workspace = [
         "1, monitor:DP-1"
