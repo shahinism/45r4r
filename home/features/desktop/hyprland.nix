@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [ slurp grim ];
+  home.packages = with pkgs; [ slurp grim pyprland ];
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = 1;
@@ -65,6 +65,7 @@
         "flameshot"
         "tailscale-systray"
         "KEYBASE_AUTOSTART=1 keybase-gui"
+        "pypr"
       ];
 
       #############################
@@ -237,7 +238,8 @@
 
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
       bind = [
-        "$mainMod, Return, exec, $terminal"
+        "$mainMod SHIFT, Return, exec, $terminal"
+        "$mainMod, Return , exec, pypr toggle term"
         "$mainMod, W, killactive,"
         "$mainMod SHIFT, E, exit,"
         "$mainMod, E, exec, $fileManager"
@@ -287,7 +289,7 @@
       ### WINDOWS AND WORKSPACES ###
       ##############################
 
-      # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
+      # See https://wiki.hyprland.org/Configuring/Window-Rules /for more
       # See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
 
       windowrule = [
@@ -304,7 +306,10 @@
 
       # Example windowrule v2
       # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
-      windowrulev2 = [ "tile,class:(wpsoffice)" ];
+      windowrulev2 = [
+        "float,class:(kitty-dropterm)"
+        "suppressevent maximize, class:.*" # You'll probably like this.
+      ];
 
       workspace = [
         "1, monitor:DP-1"
@@ -320,4 +325,16 @@
       ];
     };
   };
+
+  home.file.".config/hypr/pyprland.toml".text = ''
+    [pyprland]
+    plugins = ["scratchpads"]
+
+    [scratchpads.term]
+    command = "${pkgs.kitty}/bin/kitty --class kitty-dropterm"
+    animation = ""
+    class = "kitty-dropterm"
+    size = "80% 40%"
+    margin = 50
+  '';
 }
