@@ -204,7 +204,7 @@
         org-download-heading-lvl nil
         org-download-timestamp "_%Y%m%d-%H%M%S"
         org-image-actual-width t
-        org-download-screenshot-method "flameshot gui --raw > %s")
+        org-download-screenshot-method "grim -g \"$(slurp)\" %s")
 
   (customize-set-variable 'org-download-image-dir "images")
 
