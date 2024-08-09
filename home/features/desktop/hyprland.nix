@@ -244,6 +244,7 @@
         "$mainMod SHIFT, E, exit,"
         "$mainMod, E, exec, $fileManager"
         "$mainMod, F, togglefloating,"
+        "$mainMod SHIFT, F, fullscreen,"
         "$mainMod, D, exec, $menu"
         # FIXME "$mainMod, P, pseudo," # dwindle
         "$mainMod, P, exec, flameshot gui"
