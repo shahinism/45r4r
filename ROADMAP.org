@@ -1,6 +1,13 @@
 
-
-* Ideas
+* Ideas [20%]
+** Hyprland [25%]
+*** TODO [#C] Wallpaper (both desktop and lockscreen)
+*** DONE Terminal scratchpad
+*** DONE Screenlock
+*** TODO Add volume controls to top bar
+*** TODO Add screen light control to top bar
+*** TODO Add a terminal multiplexer to terminal scratchpad
+*** TODO Use a configurable color pallete for all applications
 ** TODO Setup a local binary cache
 
 This is specially important, where in the new releases on NixOS, it
@@ -51,3 +58,6 @@ proper README on it, for any other interested soul out there.
 ** TODO Setup AppArmor profiles
 
 [[https://pureooze.com/blog/posts/2016-07-28-the-comprehensive-guide-to-apparmor-p1/][Comprehensive AppArmor guide]]
+** TODO Migrate and the configuration to a MacOS device
+This could be useful in settings where using a Mac is mandatory by
+client.
