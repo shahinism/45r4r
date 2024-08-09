@@ -275,10 +275,12 @@
         # Example special workspace (scratchpad)
         "$mainMod, S, togglespecialworkspace, magic"
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
+        "$mainMod ALT, S, movetoworkspace, e+0"
 
         # Scroll through existing workspaces with mainMod + scroll
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
+        "$mainMod, x, exec, hyprlock"
       ];
 
       bindm = [
@@ -323,6 +325,68 @@
         "8, monitor:DP-2"
         "9, monitor:DP-2"
         "0, monitor:DP-2"
+      ];
+    };
+  };
+
+  programs.hyprlock = {
+    enable = true;
+
+    settings = {
+      general = {
+        disable_loading_bar = true;
+        hide_cursor = false;
+        no_fade_in = false;
+      };
+
+      background = [{
+        monitor = "";
+        # TODO path = "";
+      }];
+
+      input-field = [{
+        monitor = "eDP-1";
+
+        size = "300, 50";
+
+        outline_thickness = 1;
+
+        # TODO outer_color = "rgb(${})";
+        # TODO inner_color = "rgb(${})";
+        # TODO font_color = "rgb(${})";
+
+        fade_on_empty = false;
+        # TODO placeholder_text = ''<span font_family="${font_family}" foreground="##${c.primary_container}">Password...</span>'';
+
+        dots_spacing = 0.2;
+        dots_center = true;
+      }];
+
+      label = [
+        {
+          monitor = "";
+          text = "$TIME";
+          # TODO inherit font_family;
+          font_size = 50;
+          # TODO color = "rgb(${})";
+
+          position = "0, 150";
+
+          valign = "center";
+          halign = "center";
+        }
+        {
+          monitor = "";
+          text = "cmd[update:3600000] date +'%a %b %d'";
+          # TODO inherit font_family;
+          font_size = 20;
+          # TODO color = "rgb()";
+
+          position = "0, 50";
+
+          valign = "center";
+          halign = "center";
+        }
       ];
     };
   };
