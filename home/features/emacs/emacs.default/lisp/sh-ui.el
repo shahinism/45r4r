@@ -51,6 +51,7 @@
 (leaf doom-themes
   :url "https://github.com/doomemacs/themes"
   :ensure t
+  :disabled t
   :custom
   (doom-themes-enable-bold . t)
   (doom-themes-enable-italic . t)
@@ -59,6 +60,8 @@
   (doom-themes-visual-bell-config)
   (doom-themes-org-config)
   )
+
+(load-theme 'modus-vivendi)
 
 (leaf all-the-icons
   :url "https://github.com/domtronn/all-the-icons.el"
