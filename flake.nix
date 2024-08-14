@@ -26,7 +26,13 @@
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
     # nix-colors.url = "github:misterio77/nix-colors";
-
+    stylix = {
+      url = "github:danth/stylix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
   };
 
   nixConfig = {
@@ -48,7 +54,7 @@
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-shahinism, home-manager
-    , devenv, ... }@inputs:
+    , devenv, stylix, ... }@inputs:
     let
       inherit (self) outputs;
       lib = nixpkgs.lib // home-manager.lib;
@@ -102,12 +108,12 @@
           # Home-manager requires 'pkgs' instance
           pkgs = pkgsForUnstable.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/system76.nix ];
+          modules = [ stylix.homeManagerModules.stylix ./home/system76.nix ];
         };
         "shahin@framework" = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgsForUnstable.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/framework.nix ];
+          modules = [ stylix.homeManagerModules.stylix ./home/framework.nix ];
         };
       };
 

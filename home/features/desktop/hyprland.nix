@@ -46,7 +46,7 @@
       # See https://wiki.hyprland.org/Configuring/Keywords/
       "$terminal" = "alacritty";
       "$fileManager" = "alacritty -e lf";
-      "$menu" = "wofi --show drun,run";
+      "$menu" = "rofi -show drun";
 
       #################
       ### AUTOSTART ###
@@ -90,8 +90,6 @@
         border_size = 2;
 
         # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
-        "col.active_border" = "rgba(2FAFFFFF)";
-        "col.inactive_border" = "rgba(989898CC)";
 
         # Set to true enable resizing windows by clicking and dragging on borders and gaps
         resize_on_border = true;
@@ -121,7 +119,6 @@
         shadow_range = 20;
         shadow_offset = "0 2";
         shadow_render_power = 2;
-        "col.shadow" = "rgba(00bcff1A)";
 
         # https://wiki.hyprland.org/Configuring/Variables/#blur
         blur = {
@@ -282,6 +279,7 @@
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
         "$mainMod, x, exec, hyprlock"
+        "ALT, TAB, exec, rofi -show window"
       ];
 
       bindm = [
@@ -306,6 +304,7 @@
         "float,title:^(Open Folder)(.*)$"
         "float,title:^(Save As)(.*)$"
         "float,title:^(Library)(.*)$ "
+        "float,title:^(Ulauncher Preferences)$"
       ];
 
       # Example windowrule v2

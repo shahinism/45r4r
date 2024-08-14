@@ -60,7 +60,6 @@
     remmina
     feh
 
-    obsidian
   ];
 
   # TODO move it to CLI feature.
