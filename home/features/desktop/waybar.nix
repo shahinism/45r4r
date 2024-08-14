@@ -110,23 +110,21 @@
     style = ''
       @keyframes blink-warning {
           70% {
-              color: #dcdccc;
+              color: #ffffff;
           }
 
           to {
-              color: #3f3f3f;
-              background-color: #f0deae;
+              background-color: #d0bc00;
           }
       }
 
       @keyframes blink-critical {
           70% {
-            color: #dcdccc;
+            color: #ffffff;
           }
 
           to {
-              color: #3f3f3f;
-              background-color: #de0030;
+              background-color: #ff5f59;
           }
       }
 
@@ -139,8 +137,8 @@
       }
 
       #waybar {
-          background: #21322f;
-          color: #dcdccc;
+          background: #000000;
+          color: #ffffff;
           font-family: FiraCode Nerd Font;
           font-size: 13px;
       }
@@ -164,11 +162,11 @@
       }
 
       #battery.warning {
-          color: #f0deae;
+          color: #d0bc00;
       }
 
       #battery.critical {
-          color: #de0030;
+          color: #ff5f59;
       }
 
       #battery.warning.discharging {
@@ -190,11 +188,11 @@
       }
 
       #cpu.warning {
-          color: #f0deae;
+          color: #d0bc00;
       }
 
       #cpu.critical {
-          color: #de0030;
+          color: #ff5f59;
       }
 
       #memory {
@@ -204,11 +202,11 @@
       }
 
       #memory.warning {
-          color: #f0deae;
+          color: #d0bc00;
       }
 
       #memory.critical {
-          color: #de0030;
+          color: #ff5f59;
           animation-name: blink-critical;
           animation-duration: 2s;
       }
@@ -219,11 +217,11 @@
       }
 
       #temperature.warning {
-          color: #f0deae
+          color: #d0bc00;
       }
 
       #temperature.critical {
-          color: #de0030;
+          color: #ff5f59;
       }
 
       #tray {
@@ -233,24 +231,24 @@
       #workspaces button {
           padding-left: 10px;
           padding-right: 10px;
-          color: #888888;
+          color: #989898;
       }
 
       #workspaces button.focused {
-          border-color: #4c7899;
+          border-color: #00bcff;
           color: white;
-          background-color: #285577;
+          background-color: #5a5a5a;
       }
 
       #workspaces button.urgent {
-          border-color: #de0030;
-          color: #de0030;
+          border-color: #ff5f59;
+          color: #ff5f59;
       }
 
       #workspaces button:hover {
         box-shadow: none;
         text-shadow: none;
-        background: #3f3f3f;
+        background: #535353;
         transition: none;
       }
     '';

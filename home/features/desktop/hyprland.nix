@@ -87,11 +87,11 @@
         gaps_out = 5;
         gaps_workspaces = 50;
 
-        border_size = 1;
+        border_size = 2;
 
         # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
-        "col.active_border" = "rgba(471868FF)";
-        "col.inactive_border" = "rgba(4f4256CC)";
+        "col.active_border" = "rgba(2FAFFFFF)";
+        "col.inactive_border" = "rgba(989898CC)";
 
         # Set to true enable resizing windows by clicking and dragging on borders and gaps
         resize_on_border = true;
@@ -121,7 +121,7 @@
         shadow_range = 20;
         shadow_offset = "0 2";
         shadow_render_power = 2;
-        "col.shadow" = "rgba(0000001A)";
+        "col.shadow" = "rgba(00bcff1A)";
 
         # https://wiki.hyprland.org/Configuring/Variables/#blur
         blur = {
