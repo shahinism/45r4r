@@ -46,7 +46,7 @@
       # See https://wiki.hyprland.org/Configuring/Keywords/
       "$terminal" = "alacritty";
       "$fileManager" = "alacritty -e lf";
-      "$menu" = "rofi -show drun";
+      "$menu" = "rofi -show combi";
 
       #################
       ### AUTOSTART ###
