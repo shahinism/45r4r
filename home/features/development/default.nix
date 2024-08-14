@@ -3,7 +3,7 @@ let
   python-packages = p: with p; [ ipython ];
   devpkgs = inputs.devenv.packages.x86_64-linux;
 in {
-  imports = [ ./git.nix ./pass.nix ./aws-vault.nix ];
+  imports = [ ./git.nix ./pass.nix ./aws-vault.nix ./tmux.nix ];
 
   home.packages = with pkgs;
     [

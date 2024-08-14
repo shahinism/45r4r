@@ -397,7 +397,7 @@
     plugins = ["scratchpads"]
 
     [scratchpads.term]
-    command = "${pkgs.kitty}/bin/kitty --class kitty-dropterm"
+    command = "${pkgs.kitty}/bin/kitty --class kitty-dropterm tmux"
     animation = ""
     class = "kitty-dropterm"
     size = "80% 40%"
