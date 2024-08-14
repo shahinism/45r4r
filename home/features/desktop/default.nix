@@ -4,6 +4,7 @@
     ./waybar.nix
     ./firefox.nix
     ./kitty.nix
+    ./alacritty.nix
     ./qtile.nix
     ./rofi.nix
     ./dunst.nix
