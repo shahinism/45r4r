@@ -44,8 +44,8 @@
       ### MY PROGRAMS ###
       ###################
       # See https://wiki.hyprland.org/Configuring/Keywords/
-      "$terminal" = "kitty";
-      "$fileManager" = "kitty lf";
+      "$terminal" = "alacritty";
+      "$fileManager" = "alacritty -e lf";
       "$menu" = "wofi --show drun,run";
 
       #################
@@ -311,7 +311,7 @@
       # Example windowrule v2
       # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
       windowrulev2 = [
-        "float,class:(kitty-dropterm)"
+        "float,class:(dropterm)"
         "suppressevent maximize, class:.*" # You'll probably like this.
       ];
 
@@ -397,9 +397,9 @@
     plugins = ["scratchpads"]
 
     [scratchpads.term]
-    command = "${pkgs.kitty}/bin/kitty --class kitty-dropterm tmux"
+    command = "${pkgs.alacritty}/bin/alacritty --class dropterm -e tmux"
     animation = ""
-    class = "kitty-dropterm"
+    class = "dropterm"
     size = "80% 40%"
     margin = 50
   '';

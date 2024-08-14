@@ -3,7 +3,7 @@
     ./hyprland.nix
     ./waybar.nix
     ./firefox.nix
-    ./kitty.nix
+    # ./kitty.nix
     ./alacritty.nix
     ./qtile.nix
     ./rofi.nix
