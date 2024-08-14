@@ -278,8 +278,9 @@
         # Scroll through existing workspaces with mainMod + scroll
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
-        "$mainMod, x, exec, hyprlock"
+        "$mainMod, X, exec, hyprlock"
         "ALT, TAB, exec, rofi -show window"
+        "$mainMod, C, exec, rofi -show calc -modi calc -no-show-match -no-sort"
       ];
 
       bindm = [

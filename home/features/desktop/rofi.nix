@@ -4,16 +4,20 @@ let
   inherit (lib) mkForce;
   inherit (config.lib.formats.rasi) mkLiteral;
   inherit (config.lib.stylix.colors.withHashtag) base00 base0D;
+  rofi-pkg = pkgs.rofi-wayland;
+  rofi-calc-pkg = pkgs.rofi-calc.override { rofi-unwrapped = rofi-pkg; };
 in {
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
+    package = rofi-pkg;
+    plugins = [ rofi-calc-pkg ];
 
     extraConfig = {
       show-icons = true;
       display-drun = " ";
       display-window = " ";
       display-combi = " ";
+      display-calc = "󱖦 ";
       font = "FiraCode Nerd Font 12";
 
     };
@@ -43,7 +47,6 @@ in {
         border-radius = mkLiteral "5px";
       };
 
-      entry = { placeholder = "Search"; };
     };
   };
 }
