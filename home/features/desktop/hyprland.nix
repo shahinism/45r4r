@@ -104,7 +104,7 @@
 
       # https://wiki.hyprland.org/Configuring/Variables/#decoration
       decoration = {
-        rounding = 20;
+        rounding = 5;
 
         dim_strength = 0.2;
         dim_inactive = true;
