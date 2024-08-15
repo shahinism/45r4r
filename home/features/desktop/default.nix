@@ -17,11 +17,11 @@
     okular
     pavucontrol
     audacity
-    xorg.xkill
     gimp
     inkscape
-    xclip
-    flameshot
+    wl-clipboard
+    slurp
+    grim
     keybase-gui
     networkmanagerapplet
     blueman

@@ -1,5 +1,10 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [ slurp grim pyprland ];
+{ pkgs, ... }:
+let
+  satty-shot = pkgs.writeShellScriptBin "satty-shot" ''
+    ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.satty}/bin/satty --fullscreen --filename -
+  '';
+in {
+  home.packages = with pkgs; [ pyprland satty-shot ];
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = 1;
@@ -46,7 +51,7 @@
       # See https://wiki.hyprland.org/Configuring/Keywords/
       "$terminal" = "alacritty";
       "$fileManager" = "alacritty -e lf";
-      "$menu" = "rofi -show combi";
+      "$menu" = "rofi -show combi -modes combi -combi-modes 'drun,run'";
 
       #################
       ### AUTOSTART ###
@@ -62,7 +67,6 @@
         "nm-applet &"
         "blueman-applet &"
         "udiskie --no-automount --no-notify --tray"
-        "flameshot"
         "tailscale-systray"
         "KEYBASE_AUTOSTART=1 keybase-gui"
         "pypr"
@@ -244,7 +248,7 @@
         "$mainMod SHIFT, F, fullscreen,"
         "$mainMod, D, exec, $menu"
         # FIXME "$mainMod, P, pseudo," # dwindle
-        "$mainMod, P, exec, flameshot gui"
+        "$mainMod, P, exec, satty-shot"
         "$mainMod, V, togglesplit," # dwindle
         "$mainMod, H, movefocus, l"
         "$mainMod, L, movefocus, r"

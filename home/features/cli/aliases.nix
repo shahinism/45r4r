@@ -3,7 +3,7 @@ let
     "." = "cd ..";
     ".." = "cd ../..";
     "..." = "cd ../../..";
-    c = "xclip -selection clipboard";
+    c = "wl-copy";
     cat = "bat";
     e = "emacsclient -nw";
     ed = "emacsclient";
