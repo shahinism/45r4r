@@ -23,6 +23,9 @@ let
     top = "btm";
     watch = "batwatch";
     wget = "wget -c"; # Resume by default
-    ls = "eza";
+    ls = "eza -a";
+    l = "eza -lAh";
+    ll = "eza -al";
+    pg = "ping 4.2.2.4 -c 5";
   };
 in { home.shellAliases = aliases; }

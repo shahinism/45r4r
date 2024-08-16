@@ -215,6 +215,7 @@ When REGION is non-nil, unfill each paragraph in the region,"
   (eshell-toggle-use-projectile-root . nil)
   (eshell-toggle-run-command . nil)
   (eshell-toggle-init-function . #'eshell-toggle-init-eshell)
+  (eshell-toggle-find-project-root-package . 'project)
   :straight
   (eshell-toggle :repo "4DA/eshell-toggle" :fetcher github :version original)
   :bind
