@@ -131,6 +131,14 @@
   :ensure t
   :commands magit-status)
 
+(leaf magit-todos
+  :doc "Show source files with TODO/fixme/NOTE keywords in Magit status buffer"
+  :url "https://github.com/alphapapa/magit-todos"
+  :ensure t
+  :after magit
+  :config
+  (magit-todos-mode 1))
+
 (leaf git-timemachine
     :doc "Walk through git revisions of a file"
     :url "https://github.com/emacsmirror/git-timemachine"

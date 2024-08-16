@@ -1,13 +1,13 @@
 
 * Ideas [20%]
-** Hyprland [25%]
-*** TODO [#C] Wallpaper (both desktop and lockscreen)
+** Hyprland [85%]
+*** DONE [#C] Wallpaper (both desktop and lockscreen)
 *** DONE Terminal scratchpad
 *** DONE Screenlock
 *** TODO Add volume controls to top bar
-*** TODO Add screen light control to top bar
-*** TODO Add a terminal multiplexer to terminal scratchpad
-*** TODO Use a configurable color pallete for all applications
+*** DONE Add screen light control to top bar
+*** DONE Add a terminal multiplexer to terminal scratchpad
+*** DONE Use a configurable color pallete for all applications
 ** TODO Setup a local binary cache
 
 This is specially important, where in the new releases on NixOS, it
