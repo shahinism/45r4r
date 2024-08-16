@@ -112,9 +112,13 @@
   :custom
   (copilot-max-char . 1000000)   ;; https://github.com/zerolfx/copilot.el/issues/175
   (copilot-indent-offset-warning-disable . t) ;; https://github.com/copilot-emacs/copilot.el/issues/249#issuecomment-1921157985
-  :bind (:copilot-mode-map
-         ("C-<return>" . copilot-accept-completion)
-         ("C-;" . copilot-accept-completion-by-word)))
+  :bind
+  ((:prog-mode-map
+    :package prog-mode
+    ("C-c C-p" . copilot-mode))
+   (:copilot-mode-map
+   ("C-<return>" . copilot-accept-completion)
+   ("C-;" . copilot-accept-completion-by-word))))
 
 (leaf consult
   :doc "Consulting completing-read"
