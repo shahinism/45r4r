@@ -62,12 +62,12 @@ in {
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs-unstable;
+    package = pkgs.emacs-pgtk;
   };
 
   services.emacs = {
     enable = true;
-    package = pkgs.emacs-unstable;
+    package = pkgs.emacs-pgtk;
     defaultEditor = true;
   };
 
