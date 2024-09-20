@@ -83,8 +83,8 @@
         org-use-speed-commands t
         org-src-fontify-natively t
         org-src-tab-acts-natively t
-        org-directory "~/org"
-        org-agenda-files (list "~/org" "~/org/roam/daily")
+        org-directory "~/org/roam"
+        org-agenda-files (list "~/org/roam")
         org-log-refile t
         org-refile-use-outline-path t
         org-outline-path-complete-in-steps nil
@@ -92,23 +92,12 @@
         '((org-agenda-files . (:maxlevel . 2)))
         org-capture-templates
         '(("t" "Task Entry"        entry
-           (file+headline "~/org/todo.org" "Inbox")
+           (file+headline "~/org/roam/20240819083847-tasks.org" "Inbox")
            "* [ ] %?
 :PROPERTIES:
 :Added:     %U
 :END:" :empty-lines 0)
-          ("p" "People"           entry
-           (file+headline "~/org/meetings.org" "People")
-           "* %^{Name}
-:PROPERTIES:
-:BIRTHDAY: %^{Birthday}
-:EMAIL: %^{Email}
-:PHONE: %^{Phone}
-:LINKEDIN: %^{Linkedin}
-:END:" :empty-lines 0)
-          ("l" "Engineering Log"  entry
-           (file+datetree "~/org/engineering.org")
-           "**** %<%H:%M:%S> %^{Title} %^g\n- %?" :empty-lines 0)))
+          ))
 
   ;; Return or left-click with mouse should follow links
   (customize-set-variable 'org-return-follows-link t)
@@ -164,7 +153,8 @@
      ("c" org-roam-capture "capture")
      ("s" org-roam-node-random "random node"))
     "Daily"
-    (("d" org-roam-dailies-goto-today "today"))
+    (("D" org-roam-dailies-goto-today "open today")
+     ("d" org-roam-dailies-capture-today "capture today"))
     "Tags"
     (("t" org-roam-tag-add "add tag")
      ("T" org-roam-tag-remove "remove tag"))

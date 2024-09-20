@@ -449,4 +449,29 @@
   :hook
   (sgml-mode-hook . emmet-mode)
   (css-mode-hook . emmet-mode))
+
+(leaf smartparens
+  :doc "Automatic insertion, wrapping and paredit-like navigation with user defined pairs."
+  :url "https://github.com/Fuco1/smartparens"
+  :ensure t
+  :hook
+  ;; TODO do I need it in all modes?
+  (elixir-mode-hook . smartparens-mode)
+  :config
+  (require 'smartparens-config)
+
+  ;; ruby-end-mode for elixir-mode
+  ;; source: https://github.com/elixir-editors/emacs-elixir
+  (add-to-list 'elixir-mode-hook
+             (defun auto-activate-ruby-end-mode-for-elixir-mode ()
+               (set (make-variable-buffer-local 'ruby-end-expand-keywords-before-re)
+                    "\\(?:^\\|\\s-+\\)\\(?:do\\)")
+               (set (make-variable-buffer-local 'ruby-end-check-statement-modifiers) nil)
+               (ruby-end-mode +1)))
+  )
+
+(leaf elixir-mode
+  :doc "Major mode for editing Elixir files"
+  :url "https://github.com/elixir-editors/emacs-elixir"
+  :ensure t)
 ;;; sh-code.el ends here
