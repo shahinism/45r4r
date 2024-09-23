@@ -22,7 +22,6 @@
     wl-clipboard
     slurp
     grim
-    keybase-gui
     networkmanagerapplet
     blueman
     xss-lock
@@ -72,10 +71,6 @@
       allow-loopback-pinentry
     '';
   };
-
-  # Enable keybase requirements
-  services.kbfs.enable = true;
-  services.keybase.enable = true;
 
   # Set mimeapps for default applications
   xdg.mimeApps = {
