@@ -99,6 +99,11 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ ./hosts/framework ];
         };
+        # TODO do you want to keep it on unstable?
+        cloud-1 = libUnstable.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/cloud-1 ];
+        };
       };
 
       # Standalone home-manager configuration entrypoint
