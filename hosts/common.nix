@@ -142,6 +142,10 @@ in {
     sessionPackages = [ pkgs.qtile-unwrapped ];
   };
 
+  # Enable input remapper in order to help with configuring custom
+  # inputs for Mouse
+  services.input-remapper.enable = true;
+
   programs.hyprland = { enable = true; };
   # Define the default session manager
   services.displayManager.defaultSession = "hyprland";

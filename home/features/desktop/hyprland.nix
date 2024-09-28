@@ -69,6 +69,8 @@ in {
         "udiskie --no-automount --no-notify --tray"
         "tailscale-systray"
         "pypr"
+        # start autoload input-remapper configuration
+        "input-remapper-control --command autoload"
       ];
 
       #############################

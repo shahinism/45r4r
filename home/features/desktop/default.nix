@@ -3,7 +3,6 @@
     ./hyprland.nix
     ./waybar.nix
     ./firefox.nix
-    # ./kitty.nix
     ./alacritty.nix
     ./qtile.nix
     ./rofi.nix
@@ -11,6 +10,7 @@
     ./espanso.nix
     ./activitywatch.nix
     ./redshift.nix
+    ./input-remapper.nix
   ];
 
   home.packages = with pkgs; [
