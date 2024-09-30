@@ -68,8 +68,9 @@ in {
         "blueman-applet &"
         "udiskie --no-automount --no-notify --tray"
         "tailscale-systray"
-        "KEYBASE_AUTOSTART=1 keybase-gui"
         "pypr"
+        # start autoload input-remapper configuration
+        "input-remapper-control --command autoload"
       ];
 
       #############################

@@ -3,7 +3,6 @@
     ./hyprland.nix
     ./waybar.nix
     ./firefox.nix
-    # ./kitty.nix
     ./alacritty.nix
     ./qtile.nix
     ./rofi.nix
@@ -11,6 +10,7 @@
     ./espanso.nix
     ./activitywatch.nix
     ./redshift.nix
+    ./input-remapper.nix
   ];
 
   home.packages = with pkgs; [
@@ -22,7 +22,6 @@
     wl-clipboard
     slurp
     grim
-    keybase-gui
     networkmanagerapplet
     blueman
     xss-lock
@@ -72,10 +71,6 @@
       allow-loopback-pinentry
     '';
   };
-
-  # Enable keybase requirements
-  services.kbfs.enable = true;
-  services.keybase.enable = true;
 
   # Set mimeapps for default applications
   xdg.mimeApps = {
