@@ -71,6 +71,10 @@ in {
         "pypr"
         # start autoload input-remapper configuration
         "input-remapper-control --command autoload"
+        "[workspace 1 silent] firefox"
+        "[workspace 3 silent] slack"
+        "[workspace 4 silent] $terminal"
+        "[workspace 7 silent] emacsclient -c -a 'emacs'"
       ];
 
       #############################
