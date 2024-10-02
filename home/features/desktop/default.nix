@@ -58,6 +58,9 @@
     zoom-us
     remmina
     feh
+
+    tuxguitar
+    musescore
   ];
 
   # TODO move it to CLI feature.
