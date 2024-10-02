@@ -62,21 +62,19 @@ in {
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs-unstable;
+    package = pkgs.emacs-pgtk;
   };
 
   services.emacs = {
     enable = true;
-    package = pkgs.emacs-unstable;
+    package = pkgs.emacs-pgtk;
     defaultEditor = true;
   };
 
   home.file = {
     ".emacs.d" = {
       source = config.lib.file.mkOutOfStoreSymlink
-        "${config.home.homeDirectory}/.config/45r4r/home/features/emacs/emacs.chemacs2/";
+        "${config.home.homeDirectory}/.config/45r4r/home/features/emacs/emacs.d";
     };
   };
-
-  home.file = { ".emacs-profiles.el" = { source = ./emacs-profile.el; }; };
 }
