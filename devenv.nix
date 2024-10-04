@@ -5,7 +5,11 @@ in {
   env.GREET = "🛠️ Let's hack 🧑🏻‍💻";
 
   # # https://devenv.sh/packages/
-  packages = with pkgs; [ (python3.withPackages python-packages) ansible_2_14 ];
+  packages = with pkgs; [
+    (python3.withPackages python-packages)
+    ansible_2_14
+    nh
+  ];
 
   # https://devenv.sh/scripts/
   scripts.hello.exec = "echo $GREET";

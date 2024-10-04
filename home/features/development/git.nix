@@ -9,7 +9,8 @@
 
     signing = {
       signByDefault = true;
-      key = null; # set to null for GPG to decide
+      # defining it ismportant for tools like pass.
+      key = "hi@shahinism.com";
     };
 
     includes = [{

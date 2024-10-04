@@ -207,6 +207,7 @@ in {
         kb_options = "grp:caps_toggle";
         # kb_rules =
 
+        # https://github.com/hyprwm/Hyprland/issues/3659
         follow_mouse = 1;
 
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
