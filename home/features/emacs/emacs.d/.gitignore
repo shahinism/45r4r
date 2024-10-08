@@ -13,4 +13,5 @@ devdocs
 .org-id-locations
 bookmarks
 .cache
-auto-save-alist
+auto-save-list
+tramp
