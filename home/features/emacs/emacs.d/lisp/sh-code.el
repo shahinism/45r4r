@@ -13,6 +13,7 @@
 ;; (global-display-line-numbers-mode 1)
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'text-mode-hook 'display-line-numbers-mode)
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 ;; Highlight the current line.
 (global-hl-line-mode 1)
