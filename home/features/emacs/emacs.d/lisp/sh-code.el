@@ -89,17 +89,22 @@
   (eglot-autoshutdown . t)
   :hook
   ((python-mode-hook
+    python-ts-mode-hook
     rust-mode-hook
+    rust-ts-mode-hook
     go-mode-hook
+    go-ts-mode-hook
     c-mode-hook
     c++-mode-hook
     elixir-mode-hook
+    elixir-ts-mode-hook
     nix-mode-hook
     sh-mode-hook
     bash-ts-mode-hook
     json-mode-hook
     web-mode-hook) . eglot-ensure)
   :bind
+  ("C-c l" . eglot)
   (:eglot-mode-map
    ("C-c l" . eglot/body))
   :pretty-hydra
@@ -368,13 +373,13 @@
   :hook
   (before-save-hook . gofmt-before-save))
 
-;; (leaf treesit-auto
-;;   :doc "Automatic installation, usage, and fallback for tree-sitter major modes in Emacs 29"
-;;   :url "https://github.com/renzmann/treesit-auto"
-;;   :ensure t
-;;   :custom ((treesit-auto-install quote prompt)
-;;            (treesit-auto-add-to-auto-mode-alist quote all))
-;;   :global-minor-mode global-treesit-auto-mode)
+(leaf treesit-auto
+  :doc "Automatic installation, usage, and fallback for tree-sitter major modes in Emacs 29"
+  :url "https://github.com/renzmann/treesit-auto"
+  :ensure t
+  :custom ((treesit-auto-install quote prompt)
+           (treesit-auto-add-to-auto-mode-alist quote all))
+  :global-minor-mode global-treesit-auto-mode)
 
 (leaf plantuml-mode
   :doc "Major mode for PlantUML"
