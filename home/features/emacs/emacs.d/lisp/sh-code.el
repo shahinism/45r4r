@@ -361,7 +361,7 @@
   :config
 
   ;; use our derived mode for tsx files
-  (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescriptreact-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescript-mode))
   )
 
 (leaf go-mode

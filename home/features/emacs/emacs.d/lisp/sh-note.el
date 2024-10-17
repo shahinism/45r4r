@@ -231,3 +231,8 @@
   (org-super-links-link-prefix . 'org-super-links-link-prefix-timestamp)
   (org-id-link-to-org-use-id . 'create-if-interactive-and-no-custom-id)
   )
+
+(leaf ox-hugo
+  :url "https://github.com/kaushalmodi/ox-hugo"
+  :doc "A carefully crafted Org exporter back-end for Hugo."
+  :after ox)
