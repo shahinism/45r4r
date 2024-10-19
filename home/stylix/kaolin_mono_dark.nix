@@ -14,6 +14,6 @@
   base0B = "#f5f6f5"; # Strings, Inherited Class (aquamarine2)
   base0C = "#008080"; # Support, Regular Expressions (teal4)
   base0D = "#76EEC6"; # Functions, Methods (azure4)
-  base0E = "#551A8B"; # Keywords, Storage (purple4)
+  base0E = "#00bcff"; # Keywords, Storage (purple4)
   base0F = "#A52A2A"; # Deprecated, Embedded Language Tags (standard brown)
 }

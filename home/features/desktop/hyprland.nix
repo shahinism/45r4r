@@ -4,7 +4,7 @@ let
     ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.satty}/bin/satty --fullscreen --filename -
   '';
 in {
-  home.packages = with pkgs; [ pyprland satty-shot ];
+  home.packages = with pkgs; [ pyprland satty-shot wlsunset ];
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = 1;
@@ -69,6 +69,10 @@ in {
         "udiskie --no-automount --no-notify --tray"
         "tailscale-systray"
         "pypr"
+        # Set color temprature
+        # NOTE I needed to reduce the default temprature by
+        # 2000 to prevent my screen from flickering the light
+        "wlsunset -l 52.21 -L 5.27 -t 2000 -T 4500 &"
         # start autoload input-remapper configuration
         "input-remapper-control --command autoload"
         "[workspace 1 silent] firefox"
