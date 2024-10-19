@@ -47,7 +47,6 @@
   (setq nano-theme-var "light")
   )
 
-
 (leaf doom-themes
   :url "https://github.com/doomemacs/themes"
   :ensure t
@@ -61,7 +60,12 @@
   (doom-themes-org-config)
   )
 
-(load-theme 'modus-vivendi)
+;(load-theme 'modus-vivendi)
+
+(leaf kaolin-themes
+  :ensure t
+  :config
+  (load-theme 'kaolin-mono-dark t))
 
 (leaf all-the-icons
   :url "https://github.com/domtronn/all-the-icons.el"
