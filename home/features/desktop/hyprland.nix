@@ -4,7 +4,7 @@ let
     ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.satty}/bin/satty --fullscreen --filename -
   '';
 in {
-  home.packages = with pkgs; [ pyprland satty-shot wlsunset ];
+  home.packages = with pkgs; [ pyprland satty-shot hyprshade ];
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = 1;
@@ -69,10 +69,8 @@ in {
         "udiskie --no-automount --no-notify --tray"
         "tailscale-systray"
         "pypr"
-        # Set color temprature
-        # NOTE I needed to reduce the default temprature by
-        # 2000 to prevent my screen from flickering the light
-        "wlsunset -l 52.21 -L 5.27 -t 2000 -T 4500 &"
+        # Set blue light filter
+        "hyprshade auto"
         # start autoload input-remapper configuration
         "input-remapper-control --command autoload"
         "[workspace 1 silent] firefox"
@@ -416,5 +414,16 @@ in {
     class = "dropterm"
     size = "80% 40%"
     margin = 50
+  '';
+
+  home.file.".config/hyprshade/config.toml".text = ''
+    [[shades]]
+    name = "vibrance"
+    default = true # shader for when there is no other shade scheduled
+
+    [[shades]]
+    name = "blue-light-filter"
+    start_time = 18:00:00
+    end_time = 09:00:00
   '';
 }
