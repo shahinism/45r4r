@@ -268,7 +268,7 @@ When REGION is non-nil, unfill each paragraph in the region,"
 (leaf dired-single
   :doc "Visit a file in a single dired buffer"
   :url "https://codeberg.org/amano.kenji/dired-single"
-  :ensure t
+  :straight (dired-single :type git :host codeberg :repo "amano.kenji/dired-single")
   :config
   (defun my-dired-init ()
     "Bunch of stuff to run for dired, either immediately or when it's
