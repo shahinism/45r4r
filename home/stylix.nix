@@ -37,7 +37,7 @@
       };
     };
 
-    image = ./assets/wallpaper.png;
+    image = ./assets/wallpapers/01.png;
 
     opacity = { terminal = 0.9; };
 
