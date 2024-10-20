@@ -1,6 +1,12 @@
 { pkgs, config, ... }:
-let python-packages = p: with p; [ pip python-lsp-server ];
-in {
+let
+  python-packages =
+    p: with p; [
+      pip
+      python-lsp-server
+    ];
+in
+{
   # https://devenv.sh/basics/
   env.GREET = "🛠️ Let's hack 🧑🏻‍💻";
 
@@ -9,6 +15,7 @@ in {
     (python3.withPackages python-packages)
     ansible_2_14
     nh
+    nixd
   ];
 
   # https://devenv.sh/scripts/
@@ -32,8 +39,7 @@ in {
   pre-commit.hooks = {
     shellcheck.enable = true;
     black.enable = true;
-    nixfmt.enable = true;
+    nixfmt-rfc-style.enable = true;
     yamllint.enable = true;
   };
-
 }

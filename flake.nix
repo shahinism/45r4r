@@ -50,34 +50,48 @@
       "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
     ];
 
-    extra-trusted-users = [ "root" "shahin" ];
+    extra-trusted-users = [
+      "root"
+      "shahin"
+    ];
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-shahinism, home-manager
-    , devenv, stylix, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      nixpkgs-shahinism,
+      home-manager,
+      devenv,
+      stylix,
+      ...
+    }@inputs:
     let
       inherit (self) outputs;
       lib = nixpkgs.lib // home-manager.lib;
       libUnstable = nixpkgs-unstable.lib // home-manager.lib;
       # Supported systems for your flake packages, shell, etc.
-      systems = [ "aarch64-linux" "x86_64-linux" ];
+      systems = [
+        "aarch64-linux"
+        "x86_64-linux"
+      ];
       # This is a function that generates an attribute by calling a function you
       # pass to it, with each system as an argument
       forAllSystems = nixpkgs.lib.genAttrs systems;
-      pkgsFor =
-        lib.genAttrs systems (system: import nixpkgs { inherit system; });
-      pkgsForUnstable = libUnstable.genAttrs systems
-        (system: import nixpkgs-unstable { inherit system; });
+      pkgsFor = lib.genAttrs systems (system: import nixpkgs { inherit system; });
+      pkgsForUnstable = libUnstable.genAttrs systems (
+        system: import nixpkgs-unstable { inherit system; }
+      );
       x86_64-linux = pkgsForUnstable.x86_64-linux;
-    in {
+    in
+    {
       # Your custom packages
       # Acessible through 'nix build', 'nix shell', etc
-      packages =
-        forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
       # Formatter for your nix files, available through 'nix fmt'
       # Other options beside 'alejandra' include 'nixpkgs-fmt'
-      formatter =
-        forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
       # Your custom packages and modifications, exported as overlays
       overlays = import ./overlays { inherit inputs outputs; };
@@ -92,30 +106,48 @@
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
         system76 = libUnstable.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = {
+            inherit inputs outputs;
+          };
           modules = [ ./hosts/system76 ];
         };
         framework = libUnstable.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = {
+            inherit inputs outputs;
+          };
           modules = [ ./hosts/framework ];
         };
       };
 
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#your-username@your-hostname'
-      homeConfigurations = {
-        "shahin@system76" = home-manager.lib.homeManagerConfiguration {
-          # Home-manager requires 'pkgs' instance
-          pkgs = pkgsForUnstable.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ stylix.homeManagerModules.stylix ./home/system76.nix ];
+      homeConfigurations =
+        let
+          inherit (./info.nix) systemUsersMap;
+        in
+        {
+          "shahin@system76" = home-manager.lib.homeManagerConfiguration {
+            # Home-manager requires 'pkgs' instance
+            pkgs = pkgsForUnstable.x86_64-linux;
+            extraSpecialArgs = {
+              inherit inputs outputs;
+            };
+            modules = [
+              stylix.homeManagerModules.stylix
+              ./home/system76.nix
+            ];
+          };
+          "shahin@framework" = home-manager.lib.homeManagerConfiguration {
+            pkgs = pkgsForUnstable.x86_64-linux;
+            extraSpecialArgs = {
+              inherit inputs outputs;
+            };
+            modules = [
+              stylix.homeManagerModules.stylix
+              ./home/framework.nix
+            ];
+          };
         };
-        "shahin@framework" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgsForUnstable.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ stylix.homeManagerModules.stylix ./home/framework.nix ];
-        };
-      };
 
       devShell.x86_64-linux = devenv.lib.mkShell {
         inherit x86_64-linux;
