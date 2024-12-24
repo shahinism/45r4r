@@ -2,10 +2,17 @@
 let
   python-packages = p: with p; [ ipython ];
   devpkgs = inputs.devenv.packages.x86_64-linux;
-in {
-  imports = [ ./git.nix ./pass.nix ./aws-vault.nix ./tmux.nix ];
+in
+{
+  imports = [
+    ./git.nix
+    ./pass.nix
+    ./aws-vault.nix
+    ./zellij.nix
+  ];
 
-  home.packages = with pkgs;
+  home.packages =
+    with pkgs;
     [
       gnumake
       gcc
@@ -24,5 +31,6 @@ in {
       cargo
       clippy
       pipx
-    ] ++ [ devpkgs.devenv ];
+    ]
+    ++ [ devpkgs.devenv ];
 }

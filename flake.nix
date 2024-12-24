@@ -1,5 +1,5 @@
 {
-  description = "Shahin's digital life (and 45r4r) in Nix!";
+  description = "Yet Another Opinionated Nix Configuration!";
 
   inputs = {
     # Nixpkgs
@@ -9,7 +9,6 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
-    nixpkgs-shahinism.url = "github:shahinism/nixpkgs/shahinism";
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -38,21 +37,18 @@
   nixConfig = {
     extra-substituters = [
       #      "http://framework.starling-goldeye.ts.net:5000"
-      "https://shahinism.cachix.org"
       "https://nix-community.cachix.org"
       "https://cuda-maintainers.cachix.org"
       "https://cache.nixos.org/"
     ];
     extra-trusted-public-keys = [
-      "framework.starling-goldeye.ts.net:r79SpjobbITfeymQBw7GUNYBxGBGbFumJVdR9sdsOTM="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "shahinism.cachix.org-1:BzxJ+Ky6ASS/936XSAcq13841+hRW/FN++zOqoxtbGM="
       "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
     ];
 
     extra-trusted-users = [
       "root"
-      "shahin"
+      "@wheel"
     ];
   };
 
@@ -61,7 +57,6 @@
       self,
       nixpkgs,
       nixpkgs-unstable,
-      nixpkgs-shahinism,
       home-manager,
       devenv,
       stylix,
@@ -84,6 +79,8 @@
         system: import nixpkgs-unstable { inherit system; }
       );
       x86_64-linux = pkgsForUnstable.x86_64-linux;
+
+      params = import ./params.local.nix;
     in
     {
       # Your custom packages
@@ -109,13 +106,19 @@
           specialArgs = {
             inherit inputs outputs;
           };
-          modules = [ ./hosts/system76 ];
+          modules = [
+            ./params.local.nix
+            ./hosts/system76
+          ];
         };
         framework = libUnstable.nixosSystem {
           specialArgs = {
             inherit inputs outputs;
           };
-          modules = [ ./hosts/framework ];
+          modules = [
+            ./params.local.nix
+            ./hosts/framework
+          ];
         };
       };
 
@@ -126,25 +129,15 @@
           inherit (./info.nix) systemUsersMap;
         in
         {
-          "shahin@system76" = home-manager.lib.homeManagerConfiguration {
-            # Home-manager requires 'pkgs' instance
+          homes = home-manager.lib.homeManagerConfiguration {
             pkgs = pkgsForUnstable.x86_64-linux;
             extraSpecialArgs = {
               inherit inputs outputs;
             };
             modules = [
               stylix.homeManagerModules.stylix
-              ./home/system76.nix
-            ];
-          };
-          "shahin@framework" = home-manager.lib.homeManagerConfiguration {
-            pkgs = pkgsForUnstable.x86_64-linux;
-            extraSpecialArgs = {
-              inherit inputs outputs;
-            };
-            modules = [
-              stylix.homeManagerModules.stylix
-              ./home/framework.nix
+              ./home/user.nix
+              ./params.local.nix
             ];
           };
         };

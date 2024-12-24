@@ -1,2 +1,0 @@
-[servers]
-pi3-1 ansible_host=pihole-1 ansible_user=pi

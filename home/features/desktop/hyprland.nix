@@ -1,10 +1,15 @@
 { pkgs, ... }:
 let
   satty-shot = pkgs.writeShellScriptBin "satty-shot" ''
-    ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.satty}/bin/satty --fullscreen --filename -
+    # https://github.com/NixOS/nixpkgs/issues/359069
+    ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | GSK_RENDERER=ngl ${pkgs.satty}/bin/satty --fullscreen --filename -
   '';
-in {
-  home.packages = with pkgs; [ pyprland satty-shot hyprshade ];
+in
+{
+  home.packages = with pkgs; [
+    pyprland
+    satty-shot
+  ];
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = 1;
@@ -15,8 +20,15 @@ in {
   xdg.portal = {
     enable = true;
     config = {
-      common = { default = [ "hyprland" ]; };
-      hyprland = { default = [ "gtk" "hyprland" ]; };
+      common = {
+        default = [ "hyprland" ];
+      };
+      hyprland = {
+        default = [
+          "gtk"
+          "hyprland"
+        ];
+      };
     };
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
@@ -69,12 +81,9 @@ in {
         "udiskie --no-automount --no-notify --tray"
         "tailscale-systray"
         "pypr"
-        # Set blue light filter
-        "hyprshade auto"
         # start autoload input-remapper configuration
         "input-remapper-control --command autoload"
         "[workspace 1 silent] firefox"
-        "[workspace 3 silent] slack"
         "[workspace 4 silent] $terminal"
         "[workspace 7 silent] emacsclient -c -a 'emacs'"
       ];
@@ -84,7 +93,10 @@ in {
       #############################
 
       # See https://wiki.hyprland.org/Configuring/Environment-variables/
-      env = [ "XCURSOR_SIZE,24" "HYPRCURSOR_SIZE,24" ];
+      env = [
+        "XCURSOR_SIZE,24"
+        "HYPRCURSOR_SIZE,24"
+      ];
 
       #####################
       ### LOOK AND FEEL ###
@@ -125,11 +137,11 @@ in {
         inactive_opacity = "1.0";
 
         # Shadow
-        drop_shadow = false;
-        shadow_ignore_window = true;
-        shadow_range = 20;
-        shadow_offset = "0 2";
-        shadow_render_power = 2;
+        #drop_shadow = false;
+        #shadow_ignore_window = true;
+        #shadow_range = 20;
+        #shadow_offset = "0 2";
+        #shadow_render_power = 2;
 
         # https://wiki.hyprland.org/Configuring/Variables/#blur
         blur = {
@@ -178,7 +190,9 @@ in {
       };
 
       # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-      master = { new_status = "master"; };
+      master = {
+        new_status = "master";
+      };
 
       # https://wiki.hyprland.org/Configuring/Variables/#misc
       misc = {
@@ -214,7 +228,9 @@ in {
 
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
 
-        touchpad = { natural_scroll = false; };
+        touchpad = {
+          natural_scroll = false;
+        };
       };
 
       # https://wiki.hyprland.org/Configuring/Variables/#gestures
@@ -229,7 +245,9 @@ in {
         workspace_swipe_create_new = true;
       };
 
-      binds = { scroll_event_delay = 0; };
+      binds = {
+        scroll_event_delay = 0;
+      };
 
       # Example per-device config
       # See https://wiki.hyprland.org/Configuring/Keywords/#per-device-input-configs for more
@@ -251,6 +269,7 @@ in {
         "$mainMod, Return , exec, pypr toggle term"
         "$mainMod, W, killactive,"
         "$mainMod SHIFT, E, exit,"
+        "$mainMod, A, exec, alacritty -e ncpamixer"
         "$mainMod, E, exec, $fileManager"
         "$mainMod, F, togglefloating,"
         "$mainMod SHIFT, F, fullscreen,"
@@ -352,28 +371,28 @@ in {
         no_fade_in = false;
       };
 
-      background = [{
-        monitor = "";
-        # TODO path = "";
-      }];
+      # background = [{
+      #   monitor = "";
+      #   # TODO path = "";
+      # }];
 
-      input-field = [{
-        monitor = "eDP-1";
+      # input-field = [{
+      #   monitor = "eDP-1";
 
-        size = "300, 50";
+      #   size = "300, 50";
 
-        outline_thickness = 1;
+      #   outline_thickness = 1;
 
-        # TODO outer_color = "rgb(${})";
-        # TODO inner_color = "rgb(${})";
-        # TODO font_color = "rgb(${})";
+      #   # TODO outer_color = "rgb(${})";
+      #   # TODO inner_color = "rgb(${})";
+      #   # TODO font_color = "rgb(${})";
 
-        fade_on_empty = false;
-        # TODO placeholder_text = ''<span font_family="${font_family}" foreground="##${c.primary_container}">Password...</span>'';
+      #   fade_on_empty = false;
+      #   # TODO placeholder_text = ''<span font_family="${font_family}" foreground="##${c.primary_container}">Password...</span>'';
 
-        dots_spacing = 0.2;
-        dots_center = true;
-      }];
+      #   dots_spacing = 0.2;
+      #   dots_center = true;
+      # }];
 
       label = [
         {
@@ -409,21 +428,10 @@ in {
     plugins = ["scratchpads"]
 
     [scratchpads.term]
-    command = "${pkgs.alacritty}/bin/alacritty --class dropterm -e tmux"
+    command = "${pkgs.alacritty}/bin/alacritty --class dropterm"
     animation = ""
     class = "dropterm"
     size = "80% 40%"
     margin = 50
-  '';
-
-  home.file.".config/hyprshade/config.toml".text = ''
-    [[shades]]
-    name = "vibrance"
-    default = true # shader for when there is no other shade scheduled
-
-    [[shades]]
-    name = "blue-light-filter"
-    start_time = 18:00:00
-    end_time = 09:00:00
   '';
 }

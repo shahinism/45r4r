@@ -17,7 +17,7 @@ let
     reboot = "shutdown -r now";
     rm = "rip";
     serve = "python -m http.server";
-    sleep = "systemctl suspend";
+    sleep = "systemctl suspend -i";
     snr = "sudo systemctl restart NetworkManager";
     tf = "terraform";
     top = "btm";
@@ -28,4 +28,7 @@ let
     ll = "eza -al";
     pg = "ping 4.2.2.4 -c 5";
   };
-in { home.shellAliases = aliases; }
+in
+{
+  home.shellAliases = aliases;
+}

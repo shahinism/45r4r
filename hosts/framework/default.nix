@@ -2,10 +2,16 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     inputs.hardware.nixosModules.framework-13th-gen-intel
     ./hardware-configuration.nix
     ../common.nix
@@ -15,6 +21,9 @@
     cpu.intel.updateMicrocode = true;
   };
   services.fwupd.enable = true;
+
+  # Kernel
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -38,17 +47,20 @@
   };
 
   # Setup keyfile
-  boot.initrd.secrets = { "/crypto_keyfile.bin" = null; };
+  boot.initrd.secrets = {
+    "/crypto_keyfile.bin" = null;
+  };
 
   # Enable swap on luks
-  boot.initrd.luks.devices."luks-94d8bf3c-91b1-43d3-9d8e-6420c460881d".device =
-    "/dev/disk/by-uuid/94d8bf3c-91b1-43d3-9d8e-6420c460881d";
-  boot.initrd.luks.devices."luks-94d8bf3c-91b1-43d3-9d8e-6420c460881d".keyFile =
-    "/crypto_keyfile.bin";
+  boot.initrd.luks.devices."luks-94d8bf3c-91b1-43d3-9d8e-6420c460881d".device = "/dev/disk/by-uuid/94d8bf3c-91b1-43d3-9d8e-6420c460881d";
+  boot.initrd.luks.devices."luks-94d8bf3c-91b1-43d3-9d8e-6420c460881d".keyFile = "/crypto_keyfile.bin";
 
   networking.hostName = "framework"; # Define your hostname.
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

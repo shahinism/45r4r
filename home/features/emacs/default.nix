@@ -26,21 +26,35 @@ let
     exec = ''emacsclient -c -a "emacs" %F'';
     icon = "emacs";
     terminal = false;
-    categories = [ "Development" "TextEditor" "Utility" ];
+    categories = [
+      "Development"
+      "TextEditor"
+      "Utility"
+    ];
     startupWMClass = "Emacs";
   };
-  python-packages = p:
-    with p;
-    [
+  python-packages =
+    p: with p; [
       grip # FIXME markdown preview, currently failing due to nix
       # package collision.
     ];
-  nodejs-packages = with pkgs.nodePackages_latest;
-    [
-      js-beautify # Used by Emacs to format JavaScript code
-    ];
-in {
-  home.packages = with pkgs;
+  nodejs-packages = with pkgs.nodePackages_latest; [
+    js-beautify # Used by Emacs to format JavaScript code
+  ];
+  emacsPackage =
+    with pkgs;
+    (emacsPackagesFor emacs-pgtk).emacsWithPackages (
+      epkgs: with epkgs; [
+        # NOTE this is important for languages like C, otherwise you'll
+        # face: https://github.com/nix-community/emacs-overlay/issues/341
+        treesit-grammars.with-all-grammars
+        vterm
+      ]
+    );
+in
+{
+  home.packages =
+    with pkgs;
     [
       cmake # rquired by emacs to build vterm
       zstd # Used by emacs to optimize undo history
@@ -58,23 +72,25 @@ in {
       libtool
       # (python311.withPackages python-packages)
       zip # used by org-mode to publish to ODT
-    ] ++ nodejs-packages ++ [ emacsClientGuiDesktop ];
+    ]
+    ++ nodejs-packages
+    ++ [ emacsClientGuiDesktop ];
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs-unstable;
+    package = emacsPackage;
   };
 
   services.emacs = {
     enable = true;
-    package = pkgs.emacs-unstable;
+    package = emacsPackage;
     defaultEditor = true;
   };
 
   home.file = {
     ".emacs.d" = {
-      source = config.lib.file.mkOutOfStoreSymlink
-        "${config.home.homeDirectory}/.config/45r4r/home/features/emacs/emacs.d";
+      # TODO fix hardcoded path
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/454r4/home/features/emacs/emacs.d";
     };
   };
 }

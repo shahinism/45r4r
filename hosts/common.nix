@@ -1,12 +1,17 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
-let syncting = { };
-in {
+let
+  syncting = { };
+in
+{
 
-  imports =
-    [ ./nix.nix ./keyd.nix ./desktop.nix ./security.nix ./experimental.nix ];
-  # Kernel
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+  imports = [
+    ./nix.nix
+    ./keyd.nix
+    ./desktop.nix
+    ./security.nix
+    ./experimental.nix
+  ];
 
   # TODO switch to Caddy if it can enable SSL for localhost
   services.nginx = {
@@ -16,63 +21,6 @@ in {
     };
     virtualHosts."activitywatch" = {
       locations."/".proxyPass = "http://127.0.0.1:5600";
-    };
-  };
-
-  # Syncthing
-  services.syncthing = let
-    devices = {
-      framework = {
-        id = "B7ZQRU7-4OGAC33-KRQL4Q3-EQTXG7U-72TU7BR-2RK3MEN-ZPHKZAX-I45HDAK";
-      };
-      system76 = {
-        id = "4I37TGM-C23BXHD-D54Q52E-CAH6CEX-7J2WQPR-Z5AS26U-C3DL5V3-3TPFHQA";
-      };
-    };
-
-    allDevices = builtins.attrNames devices;
-  in {
-    enable = true;
-    user = "shahin";
-    dataDir = "/home/shahin/.local/share/syncthing";
-    configDir = "/home/shahin/.config/syncthing";
-    overrideDevices = true;
-    overrideFolders = true;
-
-    settings = {
-      inherit devices;
-
-      folders = {
-        "projects" = {
-          enable = true;
-          path = "/home/shahin/projects";
-          devices = allDevices;
-        };
-
-        "org" = {
-          enable = true;
-          path = "/home/shahin/org";
-          devices = allDevices;
-        };
-
-        "ssh" = {
-          enable = true;
-          path = "/home/shahin/.ssh";
-          devices = allDevices;
-        };
-
-        "gnupg" = {
-          enable = true;
-          path = "/home/shahin/.gnupg";
-          devices = allDevices;
-        };
-
-        "aws" = {
-          enable = true;
-          path = "/home/shahin/.aws";
-          devices = allDevices;
-        };
-      };
     };
   };
 
@@ -97,7 +45,12 @@ in {
   fonts.packages = with pkgs; [
     emacs-all-the-icons-fonts
     (nerdfonts.override {
-      fonts = [ "Inconsolata" "FiraCode" "Hack" "RobotoMono" ];
+      fonts = [
+        "Inconsolata"
+        "FiraCode"
+        "Hack"
+        "RobotoMono"
+      ];
     })
   ];
 
@@ -146,19 +99,18 @@ in {
   # inputs for Mouse
   services.input-remapper.enable = true;
 
-  programs.hyprland = { enable = true; };
+  programs.hyprland = {
+    enable = true;
+  };
   # Define the default session manager
   services.displayManager.defaultSession = "hyprland";
-  # services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "shahin";
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
   environment.variables = {
     # fix for this curl issue with https requests: https://github.com/NixOS/nixpkgs/issues/148686
-    CURL_CA_BUNDLE =
-      "/etc/pki/tls/certs/ca-bundle.crt"; # this is the value of $SSL_CERT_FILE ; may be brittle
+    CURL_CA_BUNDLE = "/etc/pki/tls/certs/ca-bundle.crt"; # this is the value of $SSL_CERT_FILE ; may be brittle
   };
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
@@ -172,12 +124,19 @@ in {
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.zsh.enable = true;
-  users.users.shahin = {
-    shell = pkgs.zsh;
-    isNormalUser = true;
-    description = "Shahin Azad";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
-    packages = with pkgs; [ nixFlakes ];
+  users.users = {
+    # TODO make this from local configuration
+    "shahin" = {
+      shell = pkgs.zsh;
+      isNormalUser = true;
+      description = "Shahin";
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "docker"
+      ];
+      packages = [ ];
+    };
   };
 
   # Bluetooth
@@ -243,8 +202,10 @@ in {
   # Memtest
   boot.loader.grub.memtest86.enable = false;
 
-  # TODO make me conditional
-  users.groups.uinput = { members = [ "shahin" ]; };
+  # TODO make me conditional and customize user
+  users.groups.uinput = {
+    members = [ "@wheel" ];
+  };
 
   services.udev.extraRules = ''
     KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
@@ -268,7 +229,9 @@ in {
 
   # Tailscale
   environment.systemPackages = with pkgs; [ tailscale ];
-  services.tailscale = { enable = true; };
+  services.tailscale = {
+    enable = true;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

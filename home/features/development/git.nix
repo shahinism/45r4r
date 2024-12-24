@@ -1,22 +1,27 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }:
+{
   home.packages = with pkgs; [ git-extras ];
 
   programs.git = {
     enable = true;
 
-    userName = "Shahin Azad";
-    userEmail = "hi@shahinism.com";
+    # TODO read from a config file
+    userName = config.local.userName;
+    userEmail = config.local.gitEmail;
 
     signing = {
       signByDefault = true;
       # defining it ismportant for tools like pass.
-      key = "hi@shahinism.com";
+      # TODO read from a config file
+      key = config.local.email;
     };
 
-    includes = [{
-      path = "~/.config/git/includes/DataChef";
-      condition = "gitdir:~/projects/DataChef/";
-    }];
+    includes = [
+      {
+        path = "~/.config/git/includes/DataChef";
+        condition = "gitdir:~/projects/DataChef/";
+      }
+    ];
 
     extraConfig = {
       init = {
@@ -31,11 +36,5 @@
     };
   };
 
-  home.file = {
-    ".config/git/includes" = {
-      source = ./. + "/git/includes";
-      recursive = true;
-    };
-  };
-
+  # TODO allow for custom imports
 }
