@@ -1,9 +1,0 @@
----
-roles:
-  - artis3n.tailscale
-  - caddy_ansible.caddy_ansible
-collections:
-  - ansible.posix
-  - community.docker
-  - community.general
-  - devsec.hardening

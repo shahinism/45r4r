@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
 
   # NOTE enabling this breaks qtile from starting!
   # Enable more aggressive memory corruption mitiation
@@ -22,7 +23,10 @@
   security.apparmor = {
     enable = true;
     killUnconfinedConfinables = true;
-    packages = with pkgs; [ apparmor-utils apparmor-profiles ];
+    packages = with pkgs; [
+      apparmor-utils
+      apparmor-profiles
+    ];
   };
 
   # boot kernel parameters
@@ -90,28 +94,28 @@
   programs.firejail = {
     enable = true;
     # TODO only enable these on desktop setup
-    wrappedBinaries = {
+    wrappedBinaries = with pkgs; {
       # NOTE when managing firefox with home-manager, the name firefox
       # will be overwritten. So I use a unique name, to make the
       # wrapped binary accessible.
       jailed-firefox = {
-        executable = "${pkgs.lib.getBin pkgs.firefox}/bin/firefox";
-        profile = "${pkgs.firejail}/etc/firejail/firefox.profile";
+        executable = "${lib.getBin firefox}/bin/firefox";
+        profile = "${firejail}/etc/firejail/firefox.profile";
       };
 
       tor-browser = {
-        executable = "${pkgs.tor-browser-bundle-bin}/bin/tor-browser";
-        profile = "${pkgs.firejail}/etc/firejail/tor-browser.profile";
+        executable = "${tor-browser-bundle-bin}/bin/tor-browser";
+        profile = "${firejail}/etc/firejail/tor-browser.profile";
       };
 
       slack = {
-        executable = "${pkgs.lib.getBin pkgs.slack}/bin/slack";
-        profile = "${pkgs.firejail}/etc/firejail/slack.profile";
+        executable = "${lib.getBin slack}/bin/slack";
+        profile = "${firejail}/etc/firejail/slack.profile";
       };
 
-      brave = {
-        executable = "${pkgs.lib.getBin pkgs.brave}/bin/brave";
-        profile = "${pkgs.firejail}/etc/firejail/brave.profile";
+      chromium = {
+        executable = "${lib.getBin chromium}/bin/chromium";
+        profile = "${firejail}/etc/firejail/chromium-browser.profile";
       };
     };
   };

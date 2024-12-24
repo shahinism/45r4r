@@ -1,21 +1,21 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [
     ./hyprland.nix
     ./waybar.nix
     ./firefox.nix
     ./alacritty.nix
-    ./qtile.nix
     ./rofi.nix
     ./dunst.nix
-    ./espanso.nix
     ./activitywatch.nix
-    ./redshift.nix
     ./input-remapper.nix
   ];
 
   home.packages = with pkgs; [
+    flameshot
     okular
     pavucontrol
+    ncpamixer
     audacity
     gimp
     inkscape
@@ -55,12 +55,15 @@
     xorg.xprop
     xorg.xwininfo
 
+    teams-for-linux
     zoom-us
     remmina
     feh
 
     tuxguitar
     musescore
+
+    qutebrowser
   ];
 
   # TODO move it to CLI feature.
@@ -128,5 +131,4 @@
       "application/json" = "firefox.desktop";
     };
   };
-
 }

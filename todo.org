@@ -1,0 +1,6 @@
+* Ideas
+* Tasks [0%]
+** TODO Make username configurable
+** TODO Make auto startup application configurable
+** TODO Add a README
+** TODO Setup Mac configuration

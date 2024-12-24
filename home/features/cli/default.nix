@@ -1,5 +1,11 @@
-{ pkgs, ... }: {
-  imports = [ ./aliases.nix ./zsh.nix ./atuin.nix ./lf.nix ];
+{ pkgs, ... }:
+{
+  imports = [
+    ./aliases.nix
+    ./zsh.nix
+    ./atuin.nix
+    ./lf.nix
+  ];
 
   home.packages = with pkgs; [
     killall
@@ -35,7 +41,9 @@
 
   programs.gpg = {
     enable = true;
-    settings = { pinentry-mode = "loopback"; };
+    settings = {
+      pinentry-mode = "loopback";
+    };
   };
 
   programs = {
@@ -61,13 +69,20 @@
     starship = {
       enable = true;
       enableZshIntegration = true;
+      settings = {
+        username = {
+          show_always = true;
+        };
+      };
     };
 
     bat = {
       enable = true;
-      extraPackages = with pkgs.bat-extras; [ batdiff batman batwatch ];
+      extraPackages = with pkgs.bat-extras; [
+        batdiff
+        batman
+        batwatch
+      ];
     };
-
   };
-
 }

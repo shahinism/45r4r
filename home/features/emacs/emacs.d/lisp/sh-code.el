@@ -289,10 +289,15 @@
   :url "https://github.com/hcl-emacs/terraform-mode"
   :ensure t)
 
-(leaf nix-mode
-  :doc "Major mode for editing Nix expressions"
-  :url "https://github.com/NixOS/nix-mode"
-  :ensure t)
+;; (leaf nix-mode
+;;   :doc "Major mode for editing Nix expressions"
+;;   :url "https://github.com/NixOS/nix-mode"
+;;   :ensure t)
+(leaf nix-ts-mode
+  :doc "An Emacs major mode for editing Nix expressions with tree-sitter"
+  :url "https://github.com/nix-community/nix-ts-mode"
+  :ensure t
+  :mode "\\.nix\\'")
 
 (leaf dockerfile-mode
   :doc "Major mode for editing Docker's Dockerfiles"
@@ -378,8 +383,9 @@
   :doc "Automatic installation, usage, and fallback for tree-sitter major modes in Emacs 29"
   :url "https://github.com/renzmann/treesit-auto"
   :ensure t
-  :custom ((treesit-auto-install quote prompt)
-           (treesit-auto-add-to-auto-mode-alist quote all))
+  :custom ((treesit-auto-install . 'prompt)
+           (treesit-auto-add-to-auto-mode-alist . 'all)
+           (treesit-font-lock-level . 1))
   :global-minor-mode global-treesit-auto-mode)
 
 (leaf plantuml-mode
@@ -436,6 +442,11 @@
    'anaconda-mode-installation-directory
    (expand-file-name "anaconda-mode" sh/var-dir))
   )
+
+(leaf ruff-format
+  :url "https://github.com/scop/emacs-ruff-format"
+  :doc "Format Rust code using ruff"
+  :ensure t)
 
 (leaf blacken
   :doc "Blacken Python source code"

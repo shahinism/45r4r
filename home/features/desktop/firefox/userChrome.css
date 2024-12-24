@@ -1,19 +1,5 @@
-/* Zenburn Theme for Firefox */
+/* Theme for Firefox */
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
-@-moz-document url(chrome://browser/content/browser.xul)
-{
-
-    #main-window,
-    browser[type="content-primary"],
-    browser[type="content"],
-    tabbrowser#content,
-    #content,
-    browser[type="content"] > html
-    {
-        background: #3f3f3f !important;
-    }
-
-}
 
 a, a:active, a:focus {
     outline: none !important;
@@ -22,104 +8,9 @@ a, a:active, a:focus {
 /* remove autohiding location bar, as I find autohiding things infuriating */
 #fullscr-toggler { display:none!important; }
 
-/* white flash */
-.browserContainer { background-color: #3f3f3f !important; }
-
 /* Tab bar background */
 #TabsToolbar {
   /* Hide the Tabbar */
   visibility: collapse !important;
 
-}
-menubar, toolbar, nav-bar, #TabsToolbar {
-  background-color: #3F3F3F !important;
-}
-
-/* Active tab */
-.tab-line[selected="true"] {
-  background-color: #4F4F4F !important;
-}
-
-/* Inactive tabs */
-.tabbrowser-tab {
-  background-color: #3F3F3F !important;
-  color: #D0D0D0 !important;
-}
-
-.tabbrowser-tab:hover {
-  background-color: #4F4F4F !important;
-}
-
-/* Tab close button */
-.tabbrowser-tab:not([selected="true"]) .tab-close-button {
-  fill: #D0D0D0 !important;
-}
-
-/* Tab close button (hover) */
-.tabbrowser-tab:not([selected="true"]) .tab-close-button:hover {
-  fill: #FF6B6B !important;
-}
-
-/* Tab close button (active) */
-.tabbrowser-tab[selected="true"] .tab-close-button {
-  fill: #FF6B6B !important;
-}
-
-/* Context menu background */
-#context-menu-box {
-  background-color: #4F4F4F !important;
-}
-
-/* Context menu text */
-#context-menu-box .menuitem-iconic-label {
-  color: #D0D0D0 !important;
-}
-
-/* Context menu item (hover) */
-#context-menu-box .menuitem-iconic-label:hover {
-  background-color: #3F3F3F !important;
-}
-
-/* Scrollbars */
-scrollbar {
-  -moz-appearance: none !important;
-  width: 16px !important;
-  background-color: #3F3F3F !important;
-}
-
-scrollbar-thumb {
-  background-color: #4F4F4F !important;
-  border: 4px solid transparent !important;
-  border-radius: 8px !important;
-}
-
-scrollbar-thumb:hover {
-  background-color: #5F5F5F !important;
-}
-
-scrollbar-thumb:active {
-  background-color: #6F6F6F !important;
-}
-
-scrollbar-track {
-  background-color: #3F3F3F !important;
-  border: 1px solid #3F3F3F !important;
-  border-radius: 8px !important;
-}
-
-/* Toolbar icons (inactive) */
-.toolbarbutton-1:not([disabled="true"]) {
-  fill: #D0D0D0 !important;
-}
-
-/* Toolbar icons (hover) */
-.toolbarbutton-1:not([disabled="true"]):hover {
-  background-color: #4F4F4F !important;
-  fill: #FFFFFF !important;
-}
-
-/* Toolbar icons (active) */
-.toolbarbutton-1:not([disabled="true"])[open="true"] {
-  background-color: #4F4F4F !important;
-  fill: #FFFFFF !important;
 }

@@ -1,16 +1,32 @@
-{ inputs, lib, pkgs, ... }: {
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
+{
   nix = {
     settings = {
-      trusted-users = [ "root" "@wheel" ];
+      trusted-users = [
+        "root"
+        "@wheel"
+      ];
 
       # Automatic Disc Optimisation
       ## This can be done manually by running `# nix-store --optimise`
       ## It also might potentially slow down builds. However, given my
       ## experience with NixOS, I think it's worth it.
       auto-optimise-store = lib.mkDefault true;
-      experimental-features = [ "nix-command" "flakes" "repl-flake" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       warn-dirty = false;
-      system-features = [ "kvm" "big-parallel" "nixos-test" ];
+      system-features = [
+        "kvm"
+        "big-parallel"
+        "nixos-test"
+      ];
     };
     gc = {
       automatic = true;
@@ -18,6 +34,5 @@
       # Keep the last 3 generations
       options = "--delete-older-than +3";
     };
-
   };
 }
