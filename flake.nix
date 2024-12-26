@@ -22,6 +22,9 @@
     hardware.url = "github:nixos/nixos-hardware";
     devenv.url = "github:cachix/devenv/latest";
 
+    # Required by the newer versions of hyprland
+    hyprland-qtutils.url = "github:hyprwm/hyprland-qtutils";
+
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
     # nix-colors.url = "github:misterio77/nix-colors";
@@ -60,6 +63,7 @@
       home-manager,
       devenv,
       stylix,
+      hyprland-qtutils,
       ...
     }@inputs:
     let

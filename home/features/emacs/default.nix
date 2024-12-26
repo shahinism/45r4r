@@ -90,7 +90,7 @@ in
   home.file = {
     ".emacs.d" = {
       # TODO fix hardcoded path
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/454r4/home/features/emacs/emacs.d";
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/45r4r/home/features/emacs/emacs.d";
     };
   };
 }

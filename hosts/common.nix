@@ -42,17 +42,15 @@ in
     LC_TIME = "en_US.UTF-8";
   };
 
-  fonts.packages = with pkgs; [
-    emacs-all-the-icons-fonts
-    (nerdfonts.override {
-      fonts = [
-        "Inconsolata"
-        "FiraCode"
-        "Hack"
-        "RobotoMono"
-      ];
-    })
-  ];
+  fonts.packages =
+    with pkgs;
+    [ emacs-all-the-icons-fonts ]
+    ++ (with pkgs.nerd-fonts; [
+      inconsolata
+      fira-code
+      hack
+      roboto-mono
+    ]);
 
   # Disable CUPS to print documents.
   services.printing.enable = false;

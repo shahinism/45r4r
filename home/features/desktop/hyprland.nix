@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 let
   satty-shot = pkgs.writeShellScriptBin "satty-shot" ''
     # https://github.com/NixOS/nixpkgs/issues/359069
@@ -9,6 +9,7 @@ in
   home.packages = with pkgs; [
     pyprland
     satty-shot
+    inputs.hyprland-qtutils.packages."${pkgs.system}".default
   ];
 
   home.sessionVariables = {

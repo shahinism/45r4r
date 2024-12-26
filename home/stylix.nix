@@ -14,17 +14,17 @@
 
     fonts = {
       monospace = {
-        package = pkgs.nerdfonts;
+        package = pkgs.nerd-fonts.fira-code;
         name = "FiraCode Nerd Font";
       };
 
       sansSerif = {
-        package = pkgs.nerdfonts;
+        package = pkgs.nerd-fonts.ubuntu;
         name = "Ubuntu Nerd Font";
       };
 
       serif = {
-        package = pkgs.nerdfonts;
+        package = pkgs.nerd-fonts.ubuntu;
         name = "Ubuntu Nerd Font";
       };
 

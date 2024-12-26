@@ -117,6 +117,11 @@
         executable = "${lib.getBin chromium}/bin/chromium";
         profile = "${firejail}/etc/firejail/chromium-browser.profile";
       };
+
+      brave = {
+        executable = "${pkgs.lib.getBin pkgs.brave}/bin/brave";
+        profile = "${pkgs.firejail}/etc/firejail/brave.profile";
+      };
     };
   };
 
