@@ -126,9 +126,7 @@
 (leaf copilot-chat
   :doc "ChatGPT completion for Copilot"
   :url "https://github.com/chep/copilot-chat.el"
-  :ensure t
-  :config
-  (add-hook 'git-commit-setup-hook 'copilot-chat-insert-commit-message))
+  :ensure t)
 
 (leaf consult
   :doc "Consulting completing-read"
