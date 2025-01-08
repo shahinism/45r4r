@@ -25,6 +25,7 @@
     # Required by the newer versions of hyprland
     hyprland-qtutils.url = "github:hyprwm/hyprland-qtutils";
 
+    xremap-flake.url = "github:xremap/nix-flake";
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
     # nix-colors.url = "github:misterio77/nix-colors";
@@ -111,6 +112,7 @@
             inherit inputs outputs;
           };
           modules = [
+            inputs.xremap-flake.nixosModules.default
             ./params.local.nix
             ./hosts/system76
           ];
@@ -120,6 +122,7 @@
             inherit inputs outputs;
           };
           modules = [
+            inputs.xremap-flake.nixosModules.default
             ./params.local.nix
             ./hosts/framework
           ];
