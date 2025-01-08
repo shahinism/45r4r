@@ -51,11 +51,11 @@ in
       # See https://wiki.hyprland.org/Configuring/Monitors/
       monitor = [
         # Display,resolution,position,scale
-        "DP-1,preferred,0x0,1"
-        "eDP-1,preferred,1920x0,1"
-        "desc:BOE 0x095F,preferred,auto,1.175000" # Framework 13
-        "DP-2,preferred,3849x0,1"
-        ",preferred,auto,auto"
+        "DVI-I-1,preferred,0x0,1"
+        #"eDP-1,preferred,1920x0,1"
+        "desc:BOE 0x095F,preferred,1920x0,1.175000" # Framework 13
+        "DP-4,preferred,3849x0,1"
+        # ",preferred,auto,auto"
       ];
 
       ###################
@@ -348,16 +348,16 @@ in
       ];
 
       workspace = [
-        "1, monitor:DP-1"
-        "2, monitor:DP-1"
-        "3, monitor:DP-1"
+        "1, monitor:DVI-I-1"
+        "2, monitor:DVI-I-1"
+        "3, monitor:DVI-I-1"
         "4, monitor:eDP-1"
         "5, monitor:eDP-1"
         "6, monitor:eDP-1"
-        "7, monitor:DP-2"
-        "8, monitor:DP-2"
-        "9, monitor:DP-2"
-        "0, monitor:DP-2"
+        "7, monitor:DP-4"
+        "8, monitor:DP-4"
+        "9, monitor:DP-4"
+        "0, monitor:DP-4"
       ];
     };
   };
