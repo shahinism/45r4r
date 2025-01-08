@@ -152,10 +152,11 @@
   :url "https://github.com/casouri/eldoc-box"
   :ensure t
   :hook
-  (eglot-managed-mode-hook . eldoc-box-hover-mode))
+  (global-eldoc-mode -1))
 
 (leaf devdocs
   :doc "Search the local devdocs."
+  :after eldoc-box
   :url "https://github.com/astoff/devdocs.el"
   :ensure t
   ;; TODO extract a function instead of this lambda
@@ -166,7 +167,12 @@
          (rust-mode . (lambda () (setq-local devdocs-current-docs '("rust"))))
          (go-mode . (lambda () (setq-local devdocs-current-docs '("go")))))
   :bind
-  ("C-c d" . devdocs-lookup))
+  ("C-c d" . devdocs/body)
+  :pretty-hydra
+  ((:color teal :quit-key "q")
+   ("Docs"
+    (("d" eldoc-box-help-at-point "Show docs")
+     ("D" devdocs-lookup "Lookup docs")))))
 
 (leaf major-mode-hydra
   :doc "Spacemacs-inspired major mode leader key powered by Hydra"

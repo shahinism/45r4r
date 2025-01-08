@@ -53,9 +53,7 @@
   :ensure t
   :custom
   (corfu-cycle . t)                 ;; Enable cycling for `corfu-next/previous'
-  (corfu-auto . t)                  ;; Enable auto completion)
-  (corfu-auto-prefix . 2)           ;; Show auto-completion after typing two letters
-  (corfu-auto-delay . 0.0)          ;; Show auto-completion immeditately
+  (corfu-auto . nil)                ;; Enable auto completion)
   (corfu-echo-documentation . 0.25) ;; Show documentation after 0.25 sec
   :bind (:corfu-map
          ("C-j" . corfu-next)
@@ -71,6 +69,8 @@
 
   (when (> emacs-major-version 29)
     (setq text-mode-ispell-word-completion nil))
+
+  (global-set-key (kbd "M-SPC") #'completion-at-point)
   )
 
 (leaf corfu-terminal
@@ -214,7 +214,7 @@
   (add-hook 'text-mode-hook 'tempel-setup-capf))
 
 (leaf tempel-collection
-  :doc "Collection tempel templates"
+  :doc "Csgollection tempel templates"
   :url "https://github.com/Crandel/tempel-collection"
   :ensure t
   :after tempel)
