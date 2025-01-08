@@ -37,6 +37,8 @@
     mosh
     magic-wormhole
     sshuttle
+
+    spotify-player
   ];
 
   programs.gpg = {
