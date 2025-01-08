@@ -55,7 +55,6 @@
     xorg.xprop
     xorg.xwininfo
 
-    teams-for-linux
     zoom-us
     remmina
     feh
