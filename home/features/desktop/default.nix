@@ -63,7 +63,12 @@
     tuxguitar
     musescore
 
+    google-chrome
     qutebrowser
+
+    blender
+    plasticity
+    arduino
   ];
 
   # TODO move it to CLI feature.
