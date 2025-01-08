@@ -88,10 +88,13 @@ in
     windowManager.qtile.enable = true;
   };
 
-  services.displayManager = {
-    sddm.enable = true;
-    sessionPackages = [ pkgs.qtile-unwrapped ];
-  };
+  services.xserver.videoDrivers = [
+    "displaylink"
+    "modesetting"
+  ];
+
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
   # Enable input remapper in order to help with configuring custom
   # inputs for Mouse
@@ -132,6 +135,7 @@ in
         "networkmanager"
         "wheel"
         "docker"
+        "dialout"
       ];
       packages = [ ];
     };
@@ -226,9 +230,26 @@ in
   };
 
   # Tailscale
-  environment.systemPackages = with pkgs; [ tailscale ];
+  environment.systemPackages = with pkgs; [
+    tailscale
+    bluez
+    bluez-tools
+    lm_sensors
+  ];
   services.tailscale = {
     enable = true;
+  };
+
+  services.xremap = {
+    withHypr = true;
+    config.modmap = [
+      {
+        name = "Global";
+        remap = {
+          "BTN_RIGHT" = "KEY_LEFTCTRL";
+        };
+      }
+    ];
   };
 
   # This value determines the NixOS release from which the default
